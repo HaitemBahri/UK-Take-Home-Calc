@@ -12,19 +12,19 @@ public class MonetaryValue
     }
 
 
-    public static MonetaryValue operator+(MonetaryValue value1, MonetaryValue value2)
+    public static MonetaryValue operator +(MonetaryValue value1, MonetaryValue value2)
     {
         return new MonetaryValue((value1.BaseValue + value2.BaseValue) * (int)value1.ValueFrequency, value1.ValueFrequency);
     }
-    public static MonetaryValue operator*(MonetaryValue value1, decimal value2)
+    public static MonetaryValue operator *(MonetaryValue value1, decimal value2)
     {
         return new MonetaryValue(value1.Value * value2, value1.ValueFrequency);
     }
-    public static MonetaryValue operator-(MonetaryValue value1, MonetaryValue value2)
+    public static MonetaryValue operator -(MonetaryValue value1, MonetaryValue value2)
     {
-        return value1 + (value2 * (-1));
+        return value1 + value2 * -1;
     }
-    public static MonetaryValue operator/(MonetaryValue value1, decimal value2)
+    public static MonetaryValue operator /(MonetaryValue value1, decimal value2)
     {
         if (value2 == 0)
             throw new DivideByZeroException("Cannot divide a MonetaryValue by zero.");
@@ -35,9 +35,22 @@ public class MonetaryValue
     {
         if (value == null) return false;
 
-        if(Math.Round(BaseValue, 2) == Math.Round(((MonetaryValue)value).BaseValue, 2))
+        if (Math.Round(BaseValue, 2) == Math.Round(((MonetaryValue)value).BaseValue, 2))
             return true;
 
-        return false; 
+        return false;
+    }
+
+    public override int GetHashCode()
+    {
+        int initialHash = 23;
+
+        unchecked
+        {
+            initialHash = initialHash * 23 + Value.GetHashCode();
+            initialHash = initialHash * 23 + ValueFrequency.GetHashCode();
+        }
+
+        return initialHash;
     }
 }
