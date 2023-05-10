@@ -2,15 +2,16 @@
 
 public class MonetaryValue
 {
-    private decimal _value;
-    public decimal Value { get => Math.Round(_value, 2); set => _value = value; }
-    public Frequency ValueFrequency { get; set; }
-    private decimal BaseValue { get => Math.Round(_value / (int)ValueFrequency, 4); }
+    public decimal Value { get; }
+    public Frequency ValueFrequency { get; }
+    private decimal BaseValue { get => Value / (int)ValueFrequency; }
     public MonetaryValue(decimal value, Frequency valueFrequency)
     {
-        Value = value;
+        Value = Math.Round(value, 8);
         ValueFrequency = valueFrequency;
     }
+
+
     public static MonetaryValue operator+(MonetaryValue value1, MonetaryValue value2)
     {
         return new MonetaryValue((value1.BaseValue + value2.BaseValue) * (int)value1.ValueFrequency, value1.ValueFrequency);
@@ -19,13 +20,24 @@ public class MonetaryValue
     {
         return new MonetaryValue(value1.Value * value2, value1.ValueFrequency);
     }
+    public static MonetaryValue operator-(MonetaryValue value1, MonetaryValue value2)
+    {
+        return value1 + (value2 * (-1));
+    }
+    public static MonetaryValue operator/(MonetaryValue value1, decimal value2)
+    {
+        if (value2 == 0)
+            throw new DivideByZeroException("Cannot divide a MonetaryValue by zero.");
+
+        return new MonetaryValue(value1.Value / value2, value1.ValueFrequency);
+    }
     public override bool Equals(object? value)
     {
         if (value == null) return false;
 
-        if(BaseValue == ((MonetaryValue)value).BaseValue)
+        if(Math.Round(BaseValue, 2) == Math.Round(((MonetaryValue)value).BaseValue, 2))
             return true;
 
-        return false;
+        return false; 
     }
 }

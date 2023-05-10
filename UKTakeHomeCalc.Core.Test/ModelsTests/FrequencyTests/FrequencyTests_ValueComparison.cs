@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using UKTakeHomeCalc.Core.Models;
 using Xunit;
 
-namespace UKTakeHomeCalc.Core.Test.ModelsTests
+namespace UKTakeHomeCalc.Core.Test.ModelsTests.FrequencyTests
 {
-    public  class FrequencyTests
+    public class FrequencyTests_ValueComparison
     {
         [Fact]
         public void ShouldReturnIntValueForWeeklyFrequency()
@@ -35,7 +35,7 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests
         }
 
         [Fact]
-        public void ShouldReturnIntValueForannuallyFrequency()
+        public void ShouldReturnIntValueForAnnuallyFrequency()
         {
             var annuallyFreq = Frequency.ANNUALLY;
 
