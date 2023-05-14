@@ -2,26 +2,25 @@
 
 namespace UKTakeHomeCalc.Core.Models
 {
-    public abstract class SalaryItem
+    public abstract class SalaryItemBase
     {
         public string Name { get; }
-        public MonetaryValue Value { get; }
-        public SalaryItem(string name, MonetaryValue value)
+        public virtual MonetaryValue Value { get; }
+        public SalaryItemBase(string name, MonetaryValue value)
         {
             Name = name;
             Value = value;
         }
 
-        public abstract SalaryItem FindValue(string name);
+        public abstract SalaryItemBase? FindValue(string name);
         public abstract MonetaryValue GetTotal();
-
     }
 
 
-    public class SalaryItemLeaf : SalaryItem
+    public class SalaryItem : SalaryItemBase
     {
         
-        public SalaryItemLeaf(string name, MonetaryValue value)
+        public SalaryItem(string name, MonetaryValue value)
             : base(name, value)
         {
 
@@ -29,36 +28,48 @@ namespace UKTakeHomeCalc.Core.Models
          
         public override MonetaryValue GetTotal()
         {
-            throw new NotImplementedException();
+            return Value;
         }
 
-        public override SalaryItem FindValue(string name)
+        public override SalaryItemBase? FindValue(string name)
         {
-            throw new NotImplementedException();
+            if(name == Name)
+                return this;
+
+            return null;
         }
     }
 
-    public class SalaryItemComposite : SalaryItem
+    public class SalaryItemComposite : SalaryItemBase
     {
-        private List<SalaryItem> _salaryItems;
-        public SalaryItemComposite(string name) : base(name, new MonetaryValue(0, Frequency.WEEKLY))
+        private List<SalaryItemBase> _salaryItems;
+        public override MonetaryValue Value { get; }
+        public SalaryItemComposite(string name) : base(name, null!)
         {
-            _salaryItems = new List<SalaryItem>();
+            _salaryItems = new List<SalaryItemBase>();
         }
 
-        public void AddValue(MonetaryValue value)
+        public void AddValue(SalaryItemBase value)
         {
-            throw new NotImplementedException();
+            _salaryItems.Add(value);
         }
 
-        public override SalaryItem FindValue(string name)
+        public override SalaryItemBase FindValue(string name)
         {
             throw new NotImplementedException();
         }
 
         public override MonetaryValue GetTotal()
         {
-           throw new NotImplementedException();
+            var total = new MonetaryValue(0, Frequency.WEEKLY);
+
+            foreach(var item in _salaryItems)
+            {
+                total += item.Value;
+            }
+
+            return total;
+         
         }
     }
 
