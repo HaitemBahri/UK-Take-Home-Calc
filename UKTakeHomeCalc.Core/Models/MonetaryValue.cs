@@ -1,4 +1,4 @@
-﻿namespace UKTakeHomeCalc.Core.Models;
+namespace UKTakeHomeCalc.Core.Models;
 
 public class MonetaryValue
 {
