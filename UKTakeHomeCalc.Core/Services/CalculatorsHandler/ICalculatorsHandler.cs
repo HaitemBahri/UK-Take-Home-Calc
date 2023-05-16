@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UKTakeHomeCalc.Core.Models;
 
-namespace UKTakeHomeCalc.Core.Core.CalculatorsHandle
+namespace UKTakeHomeCalc.Core.Services.CalculatorsHandler
 {
     public interface ICalculatorsHandler
     {

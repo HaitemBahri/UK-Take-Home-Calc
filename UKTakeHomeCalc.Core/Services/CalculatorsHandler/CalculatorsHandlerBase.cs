@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UKTakeHomeCalc.Core.Core.CalculatorsHandle;
 using UKTakeHomeCalc.Core.Models;
 
-namespace UKTakeHomeCalc.Core.Core.CalculatorsHandler
+namespace UKTakeHomeCalc.Core.Services.CalculatorsHandler
 {
     public abstract class CalculatorsHandlerBase : ICalculatorsHandler
     {

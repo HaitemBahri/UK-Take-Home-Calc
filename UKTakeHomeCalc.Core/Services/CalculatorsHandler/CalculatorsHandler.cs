@@ -7,7 +7,7 @@ using UKTakeHomeCalc.Core.Core.Calculator;
 using UKTakeHomeCalc.Core.Core.CalculatorsHandle;
 using UKTakeHomeCalc.Core.Models;
 
-namespace UKTakeHomeCalc.Core.Core.CalculatorsHandler
+namespace UKTakeHomeCalc.Core.Services.CalculatorsHandler
 {
     public class CalculatorsHandler : CalculatorsHandlerBase
     {

@@ -5,8 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using UKTakeHomeCalc.Core.Core.Pension;
 using UKTakeHomeCalc.Core.Models;
+using UKTakeHomeCalc.Core.Services.Calculator;
 
-namespace UKTakeHomeCalc.Core.Core.Calculator
+namespace UKTakeHomeCalc.Core.Services.Calculator.PensionCalculator
 {
     public class PensionCalculator : ICalculator
     {

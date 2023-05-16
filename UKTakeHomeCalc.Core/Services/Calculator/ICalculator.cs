@@ -1,6 +1,6 @@
 ﻿using UKTakeHomeCalc.Core.Models;
 
-namespace UKTakeHomeCalc.Core.Core.Calculator
+namespace UKTakeHomeCalc.Core.Services.Calculator
 {
     public interface ICalculator
     {

@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UKTakeHomeCalc.Core.Core.Income;
 using UKTakeHomeCalc.Core.Models;
+using UKTakeHomeCalc.Core.Services.Calculator;
+using UKTakeHomeCalc.Core.Services.Calculator.GrossIncomeCalculator.IncomeItem;
 
-namespace UKTakeHomeCalc.Core.Core.Calculator
+namespace UKTakeHomeCalc.Core.Services.Calculator.GrossIncomeCalculator
 {
     public class GrossSalaryCalculator : ICalculator
     {
-        private List<IIncome> _incomes;
+        private List<IIncomeItem> _incomeItems;
 
-        public GrossSalaryCalculator(List<IIncome> incomes)
+        public GrossSalaryCalculator(List<IIncomeItem> incomeItems)
         {
-            _incomes = incomes;
+            _incomeItems = incomeItems;
         }
 
         public MonetaryValue Calculate(MonetaryValue value)
