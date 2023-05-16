@@ -1,49 +1,48 @@
 ﻿namespace UKTakeHomeCalc.Core.Models
 {
-    public class SalaryItemComposite : SalaryItemBase
+    public class SalaryItemComposite : ISalaryItem
     {
-        private List<SalaryItemBase> _salaryItems;
-        public SalaryItemComposite(string name) : base(name)
+        private List<ISalaryItem> _salaryItems;
+        public SalaryItemComposite(string name)
         {
-            _salaryItems = new List<SalaryItemBase>();
+            Name = name;
+            _salaryItems = new List<ISalaryItem>();
         }
+        public string Name { get; }
 
-        public void AddValue(SalaryItemBase value)
+        public void AddValue(ISalaryItem value)
         {
-            if(value == null)
+            if (value == null)
                 throw new ArgumentNullException(nameof(value));
 
             _salaryItems.Add(value);
         }
-
-        public override SalaryItemBase? FindValue(string name)
+        public ISalaryItem? FindValue(string name)
         {
-            if(Name == name)
+            if (Name == name)
             {
                 return this;
             }
 
-            foreach(SalaryItemBase value in _salaryItems)
+            foreach (ISalaryItem value in _salaryItems)
             {
                 var item = value.FindValue(name);
-                if(item != null)
+                if (item != null)
                     return item;
             }
             return null;
         }
-
-        public override MonetaryValue GetTotal()
+        public MonetaryValue GetTotal()
         {
             var total = new MonetaryValue(0, Frequency.WEEKLY);
 
-            foreach(var item in _salaryItems)
+            foreach (var item in _salaryItems)
             {
                 total += item.GetTotal();
             }
 
             return total;
-         
+
         }
     }
-
 }
