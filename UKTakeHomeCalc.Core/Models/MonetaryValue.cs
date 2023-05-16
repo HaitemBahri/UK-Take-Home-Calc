@@ -5,12 +5,12 @@ public class MonetaryValue
     public decimal Value { get; }
     public Frequency ValueFrequency { get; }
     private decimal BaseValue { get => Value / (int)ValueFrequency; }
+
     public MonetaryValue(decimal value, Frequency valueFrequency)
     {
         Value = Math.Round(value, 8);
         ValueFrequency = valueFrequency;
     }
-
 
     public static MonetaryValue operator +(MonetaryValue value1, MonetaryValue value2)
     {
@@ -31,6 +31,10 @@ public class MonetaryValue
 
         return new MonetaryValue(value1.Value / value2, value1.ValueFrequency);
     }
+    public static implicit operator MonetaryValue(decimal v)
+    {
+        return new MonetaryValue(v, Frequency.WEEKLY);
+    }
     public override bool Equals(object? value)
     {
         if (value == null) return false;
@@ -40,7 +44,6 @@ public class MonetaryValue
 
         return false;
     }
-
     public override int GetHashCode()
     {
         int initialHash = 23;
