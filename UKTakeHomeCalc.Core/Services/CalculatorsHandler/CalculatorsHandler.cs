@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UKTakeHomeCalc.Core.Core.Calculator;
-using UKTakeHomeCalc.Core.Core.CalculatorsHandle;
 using UKTakeHomeCalc.Core.Models;
+using UKTakeHomeCalc.Core.Services.Calculator;
 
 namespace UKTakeHomeCalc.Core.Services.CalculatorsHandler
 {
@@ -24,7 +18,7 @@ namespace UKTakeHomeCalc.Core.Services.CalculatorsHandler
             //if (_nextCalculatorsHandler == null)
             //    return;
             //else
-            //    _nextCalculatorsHandler.Calculate(salaryData);
+            //    _nextCalculatorsHandler.AddSalaryItemToSalary(salaryData);
         }
     }
 }

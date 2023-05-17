@@ -4,6 +4,6 @@ namespace UKTakeHomeCalc.Core.Services.Calculator
 {
     public interface ICalculator
     {
-        public MonetaryValue Calculate(MonetaryValue value);
+        public void AddSalaryItemToSalary(ISalaryItemComposite salary);
     }
 }

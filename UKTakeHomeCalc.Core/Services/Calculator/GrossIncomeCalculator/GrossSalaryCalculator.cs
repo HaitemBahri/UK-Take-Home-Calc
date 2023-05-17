@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UKTakeHomeCalc.Core.Models;
-using UKTakeHomeCalc.Core.Services.Calculator;
+﻿using UKTakeHomeCalc.Core.Models;
 using UKTakeHomeCalc.Core.Services.Calculator.GrossIncomeCalculator.IncomeItem;
 
 namespace UKTakeHomeCalc.Core.Services.Calculator.GrossIncomeCalculator
@@ -12,15 +6,22 @@ namespace UKTakeHomeCalc.Core.Services.Calculator.GrossIncomeCalculator
     public class GrossSalaryCalculator : ICalculator
     {
         private List<IIncomeItem> _incomeItems;
+        private ISalaryItemComposite _nameNode;
 
-        public GrossSalaryCalculator(List<IIncomeItem> incomeItems)
+        public GrossSalaryCalculator(ISalaryItemComposite nameNode, List<IIncomeItem> incomeItems)
         {
             _incomeItems = incomeItems;
+            _nameNode = nameNode;
         }
 
-        public MonetaryValue Calculate(MonetaryValue value)
+        public void AddSalaryItemToSalary(ISalaryItemComposite salary)
         {
-            throw new NotImplementedException();
+            foreach (var incomeItem in _incomeItems)
+            {
+                _nameNode.AddValue(incomeItem.GetValue());
+            }
+
+            salary.AddValue(_nameNode);
         }
     }
 }
