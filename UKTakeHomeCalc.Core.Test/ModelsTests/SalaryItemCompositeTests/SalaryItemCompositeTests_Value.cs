@@ -13,8 +13,8 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.SalaryItemCompositeTests
         [Fact]
         public void ShouldReturnItsName()
         {
-            var expectedName = "Salary Item Some Name";
-            var sut = new SalaryItemComposite(expectedName);
+            var expectedName = "SalaryBreakdown Item Some Name";
+            var sut = new SalaryItemNode(expectedName);
 
             var actualName = sut.Name;
 

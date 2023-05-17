@@ -4,6 +4,6 @@ namespace UKTakeHomeCalc.Core.Services.Calculator
 {
     public interface ICalculator
     {
-        public void AddSalaryItemToSalary(ISalaryItemComposite salary);
+        public void AddSalaryItemToSalary(ISalaryItemNode salary);
     }
 }

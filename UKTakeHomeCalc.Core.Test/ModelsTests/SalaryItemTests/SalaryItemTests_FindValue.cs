@@ -14,7 +14,7 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.SalaryItemTests
         public void ShouldReturnItself_WhenItsNamePassed()
         {
             var monetaryValue = new MonetaryValue(4990.22m, Frequency.MONTHLY);
-            var salaryItemName = "Some Salary Item";
+            var salaryItemName = "Some SalaryBreakdown Item";
             var sut = new SalaryItem(salaryItemName, monetaryValue);
 
             var actualResult = sut.FindValue(salaryItemName);
@@ -26,9 +26,9 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.SalaryItemTests
         public void ShouldReturnNull_WhenNotItsNamePassed()
         {
             var monetaryValue = new MonetaryValue(4990.22m, Frequency.MONTHLY);
-            var salaryItemName = "Some Salary Item";
+            var salaryItemName = "Some SalaryBreakdown Item";
             var sut = new SalaryItem(salaryItemName, monetaryValue);
-            var randomName = "Random Salary Item Name";
+            var randomName = "Random SalaryBreakdown Item Name";
 
             var actualResult = sut.FindValue(randomName);
 

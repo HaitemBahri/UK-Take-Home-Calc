@@ -11,16 +11,16 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.GrossSalaryCalculatorTests
         private Mock<IIncomeItem> _incomeItemMock1;
         private Mock<IIncomeItem> _incomeItemMock2;
         private Mock<IIncomeItem> _incomeItemMock3;
-        private Mock<ISalaryItemComposite> _nameNodeMock;
-        private Mock<ISalaryItemComposite> _salaryMock;
+        private Mock<ISalaryItemNode> _nameNodeMock;
+        private Mock<ISalaryItemNode> _salaryMock;
 
         public GrossSalaryCalculatorTests_Calculate()
         {
             _incomeItemMock1 = new Mock<IIncomeItem>();
             _incomeItemMock2 = new Mock<IIncomeItem>();
             _incomeItemMock3 = new Mock<IIncomeItem>();
-            _nameNodeMock = new Mock<ISalaryItemComposite>();
-            _salaryMock = new Mock<ISalaryItemComposite>();
+            _nameNodeMock = new Mock<ISalaryItemNode>();
+            _salaryMock = new Mock<ISalaryItemNode>();
 
         }
 

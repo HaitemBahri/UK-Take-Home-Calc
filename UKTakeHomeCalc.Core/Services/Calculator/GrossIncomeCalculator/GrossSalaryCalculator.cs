@@ -6,15 +6,15 @@ namespace UKTakeHomeCalc.Core.Services.Calculator.GrossIncomeCalculator
     public class GrossSalaryCalculator : ICalculator
     {
         private List<IIncomeItem> _incomeItems;
-        private ISalaryItemComposite _nameNode;
+        private ISalaryItemNode _nameNode;
 
-        public GrossSalaryCalculator(ISalaryItemComposite nameNode, List<IIncomeItem> incomeItems)
+        public GrossSalaryCalculator(ISalaryItemNode nameNode, List<IIncomeItem> incomeItems)
         {
             _incomeItems = incomeItems;
             _nameNode = nameNode;
         }
 
-        public void AddSalaryItemToSalary(ISalaryItemComposite salary)
+        public void AddSalaryItemToSalary(ISalaryItemNode salary)
         {
             foreach (var incomeItem in _incomeItems)
             {

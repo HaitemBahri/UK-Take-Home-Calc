@@ -91,7 +91,7 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.SalaryItemCompositeTests
         public void ShouldAddValuesAndReturnTotalValue(SalaryItem v1, SalaryItem v2, SalaryItem v3, SalaryItem v4, decimal v5)
         {
             var salaryItems = new List<SalaryItem>();
-            var sut = new SalaryItemComposite("salaryitemcomposite name");
+            var sut = new SalaryItemNode("salaryitemcomposite name");
             salaryItems.AddRange(new List<SalaryItem>() { v1, v2, v3, v4 });
 
             foreach (var salaryItem in salaryItems)
@@ -107,7 +107,7 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.SalaryItemCompositeTests
         [Fact]
         public void ShouldThrowNullException_WhenNullAdded()
         {
-            var sut = new SalaryItemComposite("random name");
+            var sut = new SalaryItemNode("random name");
 
             Assert.Throws<ArgumentNullException>(() => sut.AddValue(null!));
         }
@@ -115,11 +115,11 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.SalaryItemCompositeTests
         [MemberData(nameof(SalaryItemsForComposite1))]
         public void ShouldAddCompositeValuesAndReturnTotalValue(SalaryItem[] v1, SalaryItem[] v2, SalaryItem[] v3, MonetaryValue[] expectedResult)
         {
-            var sut = new SalaryItemComposite("Test salary item composite");
+            var sut = new SalaryItemNode("Test salary item composite");
 
-            var salaryItemComposite1 = new SalaryItemComposite("sub comp - 1");
-            var salaryItemComposite2 = new SalaryItemComposite("sub comp - 2");
-            var salaryItemComposite3 = new SalaryItemComposite("sub comp - 3");
+            var salaryItemComposite1 = new SalaryItemNode("sub comp - 1");
+            var salaryItemComposite2 = new SalaryItemNode("sub comp - 2");
+            var salaryItemComposite3 = new SalaryItemNode("sub comp - 3");
 
             foreach (var salaryItem1 in v1)
             {

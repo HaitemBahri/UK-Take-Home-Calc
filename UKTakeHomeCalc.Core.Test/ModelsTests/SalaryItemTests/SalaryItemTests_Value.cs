@@ -13,7 +13,7 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.SalaryItemTests
         [Fact]
         public void ShouldReturnItsNameAndValue()
         {
-            var expectedName = "Salary Item Some Name";
+            var expectedName = "SalaryBreakdown Item Some Name";
             var expectedValue = new MonetaryValue(499.22m, Frequency.MONTHLY);
             var sut = new SalaryItem(expectedName, expectedValue);
 
