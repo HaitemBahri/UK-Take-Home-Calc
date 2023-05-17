@@ -1,6 +1,6 @@
 ﻿namespace UKTakeHomeCalc.Core.Models
 {
-    public class SalaryItemComposite : ISalaryItem
+    public class SalaryItemComposite : ISalaryItemComposite
     {
         private List<ISalaryItem> _salaryItems;
         public SalaryItemComposite(string name)
