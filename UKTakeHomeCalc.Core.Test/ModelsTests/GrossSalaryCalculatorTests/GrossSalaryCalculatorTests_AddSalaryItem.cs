@@ -6,7 +6,7 @@ using Xunit;
 
 namespace UKTakeHomeCalc.Core.Test.ModelsTests.GrossSalaryCalculatorTests
 {
-    public class GrossSalaryCalculatorTests_Calculate
+    public class GrossSalaryCalculatorTests_AddSalaryItem
     {
         private Mock<IIncomeItem> _incomeItemMock1;
         private Mock<IIncomeItem> _incomeItemMock2;
@@ -14,7 +14,7 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.GrossSalaryCalculatorTests
         private Mock<ISalaryItemNode> _nameNodeMock;
         private Mock<ISalaryItemNode> _salaryMock;
 
-        public GrossSalaryCalculatorTests_Calculate()
+        public GrossSalaryCalculatorTests_AddSalaryItem()
         {
             _incomeItemMock1 = new Mock<IIncomeItem>();
             _incomeItemMock2 = new Mock<IIncomeItem>();
