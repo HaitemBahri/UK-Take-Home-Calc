@@ -12,7 +12,6 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.GrossSalaryCalculatorTests
         private Mock<IIncomeItem> _incomeItemMock2;
         private Mock<IIncomeItem> _incomeItemMock3;
         private Mock<ISalaryItemNode> _nameNodeMock;
-        private Mock<ISalaryItemNode> _salaryMock;
 
         public GrossSalaryCalculatorTests_AddSalaryItem()
         {
@@ -20,7 +19,6 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.GrossSalaryCalculatorTests
             _incomeItemMock2 = new Mock<IIncomeItem>();
             _incomeItemMock3 = new Mock<IIncomeItem>();
             _nameNodeMock = new Mock<ISalaryItemNode>();
-            _salaryMock = new Mock<ISalaryItemNode>();
 
         }
 
@@ -40,7 +38,7 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.GrossSalaryCalculatorTests
 
             });
 
-            sut.AddSalaryItemToSalary(_salaryMock.Object);
+            var x = sut.CreateSalaryItemNode();
 
             _incomeItemMock1.Verify(x => x.GetValue(), Times.Exactly(1));
             _incomeItemMock2.Verify(x => x.GetValue(), Times.Exactly(1));
@@ -61,19 +59,19 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.GrossSalaryCalculatorTests
 
             });
 
-            sut.AddSalaryItemToSalary(_salaryMock.Object);
+            var x = sut.CreateSalaryItemNode();
 
             _nameNodeMock.Verify(x => x.AddValue(It.IsAny<ISalaryItem>()), Times.Exactly(3));
         }
-
         [Fact]
-        public void ShouldAddItsNameNodeToSalary()
+        public void ShouldReturnItsNameNodeWithSalaryItems()
         {
+            var salaryItemNode = new SalaryItemNode("myNode name");
             _incomeItemMock1.Setup(x => x.GetValue()).Returns(new SalaryItem("test", 0.0m));
             _incomeItemMock2.Setup(x => x.GetValue()).Returns(new SalaryItem("test", 0.0m));
             _incomeItemMock3.Setup(x => x.GetValue()).Returns(new SalaryItem("test", 0.0m));
 
-            var sut = new GrossSalaryCalculator(_nameNodeMock.Object, new List<IIncomeItem>()
+            var sut = new GrossSalaryCalculator(salaryItemNode, new List<IIncomeItem>()
             {
                 _incomeItemMock1.Object,
                 _incomeItemMock2.Object,
@@ -81,9 +79,10 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.GrossSalaryCalculatorTests
 
             });
 
-            sut.AddSalaryItemToSalary(_salaryMock.Object);
+            var actualValue = sut.CreateSalaryItemNode();
 
-            _salaryMock.Verify(x => x.AddValue(It.IsAny<ISalaryItem>()), Times.Exactly(1));
+            Assert.Equal(salaryItemNode, actualValue);
+            Assert.Equal(3, actualValue.GetSalaryItems().Count());
         }
     }
 }

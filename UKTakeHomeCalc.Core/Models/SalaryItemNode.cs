@@ -42,7 +42,11 @@
             }
 
             return total;
+        }
 
+        public IEnumerable<ISalaryItem> GetSalaryItems()
+        {
+            return _salaryItems.ToList();
         }
     }
 }

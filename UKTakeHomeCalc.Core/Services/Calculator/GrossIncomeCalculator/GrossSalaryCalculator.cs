@@ -14,14 +14,14 @@ namespace UKTakeHomeCalc.Core.Services.Calculator.GrossIncomeCalculator
             _nameNode = nameNode;
         }
 
-        public void AddSalaryItemToSalary(ISalaryItemNode salary)
+        public ISalaryItemNode CreateSalaryItemNode(ISalaryItemNode salary = null!)
         {
             foreach (var incomeItem in _incomeItems)
             {
                 _nameNode.AddValue(incomeItem.GetValue());
             }
 
-            salary.AddValue(_nameNode);
+            return _nameNode;
         }
     }
 }
