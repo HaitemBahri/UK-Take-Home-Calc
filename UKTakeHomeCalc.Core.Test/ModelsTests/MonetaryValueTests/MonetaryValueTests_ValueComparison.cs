@@ -5,15 +5,6 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.MonetaryValueTests
 {
     public class MonetaryValueTests_ValueComparison
     {
-        [Fact]
-        public void ShouldNotBeEqualToNull()
-        {
-            var sut = new MonetaryValue(5003.922m, Frequency.WEEKLY);
-            MonetaryValue nullMonetaryValue = null!;
-
-            Assert.NotEqual(sut, nullMonetaryValue);
-        }
-
         [Theory]
         [InlineData(48.888, 48.89)]
         [InlineData(129.1145, 129.11)]

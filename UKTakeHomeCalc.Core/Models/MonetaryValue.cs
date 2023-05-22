@@ -1,6 +1,6 @@
 namespace UKTakeHomeCalc.Core.Models;
 
-public class MonetaryValue
+public struct MonetaryValue
 {
     public decimal Value { get; }
     public Frequency ValueFrequency { get; }
