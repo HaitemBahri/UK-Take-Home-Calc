@@ -10,7 +10,7 @@ namespace UKTakeHomeCalc.Core.Services.CalculatorsHandler
     public interface ICalculatorsHandler
     {
         public void SetNext(ICalculatorsHandler calculatorsHandler);
-        public void Calculate(MonetaryValue value);
+        public void Handle(ISalaryItemNode salaryData);
 
     }
 }
