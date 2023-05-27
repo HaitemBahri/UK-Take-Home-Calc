@@ -16,22 +16,22 @@ namespace UKTakeHomeCalc.Core.Services.CalculatorsHandler
         {
             _nextCalculatorsHandler = nextCalculatorsHandler;
         }
-        public void Handle(ISalaryItemNode salaryData)
+        public void Handle(ISalaryItemNode salary)
         {
             var salaryItemsBag = new ConcurrentBag<ISalaryItem>();
 
             Parallel.ForEach(_calculators, (calculator) =>
             {
-                salaryItemsBag.Add(calculator.CreateSalaryItemNode());
+                salaryItemsBag.Add(calculator.CreateSalaryItemNode(salary));
             });
 
             foreach (var salaryItem in salaryItemsBag)
             {
-                salaryData.AddValue(salaryItem);
+                salary.AddValue(salaryItem);
             }
 
             if (_nextCalculatorsHandler != null)
-                _nextCalculatorsHandler.Handle(salaryData);
+                _nextCalculatorsHandler.Handle(salary);
         }
     }
 }

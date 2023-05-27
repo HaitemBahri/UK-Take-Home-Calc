@@ -14,7 +14,7 @@ namespace UKTakeHomeCalc.Core.Services.Calculator.GrossIncomeCalculator
             _nameNode = nameNode;
         }
 
-        public ISalaryItemNode CreateSalaryItemNode(ISalaryItemNode salary = null!)
+        public ISalaryItemNode CreateSalaryItemNode(ISalaryItemNode salary)
         {
             foreach (var incomeItem in _incomeItems)
             {
