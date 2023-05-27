@@ -56,4 +56,12 @@ public struct MonetaryValue
 
         return initialHash;
     }
+    public static bool operator ==(MonetaryValue value1, MonetaryValue value2)
+    {
+        return (value1.Equals(value2));
+    }
+    public static bool operator !=(MonetaryValue value1, MonetaryValue value2)
+    {
+        return (!value1.Equals(value2));
+    }
 }

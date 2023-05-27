@@ -44,5 +44,35 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.MonetaryValueTests
 
             Assert.Equal(sut, sut2);
         }
+
+        [Theory]
+        [InlineData(97.99, Frequency.MONTHLY, 1192.21, Frequency.ANNUALLY)]
+        [InlineData(395.07, Frequency.WEEKLY, 1693.16, Frequency.MONTHLY)]
+        public void ShouldTwoValuesBeEqualUsingEqualOperator(decimal value1, Frequency frequency1, decimal value2, Frequency frequency2)
+        {
+            var sut = new MonetaryValue(value1, frequency1);
+            var sut2 = new MonetaryValue(value2, frequency2);
+
+            var actualResult1 = (sut == sut2);
+            var actualResult2 = (sut != sut2);
+
+            Assert.True(actualResult1);
+            Assert.False(actualResult2);
+        }
+
+        [Theory]
+        [InlineData(9.19, Frequency.MONTHLY, 1192.21, Frequency.ANNUALLY)]
+        [InlineData(3555.07, Frequency.WEEKLY, 1693.16, Frequency.MONTHLY)]
+        public void ShouldTwoValuesNotBeEqualUsingEqualOperator(decimal value1, Frequency frequency1, decimal value2, Frequency frequency2)
+        {
+            var sut = new MonetaryValue(value1, frequency1);
+            var sut2 = new MonetaryValue(value2, frequency2);
+
+            var actualResult1 = (sut != sut2);
+            var actualResult2 = (sut == sut2);
+
+            Assert.True(actualResult1);
+            Assert.False(actualResult2);
+        }
     }
 }
