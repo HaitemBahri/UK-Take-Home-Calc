@@ -18,7 +18,7 @@ namespace UKTakeHomeCalc.Core.Services.Calculator.GrossIncomeCalculator
         {
             foreach (var incomeItem in _incomeItems)
             {
-                _nameNode.AddValue(incomeItem.GetValue());
+                _nameNode.AddValue(incomeItem.CreateSalaryItem());
             }
 
             return _nameNode;
