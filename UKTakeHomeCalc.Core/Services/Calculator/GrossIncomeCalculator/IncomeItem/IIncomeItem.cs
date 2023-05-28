@@ -4,6 +4,6 @@ namespace UKTakeHomeCalc.Core.Services.Calculator.GrossIncomeCalculator.IncomeIt
 {
     public interface IIncomeItem
     {
-        public ISalaryItem CreateSalaryItem();
+        public ISalaryItem CreateIncomeSalaryItem();
     }
 }

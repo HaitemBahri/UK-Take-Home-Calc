@@ -20,7 +20,7 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.GrossSalaryCalculatorTests.BasicI
 
             var sut = new BasicIncome(name, value, freq);
 
-            var actualResult = sut.CreateSalaryItem();
+            var actualResult = sut.CreateIncomeSalaryItem();
             var expectedResult = new SalaryItem(name, new MonetaryValue(value, freq));
 
             Assert.Equal(expectedResult, actualResult);

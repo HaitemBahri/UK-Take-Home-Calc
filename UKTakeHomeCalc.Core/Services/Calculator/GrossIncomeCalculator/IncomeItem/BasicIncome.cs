@@ -18,7 +18,7 @@ namespace UKTakeHomeCalc.Core.Services.Calculator.GrossIncomeCalculator.IncomeIt
             _monetaryValue = new MonetaryValue(value, frequency);
             _name = name;
         }
-        public ISalaryItem CreateSalaryItem()
+        public ISalaryItem CreateIncomeSalaryItem()
         {
             return new SalaryItem(_name, _monetaryValue);
         }

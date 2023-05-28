@@ -21,7 +21,7 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.GrossSalaryCalculatorTests.Hourly
 
             var sut = new HourlyRateIncome(name, hourlyRate, hours, freq);
 
-            var actualResult = sut.CreateSalaryItem();
+            var actualResult = sut.CreateIncomeSalaryItem();
             var expectedResult = new SalaryItem(name, new MonetaryValue(hourlyRate * hours, freq));
 
             Assert.Equal(expectedResult, actualResult);

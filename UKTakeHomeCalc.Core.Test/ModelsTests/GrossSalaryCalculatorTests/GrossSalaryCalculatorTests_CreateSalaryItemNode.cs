@@ -26,9 +26,9 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.GrossSalaryCalculatorTests
         [Fact]
         public void ShouldGetValuesFromIIncomeItems()
         {
-            _incomeItemMock1.Setup(x => x.CreateSalaryItem()).Returns(new SalaryItem("test", 0.0m));
-            _incomeItemMock2.Setup(x => x.CreateSalaryItem()).Returns(new SalaryItem("test", 0.0m));
-            _incomeItemMock3.Setup(x => x.CreateSalaryItem()).Returns(new SalaryItem("test", 0.0m));
+            _incomeItemMock1.Setup(x => x.CreateIncomeSalaryItem()).Returns(new SalaryItem("test", 0.0m));
+            _incomeItemMock2.Setup(x => x.CreateIncomeSalaryItem()).Returns(new SalaryItem("test", 0.0m));
+            _incomeItemMock3.Setup(x => x.CreateIncomeSalaryItem()).Returns(new SalaryItem("test", 0.0m));
 
 
             var sut = new GrossSalaryCalculator(_nameNodeMock.Object, new List<IIncomeItem>()
@@ -41,16 +41,16 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.GrossSalaryCalculatorTests
 
             var x = sut.CreateSalaryItemNode(_salaryMock.Object);
 
-            _incomeItemMock1.Verify(x => x.CreateSalaryItem(), Times.Exactly(1));
-            _incomeItemMock2.Verify(x => x.CreateSalaryItem(), Times.Exactly(1));
-            _incomeItemMock3.Verify(x => x.CreateSalaryItem(), Times.Exactly(1));
+            _incomeItemMock1.Verify(x => x.CreateIncomeSalaryItem(), Times.Exactly(1));
+            _incomeItemMock2.Verify(x => x.CreateIncomeSalaryItem(), Times.Exactly(1));
+            _incomeItemMock3.Verify(x => x.CreateIncomeSalaryItem(), Times.Exactly(1));
         }
         [Fact]
         public void ShouldAddSalaryItemsFromIncomeItemsToItsNameNode()
         {
-            _incomeItemMock1.Setup(x => x.CreateSalaryItem()).Returns(new SalaryItem("test", 0.0m));
-            _incomeItemMock2.Setup(x => x.CreateSalaryItem()).Returns(new SalaryItem("test", 0.0m));
-            _incomeItemMock3.Setup(x => x.CreateSalaryItem()).Returns(new SalaryItem("test", 0.0m));
+            _incomeItemMock1.Setup(x => x.CreateIncomeSalaryItem()).Returns(new SalaryItem("test", 0.0m));
+            _incomeItemMock2.Setup(x => x.CreateIncomeSalaryItem()).Returns(new SalaryItem("test", 0.0m));
+            _incomeItemMock3.Setup(x => x.CreateIncomeSalaryItem()).Returns(new SalaryItem("test", 0.0m));
 
             var sut = new GrossSalaryCalculator(_nameNodeMock.Object, new List<IIncomeItem>()
             {
@@ -68,9 +68,9 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.GrossSalaryCalculatorTests
         public void ShouldReturnItsNameNodeWithSalaryItems()
         {
             var salaryItemNode = new SalaryItemNode("myNode name");
-            _incomeItemMock1.Setup(x => x.CreateSalaryItem()).Returns(new SalaryItem("test", 0.0m));
-            _incomeItemMock2.Setup(x => x.CreateSalaryItem()).Returns(new SalaryItem("test", 0.0m));
-            _incomeItemMock3.Setup(x => x.CreateSalaryItem()).Returns(new SalaryItem("test", 0.0m));
+            _incomeItemMock1.Setup(x => x.CreateIncomeSalaryItem()).Returns(new SalaryItem("test", 0.0m));
+            _incomeItemMock2.Setup(x => x.CreateIncomeSalaryItem()).Returns(new SalaryItem("test", 0.0m));
+            _incomeItemMock3.Setup(x => x.CreateIncomeSalaryItem()).Returns(new SalaryItem("test", 0.0m));
 
             var sut = new GrossSalaryCalculator(salaryItemNode, new List<IIncomeItem>()
             {
