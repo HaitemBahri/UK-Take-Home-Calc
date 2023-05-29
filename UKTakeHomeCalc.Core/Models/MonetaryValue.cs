@@ -31,6 +31,22 @@ public struct MonetaryValue
 
         return new MonetaryValue(value1.Value / value2, value1.ValueFrequency);
     }
+    public static bool operator <(MonetaryValue value1, MonetaryValue value2)
+    {
+        return value1.BaseValue < value2.BaseValue;
+    }
+    public static bool operator >(MonetaryValue value1, MonetaryValue value2)
+    {
+        return value1.BaseValue > value2.BaseValue;
+    }
+    public static bool operator <=(MonetaryValue value1, MonetaryValue value2)
+    {
+        return value1.BaseValue <= value2.BaseValue;
+    }
+    public static bool operator >=(MonetaryValue value1, MonetaryValue value2)
+    {
+        return value1.BaseValue >= value2.BaseValue;
+    }
     public static implicit operator MonetaryValue(decimal v)
     {
         return new MonetaryValue(v, Frequency.WEEKLY);

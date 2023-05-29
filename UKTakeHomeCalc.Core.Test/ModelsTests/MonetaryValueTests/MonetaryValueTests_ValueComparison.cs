@@ -74,5 +74,45 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.MonetaryValueTests
             Assert.True(actualResult1);
             Assert.False(actualResult2);
         }
+        [Theory]
+        [InlineData(658.19, Frequency.WEEKLY, 1192.21, Frequency.ANNUALLY)]
+        [InlineData(3555.07, Frequency.WEEKLY, 1693.16, Frequency.MONTHLY)]
+        public void ShouldOneValueBeGreaterThanOtherValue(decimal value1, Frequency frequency1, decimal value2, Frequency frequency2)
+        {
+            var sut = new MonetaryValue(value1, frequency1);
+            var sut2 = new MonetaryValue(value2, frequency2);
+
+            Assert.True(sut > sut2, "Value 1 is not greater than Value 2");
+        }
+        [Theory]
+        [InlineData(658.19, Frequency.WEEKLY, 1192.21, Frequency.ANNUALLY)]
+        [InlineData(3555.07, Frequency.WEEKLY, 3555.07, Frequency.WEEKLY)]
+        public void ShouldOneValueBeGreaterThanOrEqualOtherValue(decimal value1, Frequency frequency1, decimal value2, Frequency frequency2)
+        {
+            var sut = new MonetaryValue(value1, frequency1);
+            var sut2 = new MonetaryValue(value2, frequency2);
+
+            Assert.True(sut >= sut2, "Value 1 is not greater than or equal Value 2");
+        }
+        [Theory]
+        [InlineData(1192.21, Frequency.ANNUALLY , 658.19, Frequency.WEEKLY)]
+        [InlineData( 1693.16, Frequency.MONTHLY, 3555.07, Frequency.WEEKLY)]
+        public void ShouldOneValueBeLessThanOtherValue(decimal value1, Frequency frequency1, decimal value2, Frequency frequency2)
+        {
+            var sut = new MonetaryValue(value1, frequency1);
+            var sut2 = new MonetaryValue(value2, frequency2);
+
+            Assert.True(sut < sut2, "Value 1 is not less than Value 2");
+        }
+        [Theory]
+        [InlineData(1192.21, Frequency.ANNUALLY, 658.19, Frequency.WEEKLY)]
+        [InlineData(3555.07, Frequency.WEEKLY, 3555.07, Frequency.WEEKLY)]
+        public void ShouldOneValueBeLessThanOrEqualOtherValue(decimal value1, Frequency frequency1, decimal value2, Frequency frequency2)
+        {
+            var sut = new MonetaryValue(value1, frequency1);
+            var sut2 = new MonetaryValue(value2, frequency2);
+
+            Assert.True(sut <= sut2, "Value 1 is not less than or equal Value 2");
+        }
     }
 }
