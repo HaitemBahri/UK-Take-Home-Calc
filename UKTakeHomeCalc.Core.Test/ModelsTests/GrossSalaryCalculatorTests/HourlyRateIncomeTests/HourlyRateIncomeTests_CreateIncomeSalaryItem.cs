@@ -9,7 +9,7 @@ using Xunit;
 
 namespace UKTakeHomeCalc.Core.Test.ModelsTests.GrossSalaryCalculatorTests.HourlyRateIncomeTests
 {
-    public class HourlyRateIncomeTests_CreateSalaryItem
+    public class HourlyRateIncomeTests_CreateIncomeSalaryItem
     {
         [Fact]
         public void ShouldReturnCorrectMonetaryValueWithSameInputFrequency()
