@@ -80,4 +80,8 @@ public struct MonetaryValue
     {
         return (!value1.Equals(value2));
     }
+    public override string ToString()
+    {
+        return $"{Math.Round(Value, 2)}/{ValueFrequency}";
+    }
 }
