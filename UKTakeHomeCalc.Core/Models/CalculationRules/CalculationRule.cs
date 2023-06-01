@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UKTakeHomeCalc.Core.Models;
 
-namespace UKTakeHomeCalc.Core.Helpers.CalculationRules
+namespace UKTakeHomeCalc.Core.Models.CalculationRules
 {
     public class CalculationRule
     {

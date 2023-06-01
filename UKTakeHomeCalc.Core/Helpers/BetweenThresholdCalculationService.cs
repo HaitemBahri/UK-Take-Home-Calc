@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UKTakeHomeCalc.Core.Helpers.CalculationRules;
 using UKTakeHomeCalc.Core.Models;
+using UKTakeHomeCalc.Core.Models.CalculationRules;
 
 namespace UKTakeHomeCalc.Core.Helpers
 {
