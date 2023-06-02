@@ -29,8 +29,7 @@ namespace UKTakeHomeCalc.Core.Services.Calculator.TaxCalculator.TaxStrategy
         {
             var taxableSalary = _taxableSalaryCalculationService.CalculateTaxableSalary(salary.GetTotal());
 
-            var betweenThresholdCalculationService = new BetweenThresholdCalculationService();
-            var taxResults = betweenThresholdCalculationService.CalculateValuesUsingCalculationRule(taxableSalary, _taxCalculationRule);
+            var taxResults = ThresholdCalculationService.CalcValuesUsingRules(taxableSalary, _taxCalculationRule);
 
             var salaryItemNode = new SalaryItemNode(_name);
             foreach (var taxResult in taxResults.Results)

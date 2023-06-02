@@ -8,9 +8,9 @@ using UKTakeHomeCalc.Core.Models.CalculationRules;
 
 namespace UKTakeHomeCalc.Core.Helpers
 {
-    public class BetweenThresholdCalculationService
+    public static class ThresholdCalculationService
     {
-        public MonetaryValue GetValuesBetweenThresholds(MonetaryValue value, MonetaryValue lowerThreshold, MonetaryValue upperThreshold)
+        public static MonetaryValue CalcValueBetweenThresholds(MonetaryValue value, MonetaryValue lowerThreshold, MonetaryValue upperThreshold)
         {
             if (value > upperThreshold)
                 return upperThreshold - lowerThreshold;
@@ -21,13 +21,13 @@ namespace UKTakeHomeCalc.Core.Helpers
             return value - lowerThreshold;
         }
 
-        public CalculationRuleResult CalculateValuesUsingCalculationRule(MonetaryValue value, CalculationRule calculationRule)
+        public static CalculationRuleResult CalcValuesUsingRules(MonetaryValue value, CalculationRule calculationRule)
         {
             var results = new CalculationRuleResult();
 
             foreach (var rule in calculationRule.Rules)
             {
-                var valueInBetween = GetValuesBetweenThresholds(value, rule.FromValue, rule.ToValue);
+                var valueInBetween = CalcValueBetweenThresholds(value, rule.FromValue, rule.ToValue);
                 var taxOnValueInBetween = valueInBetween * rule.Percentage;
                 results.AddResult(rule.Percentage, taxOnValueInBetween);
             }
