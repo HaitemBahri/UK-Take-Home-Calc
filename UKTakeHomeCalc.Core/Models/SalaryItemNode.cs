@@ -48,5 +48,37 @@
         {
             return _salaryItems.ToList();
         }
+
+        public override bool Equals(object? obj)
+        {
+            if (obj is null) 
+                return false;
+
+            if (obj.GetType() != typeof(SalaryItemNode)) 
+                return false;
+
+            var other = (ISalaryItemNode)obj;
+
+            var result = true;
+
+            if (Name == other.Name)
+                result = result && true;
+
+            result = result && _salaryItems.SequenceEqual(other.GetSalaryItems());
+
+            return result;
+        }
+
+        public override int GetHashCode()
+        {
+            int initialHash = 23;
+
+            unchecked
+            {
+                initialHash = initialHash * 23 + Name.GetHashCode();
+            }
+
+            return initialHash;
+        }
     }
 }
