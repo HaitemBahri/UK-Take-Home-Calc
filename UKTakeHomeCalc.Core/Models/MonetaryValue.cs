@@ -24,6 +24,10 @@ public struct MonetaryValue
     {
         return value1 + value2 * -1;
     }
+    public static MonetaryValue operator -(MonetaryValue value1)
+    {
+        return value1 * -1;
+    }
     public static MonetaryValue operator /(MonetaryValue value1, decimal value2)
     {
         if (value2 == 0)

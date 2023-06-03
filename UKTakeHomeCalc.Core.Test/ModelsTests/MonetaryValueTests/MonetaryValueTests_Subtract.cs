@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UKTakeHomeCalc.Core.Helpers;
 using UKTakeHomeCalc.Core.Models;
 using Xunit;
 
@@ -31,6 +32,17 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.MonetaryValueTests
             var expectedResult = new MonetaryValue(20967.16433m, Frequency.ANNUALLY);
 
             var actualResult = sut - valueToBeSubtracted;
+
+            Assert.Equal(expectedResult, actualResult);
+        }
+
+        [Fact]
+        public void ShouldNegateValue_WhenPreceededWithNegativeSign()
+        {
+            var sut = 599.5m.Monthly();
+            var expectedResult = 599.5m.Monthly() * (-1);
+
+            var actualResult = -sut;
 
             Assert.Equal(expectedResult, actualResult);
         }
