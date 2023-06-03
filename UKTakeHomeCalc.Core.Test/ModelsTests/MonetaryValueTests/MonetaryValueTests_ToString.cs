@@ -13,9 +13,9 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.MonetaryValueTests
         [Fact]
         public void ShouldReturnCorrectString()
         {
-            var sut = new MonetaryValue(592.66m, Frequency.WEEKLY);
+            var sut = new MonetaryValue(592.66m, Frequency.Weekly);
 
-            var expectedResult = "592.66/WEEKLY";
+            var expectedResult = "592.66/Weekly";
 
             var actualResult = sut.ToString();
 
@@ -24,9 +24,9 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.MonetaryValueTests
         [Fact]
         public void ShouldReturnCorrectStringWithTwoDecimalPlaces()
         {
-            var sut = new MonetaryValue(1980.95877m, Frequency.MONTHLY);
+            var sut = new MonetaryValue(1980.95877m, Frequency.Monthly);
 
-            var expectedResult = "1980.96/MONTHLY";
+            var expectedResult = "1980.96/Monthly";
 
             var actualResult = sut.ToString();
 

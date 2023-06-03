@@ -15,8 +15,8 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.MonetaryValueTests
         [InlineData(19855.333, 1.228, 24382.35)]
         public void ShouldMultiplyDecimal_AndReturnValueWithOriginalFrequency(decimal sutValue, decimal multiplyValue, decimal expectedValue)
         {
-            var sut = new MonetaryValue(sutValue, Frequency.MONTHLY);
-            var expectedResult = new MonetaryValue(expectedValue, Frequency.MONTHLY);
+            var sut = new MonetaryValue(sutValue, Frequency.Monthly);
+            var expectedResult = new MonetaryValue(expectedValue, Frequency.Monthly);
 
             var actualResult = sut * multiplyValue;
 

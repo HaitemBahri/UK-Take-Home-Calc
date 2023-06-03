@@ -1,4 +1,6 @@
-﻿namespace UKTakeHomeCalc.Core.Models
+﻿using System.Text;
+
+namespace UKTakeHomeCalc.Core.Models
 {
     public class SalaryItemNode : ISalaryItemNode
     {
@@ -34,7 +36,7 @@
         }
         public MonetaryValue GetTotal()
         {
-            var total = new MonetaryValue(0, Frequency.WEEKLY);
+            var total = new MonetaryValue(0, Frequency.Weekly);
 
             foreach (var item in _salaryItems)
             {
@@ -79,6 +81,20 @@
             }
 
             return initialHash;
+        }
+
+        public override string ToString()
+        {
+            var stringBuilder = new StringBuilder();
+
+            stringBuilder.AppendLine(Name);
+
+            foreach(var item in _salaryItems)
+            {
+                stringBuilder.Append('\t').AppendLine(item.ToString());
+            }
+
+            return stringBuilder.ToString();
         }
     }
 }

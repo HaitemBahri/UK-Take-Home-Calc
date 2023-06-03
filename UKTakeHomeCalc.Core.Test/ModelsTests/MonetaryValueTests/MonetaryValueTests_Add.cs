@@ -13,7 +13,7 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.MonetaryValueTests
         [Fact]
         public void ShouldAddMonetaryValueWithSameFrequency_AndReturnValueWithOriginalFrequency()
         {
-            Frequency frequency = Frequency.WEEKLY;
+            Frequency frequency = Frequency.Weekly;
             var sut = new MonetaryValue(22.88m, frequency);
             var valueToBeAdded = new MonetaryValue(399.1m, frequency);
             var expectedResult = new MonetaryValue(421.98m, frequency);
@@ -27,9 +27,9 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.MonetaryValueTests
         [Fact]
         public void ShouldAddMonetaryValueWithDifferentFrequency_AndReturnValueWithOriginalFrequency()
         {
-            var sut = new MonetaryValue(25822.88m, Frequency.ANNUALLY);
-            var valueToBeAdded = new MonetaryValue(399.1m, Frequency.WEEKLY);
-            var expectedResult = new MonetaryValue(46633.09m, Frequency.ANNUALLY);
+            var sut = new MonetaryValue(25822.88m, Frequency.Annually);
+            var valueToBeAdded = new MonetaryValue(399.1m, Frequency.Weekly);
+            var expectedResult = new MonetaryValue(46633.09m, Frequency.Annually);
 
             var actualResult = sut + valueToBeAdded;
 

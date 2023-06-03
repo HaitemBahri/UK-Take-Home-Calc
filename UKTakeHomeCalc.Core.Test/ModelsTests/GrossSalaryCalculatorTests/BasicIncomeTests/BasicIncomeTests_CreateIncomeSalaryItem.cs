@@ -16,7 +16,7 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.GrossSalaryCalculatorTests.BasicI
         {
             var name = "my BasicIncome";
             var value = 850.00m;
-            var freq = Frequency.WEEKLY;
+            var freq = Frequency.Weekly;
 
             var sut = new BasicIncome(name, value, freq);
 

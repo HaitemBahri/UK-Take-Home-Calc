@@ -10,8 +10,8 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.MonetaryValueTests
         [InlineData(27852.09, 18.5, 1505.518)]
         public void ShouldDivideDecimal_AndReturnValueWithOriginalFrequency(decimal sutValue, decimal DivideValue, decimal expectedValue)
         {
-            var sut = new MonetaryValue(sutValue, Frequency.ANNUALLY);
-            var expectedResult = new MonetaryValue(expectedValue, Frequency.ANNUALLY);
+            var sut = new MonetaryValue(sutValue, Frequency.Annually);
+            var expectedResult = new MonetaryValue(expectedValue, Frequency.Annually);
 
             var actualResult = sut / DivideValue;
 
@@ -22,7 +22,7 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.MonetaryValueTests
         [Fact]
         public void ShouldThrowDivideByZeroExceptionWhenDividingByZero()
         {
-            var sut = new MonetaryValue(4599.39903m, Frequency.ANNUALLY);
+            var sut = new MonetaryValue(4599.39903m, Frequency.Annually);
             var DivideValue = 0;
 
             Assert.Throws<DivideByZeroException>(() => sut / DivideValue);

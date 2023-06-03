@@ -12,15 +12,15 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.MonetaryValueTests
         [InlineData(3.135, 3.14)]
         public void ValueShouldBeEqualToTwoDecimalPlaces(decimal value, decimal expectedValue)
         {
-            var sut = new MonetaryValue(value, Frequency.WEEKLY);
+            var sut = new MonetaryValue(value, Frequency.Weekly);
             Assert.Equal(sut.Value, expectedValue, 2);
         }
 
         [Fact]
         public void ShouldTwoMonetaryValuesBeEqual()
         {
-            var sut = new MonetaryValue(97.99m, Frequency.WEEKLY);
-            var sut2 = new MonetaryValue(97.99m, Frequency.WEEKLY);
+            var sut = new MonetaryValue(97.99m, Frequency.Weekly);
+            var sut2 = new MonetaryValue(97.99m, Frequency.Weekly);
 
             Assert.Equal(sut, sut2);
         }
@@ -28,15 +28,15 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.MonetaryValueTests
         [Fact]
         public void ShouldTwoValuesWithSameValueAndDifferentFrequenciesBeNotEqual()
         {
-            var sut = new MonetaryValue(97.99m, Frequency.MONTHLY);
-            var sut2 = new MonetaryValue(97.99m, Frequency.ANNUALLY);
+            var sut = new MonetaryValue(97.99m, Frequency.Monthly);
+            var sut2 = new MonetaryValue(97.99m, Frequency.Annually);
 
             Assert.NotEqual(sut, sut2);
         }
 
         [Theory]
-        [InlineData(97.99, Frequency.MONTHLY, 1192.21, Frequency.ANNUALLY)]
-        [InlineData(395.07, Frequency.WEEKLY, 1693.16, Frequency.MONTHLY)]
+        [InlineData(97.99, Frequency.Monthly, 1192.21, Frequency.Annually)]
+        [InlineData(395.07, Frequency.Weekly, 1693.16, Frequency.Monthly)]
         public void ShouldTwoValuesWithDifferentValuesAndFrequenciesBeEqual(decimal value1, Frequency frequency1, decimal value2, Frequency frequency2)
         {
             var sut = new MonetaryValue(value1, frequency1);
@@ -46,8 +46,8 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.MonetaryValueTests
         }
 
         [Theory]
-        [InlineData(97.99, Frequency.MONTHLY, 1192.21, Frequency.ANNUALLY)]
-        [InlineData(395.07, Frequency.WEEKLY, 1693.16, Frequency.MONTHLY)]
+        [InlineData(97.99, Frequency.Monthly, 1192.21, Frequency.Annually)]
+        [InlineData(395.07, Frequency.Weekly, 1693.16, Frequency.Monthly)]
         public void ShouldTwoValuesBeEqualUsingEqualOperator(decimal value1, Frequency frequency1, decimal value2, Frequency frequency2)
         {
             var sut = new MonetaryValue(value1, frequency1);
@@ -61,8 +61,8 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.MonetaryValueTests
         }
 
         [Theory]
-        [InlineData(9.19, Frequency.MONTHLY, 1192.21, Frequency.ANNUALLY)]
-        [InlineData(3555.07, Frequency.WEEKLY, 1693.16, Frequency.MONTHLY)]
+        [InlineData(9.19, Frequency.Monthly, 1192.21, Frequency.Annually)]
+        [InlineData(3555.07, Frequency.Weekly, 1693.16, Frequency.Monthly)]
         public void ShouldTwoValuesNotBeEqualUsingEqualOperator(decimal value1, Frequency frequency1, decimal value2, Frequency frequency2)
         {
             var sut = new MonetaryValue(value1, frequency1);
@@ -75,8 +75,8 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.MonetaryValueTests
             Assert.False(actualResult2);
         }
         [Theory]
-        [InlineData(658.19, Frequency.WEEKLY, 1192.21, Frequency.ANNUALLY)]
-        [InlineData(3555.07, Frequency.WEEKLY, 1693.16, Frequency.MONTHLY)]
+        [InlineData(658.19, Frequency.Weekly, 1192.21, Frequency.Annually)]
+        [InlineData(3555.07, Frequency.Weekly, 1693.16, Frequency.Monthly)]
         public void ShouldOneValueBeGreaterThanOtherValue(decimal value1, Frequency frequency1, decimal value2, Frequency frequency2)
         {
             var sut = new MonetaryValue(value1, frequency1);
@@ -85,8 +85,8 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.MonetaryValueTests
             Assert.True(sut > sut2, "Value 1 is not greater than Value 2");
         }
         [Theory]
-        [InlineData(658.19, Frequency.WEEKLY, 1192.21, Frequency.ANNUALLY)]
-        [InlineData(3555.07, Frequency.WEEKLY, 3555.07, Frequency.WEEKLY)]
+        [InlineData(658.19, Frequency.Weekly, 1192.21, Frequency.Annually)]
+        [InlineData(3555.07, Frequency.Weekly, 3555.07, Frequency.Weekly)]
         public void ShouldOneValueBeGreaterThanOrEqualOtherValue(decimal value1, Frequency frequency1, decimal value2, Frequency frequency2)
         {
             var sut = new MonetaryValue(value1, frequency1);
@@ -95,8 +95,8 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.MonetaryValueTests
             Assert.True(sut >= sut2, "Value 1 is not greater than or equal Value 2");
         }
         [Theory]
-        [InlineData(1192.21, Frequency.ANNUALLY , 658.19, Frequency.WEEKLY)]
-        [InlineData( 1693.16, Frequency.MONTHLY, 3555.07, Frequency.WEEKLY)]
+        [InlineData(1192.21, Frequency.Annually , 658.19, Frequency.Weekly)]
+        [InlineData( 1693.16, Frequency.Monthly, 3555.07, Frequency.Weekly)]
         public void ShouldOneValueBeLessThanOtherValue(decimal value1, Frequency frequency1, decimal value2, Frequency frequency2)
         {
             var sut = new MonetaryValue(value1, frequency1);
@@ -105,8 +105,8 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.MonetaryValueTests
             Assert.True(sut < sut2, "Value 1 is not less than Value 2");
         }
         [Theory]
-        [InlineData(1192.21, Frequency.ANNUALLY, 658.19, Frequency.WEEKLY)]
-        [InlineData(3555.07, Frequency.WEEKLY, 3555.07, Frequency.WEEKLY)]
+        [InlineData(1192.21, Frequency.Annually, 658.19, Frequency.Weekly)]
+        [InlineData(3555.07, Frequency.Weekly, 3555.07, Frequency.Weekly)]
         public void ShouldOneValueBeLessThanOrEqualOtherValue(decimal value1, Frequency frequency1, decimal value2, Frequency frequency2)
         {
             var sut = new MonetaryValue(value1, frequency1);

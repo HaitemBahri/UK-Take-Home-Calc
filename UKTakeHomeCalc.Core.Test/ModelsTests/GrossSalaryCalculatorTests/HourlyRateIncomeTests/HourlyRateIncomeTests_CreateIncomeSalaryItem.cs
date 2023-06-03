@@ -17,7 +17,7 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.GrossSalaryCalculatorTests.Hourly
             var name = "my hourlyRateIncome";
             var hourlyRate = 15.48m;
             var hours = 37.5m;
-            var freq = Frequency.WEEKLY;
+            var freq = Frequency.Weekly;
 
             var sut = new HourlyRateIncome(name, hourlyRate, hours, freq);
 

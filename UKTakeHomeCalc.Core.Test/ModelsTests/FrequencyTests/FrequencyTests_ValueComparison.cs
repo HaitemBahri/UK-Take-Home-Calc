@@ -13,7 +13,7 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.FrequencyTests
         [Fact]
         public void ShouldReturnIntValueForWeeklyFrequency()
         {
-            var weeklyFreq = Frequency.WEEKLY;
+            var weeklyFreq = Frequency.Weekly;
 
             int weeklyFreqInt = (int)weeklyFreq;
 
@@ -25,7 +25,7 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.FrequencyTests
         [Fact]
         public void ShouldReturnIntValueForMonthlyFrequency()
         {
-            var monthlyFreq = Frequency.MONTHLY;
+            var monthlyFreq = Frequency.Monthly;
 
             int monthlyFreqInt = (int)monthlyFreq;
 
@@ -37,7 +37,7 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.FrequencyTests
         [Fact]
         public void ShouldReturnIntValueForAnnuallyFrequency()
         {
-            var annuallyFreq = Frequency.ANNUALLY;
+            var annuallyFreq = Frequency.Annually;
 
             int annuallyFreqInt = (int)annuallyFreq;
 

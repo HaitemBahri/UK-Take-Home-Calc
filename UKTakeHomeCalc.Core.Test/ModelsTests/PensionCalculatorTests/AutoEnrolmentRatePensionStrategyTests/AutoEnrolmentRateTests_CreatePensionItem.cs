@@ -23,7 +23,7 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.PensionCalculatorTests.AutoEnrolm
             var name = "my hourlyRateIncome";
             var percentage = 0.05f;
             var salary = 1650.00m;
-            var freq = Frequency.ANNUALLY;
+            var freq = Frequency.Annually;
             var expected = 0;
 
             var salaryMock = new Mock<ISalaryItemNode>();
@@ -42,7 +42,7 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.PensionCalculatorTests.AutoEnrolm
             var name = "my hourlyRateIncome";
             var percentage = 0.05f;
             var salary = 45750.00m;
-            var freq = Frequency.ANNUALLY;
+            var freq = Frequency.Annually;
             var expected = (salary - 6240m) * (decimal)percentage * (-1);
 
             var salaryMock = new Mock<ISalaryItemNode>();
@@ -61,7 +61,7 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.PensionCalculatorTests.AutoEnrolm
             var name = "my hourlyRateIncome";
             var percentage = 0.05f;
             var salary = 75050.00m;
-            var freq = Frequency.ANNUALLY;
+            var freq = Frequency.Annually;
             var expected = (50270m - 6240m) * (decimal)percentage * (-1);
 
             var salaryMock = new Mock<ISalaryItemNode>();

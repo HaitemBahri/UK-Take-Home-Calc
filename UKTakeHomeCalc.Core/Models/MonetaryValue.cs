@@ -53,7 +53,7 @@ public struct MonetaryValue
     }
     public static implicit operator MonetaryValue(decimal v)
     {
-        return new MonetaryValue(v, Frequency.WEEKLY);
+        return new MonetaryValue(v, Frequency.Weekly);
     }
     public override bool Equals(object? value)
     {

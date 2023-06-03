@@ -22,12 +22,12 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.TaxCalculatorTests.EnglandTaxStra
             decimal SalaryAnnually,
             decimal expectedValue)
         {
-            var salary = new MonetaryValue(SalaryAnnually, Frequency.ANNUALLY);
+            var salary = new MonetaryValue(SalaryAnnually, Frequency.Annually);
             var sut = new EnglandTaxStrategy("some name", 
                 new IncomeLimitTaxableSalaryCalculationService(
                     new TaxFreeAllowance(personalAllowanceAnnually.Annually())));
             var salaryMock = new Mock<ISalaryItem>();
-            var expectedResult = new MonetaryValue(expectedValue, Frequency.ANNUALLY);
+            var expectedResult = new MonetaryValue(expectedValue, Frequency.Annually);
 
             salaryMock.Setup(x => x.GetTotal()).Returns(salary);
 
@@ -41,12 +41,12 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.TaxCalculatorTests.EnglandTaxStra
             decimal SalaryAnnually,
             decimal expectedValue)
         {
-            var salary = new MonetaryValue(SalaryAnnually, Frequency.ANNUALLY);
+            var salary = new MonetaryValue(SalaryAnnually, Frequency.Annually);
             var sut = new EnglandTaxStrategy("some name", 
                 new IncomeLimitTaxableSalaryCalculationService(
                     new TaxFreeAllowance(personalAllowanceAnnually.Annually())));
             var salaryMock = new Mock<ISalaryItem>();
-            var expectedResult = new MonetaryValue(expectedValue, Frequency.ANNUALLY);
+            var expectedResult = new MonetaryValue(expectedValue, Frequency.Annually);
 
             salaryMock.Setup(x => x.GetTotal()).Returns(salary);
 
@@ -60,12 +60,12 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.TaxCalculatorTests.EnglandTaxStra
             decimal SalaryAnnually,
             decimal expectedValue)
         {
-            var salary = new MonetaryValue(SalaryAnnually, Frequency.ANNUALLY);
+            var salary = new MonetaryValue(SalaryAnnually, Frequency.Annually);
             var sut = new EnglandTaxStrategy("some name",
                 new IncomeLimitTaxableSalaryCalculationService(
                     new TaxFreeAllowance(personalAllowanceAnnually.Annually())));
             var salaryMock = new Mock<ISalaryItem>();
-            var expectedResult = new MonetaryValue(expectedValue, Frequency.ANNUALLY);
+            var expectedResult = new MonetaryValue(expectedValue, Frequency.Annually);
 
             salaryMock.Setup(x => x.GetTotal()).Returns(salary);
 
@@ -80,11 +80,11 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.TaxCalculatorTests.EnglandTaxStra
             decimal SalaryAnnually,
             decimal expectedValue)
         {
-            var salary = new MonetaryValue(SalaryAnnually, Frequency.ANNUALLY);
+            var salary = new MonetaryValue(SalaryAnnually, Frequency.Annually);
             var sut = new EnglandTaxStrategy("some name",
                 new IncomeLimitTaxableSalaryCalculationService(
                     new TaxFreeAllowance(personalAllowanceAnnually.Annually()))); var salaryMock = new Mock<ISalaryItem>();
-            var expectedResult = new MonetaryValue(expectedValue, Frequency.ANNUALLY);
+            var expectedResult = new MonetaryValue(expectedValue, Frequency.Annually);
 
             salaryMock.Setup(x => x.GetTotal()).Returns(salary);
 
@@ -99,11 +99,11 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.TaxCalculatorTests.EnglandTaxStra
             decimal SalaryAnnually,
             decimal expectedValue)
         {
-            var salary = new MonetaryValue(SalaryAnnually, Frequency.ANNUALLY);
+            var salary = new MonetaryValue(SalaryAnnually, Frequency.Annually);
             var sut = new EnglandTaxStrategy("some name",
                 new IncomeLimitTaxableSalaryCalculationService(
                     new TaxFreeAllowance(personalAllowanceAnnually.Annually()))); var salaryMock = new Mock<ISalaryItem>();
-            var expectedResult = new MonetaryValue(expectedValue, Frequency.ANNUALLY);
+            var expectedResult = new MonetaryValue(expectedValue, Frequency.Annually);
 
             salaryMock.Setup(x => x.GetTotal()).Returns(salary);
 

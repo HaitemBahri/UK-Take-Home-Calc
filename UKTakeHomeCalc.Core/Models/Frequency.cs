@@ -8,8 +8,8 @@ namespace UKTakeHomeCalc.Core.Models
 {
     public enum Frequency
     {
-        WEEKLY = 7,
-        MONTHLY = 30,
-        ANNUALLY = 365
+        Weekly = 7,
+        Monthly = 30,
+        Annually = 365
     }
 }

@@ -8,38 +8,38 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.SalaryItemCompositeTests
         public static List<object[]> SalaryItems =>
             new List<object[]>() {
                 new object[] {
-                    new SalaryItem("random name - 1", new MonetaryValue(659.22m , Frequency.WEEKLY)),
-                    new SalaryItem("random name - 2", new MonetaryValue(8.5299m , Frequency.WEEKLY)),
-                    new SalaryItem("random name - 3", new MonetaryValue(618.369m , Frequency.WEEKLY)),
-                    new SalaryItem("random name - 4", new MonetaryValue(25910.07m , Frequency.WEEKLY)),
+                    new SalaryItem("random name - 1", new MonetaryValue(659.22m , Frequency.Weekly)),
+                    new SalaryItem("random name - 2", new MonetaryValue(8.5299m , Frequency.Weekly)),
+                    new SalaryItem("random name - 3", new MonetaryValue(618.369m , Frequency.Weekly)),
+                    new SalaryItem("random name - 4", new MonetaryValue(25910.07m , Frequency.Weekly)),
                     27196.1889m
                 },
                 new object[] {
-                    new SalaryItem("random name - 1", new MonetaryValue(-569.3m , Frequency.WEEKLY)),
-                    new SalaryItem("random name - 2", new MonetaryValue(10m , Frequency.WEEKLY)),
-                    new SalaryItem("random name - 3", new MonetaryValue(-95.66m , Frequency.WEEKLY)),
-                    new SalaryItem("random name - 4", new MonetaryValue(0.999m , Frequency.WEEKLY)),
+                    new SalaryItem("random name - 1", new MonetaryValue(-569.3m , Frequency.Weekly)),
+                    new SalaryItem("random name - 2", new MonetaryValue(10m , Frequency.Weekly)),
+                    new SalaryItem("random name - 3", new MonetaryValue(-95.66m , Frequency.Weekly)),
+                    new SalaryItem("random name - 4", new MonetaryValue(0.999m , Frequency.Weekly)),
                     -653.961m
                 },
                 new object[] {
-                    new SalaryItem("random name - 1", new MonetaryValue(-60.65m , Frequency.WEEKLY)),
-                    new SalaryItem("random name - 2", new MonetaryValue(195.28889m , Frequency.WEEKLY)),
-                    new SalaryItem("random name - 3", new MonetaryValue(60.65m , Frequency.WEEKLY)),
-                    new SalaryItem("random name - 4", new MonetaryValue(-195.28889m , Frequency.WEEKLY)),
+                    new SalaryItem("random name - 1", new MonetaryValue(-60.65m , Frequency.Weekly)),
+                    new SalaryItem("random name - 2", new MonetaryValue(195.28889m , Frequency.Weekly)),
+                    new SalaryItem("random name - 3", new MonetaryValue(60.65m , Frequency.Weekly)),
+                    new SalaryItem("random name - 4", new MonetaryValue(-195.28889m , Frequency.Weekly)),
                     0m
                 },
                 new object[] {
-                    new SalaryItem("random name - 1", new MonetaryValue(-0m , Frequency.WEEKLY)),
-                    new SalaryItem("random name - 2", new MonetaryValue(0m , Frequency.WEEKLY)),
-                    new SalaryItem("random name - 3", new MonetaryValue(-0m , Frequency.WEEKLY)),
-                    new SalaryItem("random name - 4", new MonetaryValue(0m , Frequency.WEEKLY)),
+                    new SalaryItem("random name - 1", new MonetaryValue(-0m , Frequency.Weekly)),
+                    new SalaryItem("random name - 2", new MonetaryValue(0m , Frequency.Weekly)),
+                    new SalaryItem("random name - 3", new MonetaryValue(-0m , Frequency.Weekly)),
+                    new SalaryItem("random name - 4", new MonetaryValue(0m , Frequency.Weekly)),
                     0m
                 },
                 new object[] {
-                    new SalaryItem("random name - 1", new MonetaryValue(-159.666m , Frequency.WEEKLY)),
-                    new SalaryItem("random name - 2", new MonetaryValue(0m , Frequency.WEEKLY)),
-                    new SalaryItem("random name - 3", new MonetaryValue(-0m , Frequency.WEEKLY)),
-                    new SalaryItem("random name - 4", new MonetaryValue(0m , Frequency.WEEKLY)),
+                    new SalaryItem("random name - 1", new MonetaryValue(-159.666m , Frequency.Weekly)),
+                    new SalaryItem("random name - 2", new MonetaryValue(0m , Frequency.Weekly)),
+                    new SalaryItem("random name - 3", new MonetaryValue(-0m , Frequency.Weekly)),
+                    new SalaryItem("random name - 4", new MonetaryValue(0m , Frequency.Weekly)),
                     -159.666m
                 }
             };
@@ -47,40 +47,40 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.SalaryItemCompositeTests
         public static List<object[]> SalaryItemsForComposite1 => new List<object[]>() {
             new object[] {
                 new SalaryItem[] {
-                    new SalaryItem("random name - 1", new MonetaryValue(659.22m , Frequency.WEEKLY)),
-                    new SalaryItem("random name - 4", new MonetaryValue(25910.07m , Frequency.WEEKLY)),
+                    new SalaryItem("random name - 1", new MonetaryValue(659.22m , Frequency.Weekly)),
+                    new SalaryItem("random name - 4", new MonetaryValue(25910.07m , Frequency.Weekly)),
                 },
                 new SalaryItem[] {
-                    new SalaryItem("random name - 1", new MonetaryValue(-569.3m , Frequency.WEEKLY)),
-                    new SalaryItem("random name - 4", new MonetaryValue(0.999m , Frequency.WEEKLY)),
+                    new SalaryItem("random name - 1", new MonetaryValue(-569.3m , Frequency.Weekly)),
+                    new SalaryItem("random name - 4", new MonetaryValue(0.999m , Frequency.Weekly)),
                 },
                 new SalaryItem[] {
-                    new SalaryItem("random name - 1", new MonetaryValue(-60.65m , Frequency.WEEKLY)),
-                    new SalaryItem("random name - 2", new MonetaryValue(195.28889m , Frequency.WEEKLY)),
-                    new SalaryItem("random name - 4", new MonetaryValue(-195.28889m , Frequency.WEEKLY)),
+                    new SalaryItem("random name - 1", new MonetaryValue(-60.65m , Frequency.Weekly)),
+                    new SalaryItem("random name - 2", new MonetaryValue(195.28889m , Frequency.Weekly)),
+                    new SalaryItem("random name - 4", new MonetaryValue(-195.28889m , Frequency.Weekly)),
                 },
                 new MonetaryValue[]
                 {
-                    new MonetaryValue(25940.339m, Frequency.WEEKLY),
+                    new MonetaryValue(25940.339m, Frequency.Weekly),
                 } 
             },
             new object[] {
                 new SalaryItem[] {
-                    new SalaryItem("random name - 1", new MonetaryValue(2825.2285m , Frequency.MONTHLY)),
-                    new SalaryItem("random name - 4", new MonetaryValue(25910.07m , Frequency.WEEKLY)),
+                    new SalaryItem("random name - 1", new MonetaryValue(2825.2285m , Frequency.Monthly)),
+                    new SalaryItem("random name - 4", new MonetaryValue(25910.07m , Frequency.Weekly)),
                 },
                 new SalaryItem[] {
-                    new SalaryItem("random name - 1", new MonetaryValue(-569.3m , Frequency.WEEKLY)),
-                    new SalaryItem("random name - 4", new MonetaryValue(52.0907m , Frequency.ANNUALLY)),
+                    new SalaryItem("random name - 1", new MonetaryValue(-569.3m , Frequency.Weekly)),
+                    new SalaryItem("random name - 4", new MonetaryValue(52.0907m , Frequency.Annually)),
                 },
                 new SalaryItem[] {
-                    new SalaryItem("random name - 1", new MonetaryValue(-3162.464m , Frequency.ANNUALLY)),
-                    new SalaryItem("random name - 2", new MonetaryValue(195.28889m , Frequency.WEEKLY)),
-                    new SalaryItem("random name - 4", new MonetaryValue(-195.28889m , Frequency.WEEKLY)),
+                    new SalaryItem("random name - 1", new MonetaryValue(-3162.464m , Frequency.Annually)),
+                    new SalaryItem("random name - 2", new MonetaryValue(195.28889m , Frequency.Weekly)),
+                    new SalaryItem("random name - 4", new MonetaryValue(-195.28889m , Frequency.Weekly)),
                 },
                 new MonetaryValue[]
                 {
-                    new MonetaryValue(111172.8814m, Frequency.MONTHLY),
+                    new MonetaryValue(111172.8814m, Frequency.Monthly),
                 }
             }
         };
@@ -99,7 +99,7 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.SalaryItemCompositeTests
                 sut.AddValue(salaryItem);
             }
 
-            var expectedResult = new MonetaryValue(v5, Frequency.WEEKLY);
+            var expectedResult = new MonetaryValue(v5, Frequency.Weekly);
             var actualResult = sut.GetTotal();
 
             Assert.Equal(expectedResult, actualResult);

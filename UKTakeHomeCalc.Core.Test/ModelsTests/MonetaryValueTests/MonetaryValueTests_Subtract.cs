@@ -14,7 +14,7 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.MonetaryValueTests
         [Fact]
         public void ShouldSubtractMonetaryValueWithSameFrequency_AndReturnValueWithOriginalFrequency()
         {
-            Frequency frequency = Frequency.WEEKLY;
+            Frequency frequency = Frequency.Weekly;
             var sut = new MonetaryValue(9822.88999m, frequency);
             var valueToBeSubtracted = new MonetaryValue(399.450001m, frequency);
             var expectedResult = new MonetaryValue(9423.439m, frequency);
@@ -27,9 +27,9 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.MonetaryValueTests
         [Fact]
         public void ShouldSubtractMonetaryValueWithDifferentFrequency_AndReturnValueWithOriginalFrequency()
         {
-            var sut = new MonetaryValue(25822.881m, Frequency.ANNUALLY);
-            var valueToBeSubtracted = new MonetaryValue(399.1m, Frequency.MONTHLY);
-            var expectedResult = new MonetaryValue(20967.16433m, Frequency.ANNUALLY);
+            var sut = new MonetaryValue(25822.881m, Frequency.Annually);
+            var valueToBeSubtracted = new MonetaryValue(399.1m, Frequency.Monthly);
+            var expectedResult = new MonetaryValue(20967.16433m, Frequency.Annually);
 
             var actualResult = sut - valueToBeSubtracted;
 

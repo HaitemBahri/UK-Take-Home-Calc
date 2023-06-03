@@ -13,8 +13,8 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.SalaryItemTests
         [Fact]
         public void ShouldTwoSalaryItemsWithSameNameAndValueBeEqual()
         {
-            var sut1 = new SalaryItem("some salaryItem", new MonetaryValue(52.2m, Frequency.WEEKLY));
-            var sut2 = new SalaryItem("some salaryItem", new MonetaryValue(52.2m, Frequency.WEEKLY));
+            var sut1 = new SalaryItem("some salaryItem", new MonetaryValue(52.2m, Frequency.Weekly));
+            var sut2 = new SalaryItem("some salaryItem", new MonetaryValue(52.2m, Frequency.Weekly));
 
             Assert.Equal(sut1, sut2);
         }
@@ -22,8 +22,8 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.SalaryItemTests
         [Fact]
         public void ShouldTwoSalaryItemsWithSameNameAndDifferentValueNotBeEqual()
         {
-            var sut1 = new SalaryItem("some salaryItem", new MonetaryValue(455.7m, Frequency.MONTHLY));
-            var sut2 = new SalaryItem("some salaryItem", new MonetaryValue(52.2m, Frequency.MONTHLY));
+            var sut1 = new SalaryItem("some salaryItem", new MonetaryValue(455.7m, Frequency.Monthly));
+            var sut2 = new SalaryItem("some salaryItem", new MonetaryValue(52.2m, Frequency.Monthly));
 
             Assert.NotEqual(sut1, sut2);
         }
@@ -31,8 +31,8 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.SalaryItemTests
         [Fact]
         public void ShouldTwoSalaryItemsWithDifferentNameAndSameValueNotBeEqual()
         {
-            var sut1 = new SalaryItem("some salaryItem - One", new MonetaryValue(52.2m, Frequency.ANNUALLY));
-            var sut2 = new SalaryItem("some salaryItem - Two", new MonetaryValue(52.2m, Frequency.ANNUALLY));
+            var sut1 = new SalaryItem("some salaryItem - One", new MonetaryValue(52.2m, Frequency.Annually));
+            var sut2 = new SalaryItem("some salaryItem - Two", new MonetaryValue(52.2m, Frequency.Annually));
 
             Assert.NotEqual(sut1, sut2);
         }

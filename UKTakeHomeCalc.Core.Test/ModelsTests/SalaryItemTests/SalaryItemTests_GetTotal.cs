@@ -11,9 +11,9 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.SalaryItemTests
     public  class SalaryItemTests_GetTotal
     {
         [Theory]
-        [InlineData(39902.44, Frequency.ANNUALLY)]
-        [InlineData(-58.18, Frequency.WEEKLY)]
-        [InlineData(0, Frequency.MONTHLY)]
+        [InlineData(39902.44, Frequency.Annually)]
+        [InlineData(-58.18, Frequency.Weekly)]
+        [InlineData(0, Frequency.Monthly)]
         public void ShouldReturnItsOwnValue(decimal value, Frequency valueFrequency)
         {
             var expectedValue = new MonetaryValue(value, valueFrequency);

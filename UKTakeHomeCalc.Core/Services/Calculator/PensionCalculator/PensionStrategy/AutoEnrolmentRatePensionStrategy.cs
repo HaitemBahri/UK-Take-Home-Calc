@@ -9,8 +9,8 @@ namespace UKTakeHomeCalc.Core.Services.Calculator.PensionCalculator.PensionStrat
 {
     public class AutoEnrolmentRatePensionStrategy : IPensionStrategy
     {
-        private MonetaryValue LOWER_THRESHOLD => new MonetaryValue(6_240m, Frequency.ANNUALLY);
-        private MonetaryValue UPPER_THRESHOLD => new MonetaryValue(50_270m, Frequency.ANNUALLY);
+        private MonetaryValue LOWER_THRESHOLD => new MonetaryValue(6_240m, Frequency.Annually);
+        private MonetaryValue UPPER_THRESHOLD => new MonetaryValue(50_270m, Frequency.Annually);
         private readonly string _name;
         private readonly float _percentage;
 
