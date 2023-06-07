@@ -8,7 +8,7 @@ using UKTakeHomeCalc.Core.Services.Calculator.TaxCalculator.TaxStrategy;
 
 namespace UKTakeHomeCalc.Core.Services.Calculator.TaxCalculator
 {
-    internal class TaxCalculator : ICalculator
+    public class TaxCalculator : ICalculator
     {
         private ITaxStrategy _taxStrategy;
         private ISalaryItemNode _nameNode;
@@ -21,7 +21,8 @@ namespace UKTakeHomeCalc.Core.Services.Calculator.TaxCalculator
 
         public ISalaryItemNode CreateSalaryItemNode(ISalaryItemNode salary)
         {
-            _nameNode.AddValue(_taxStrategy.CreateTaxSalaryItem(salary));
+            var taxSalaryItem = _taxStrategy.CreateTaxSalaryItem(salary);
+            _nameNode.AddValue(taxSalaryItem);
 
             return _nameNode;
         }
