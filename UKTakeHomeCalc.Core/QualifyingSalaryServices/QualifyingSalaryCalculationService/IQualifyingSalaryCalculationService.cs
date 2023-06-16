@@ -4,6 +4,6 @@ namespace UKTakeHomeCalc.Core.QualifyingSalaryServices.QualifyingSalaryCalculati
 {
     public interface IQualifyingSalaryCalculationService
     {
-        public MonetaryValue CalculateQualifyingSalary(MonetaryValue salary);
+        public MonetaryValue CalculateQualifyingSalary(MonetaryValue salary, IFreeAllowance freeAllowance);
     }
 }

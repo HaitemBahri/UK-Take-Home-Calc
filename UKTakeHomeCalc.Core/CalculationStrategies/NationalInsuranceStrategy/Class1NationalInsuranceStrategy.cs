@@ -8,6 +8,7 @@ using UKTakeHomeCalc.Core.Helpers;
 using UKTakeHomeCalc.Core.Models;
 using UKTakeHomeCalc.Core.Models.CalculationRules;
 using UKTakeHomeCalc.Core.QualifyingSalaryServices.QualifyingSalaryCalculationService;
+using UKTakeHomeCalc.Core.QualifyingSalaryServices.TaxableSalaryCalculationService;
 
 namespace UKTakeHomeCalc.Core.CalculationStrategies.NationalInsuranceStrategy
 {
@@ -15,11 +16,16 @@ namespace UKTakeHomeCalc.Core.CalculationStrategies.NationalInsuranceStrategy
     {
         private readonly string _name;
         private readonly List<ThresholdPercentageRule> _rules;
+        private readonly IQualifyingSalaryCalculationService _qualifyingSalaryCalculationService;
+        private readonly IFreeAllowance _freeAllowance;
 
         public Class1NationalInsuranceStrategy(string name, 
-            IQualifyingSalaryCalculationService qualifyingSalaryCalculationService)
+            IQualifyingSalaryCalculationService qualifyingSalaryCalculationService, IFreeAllowance freeAllowance)
         {
             _name = name;
+            _qualifyingSalaryCalculationService = qualifyingSalaryCalculationService;
+            _freeAllowance = freeAllowance;
+
             _rules = new List<ThresholdPercentageRule>()
             {
                 new ThresholdPercentageRule(0m.Weekly(), (967m - 242m).Annually(), 0.12m),
@@ -29,15 +35,24 @@ namespace UKTakeHomeCalc.Core.CalculationStrategies.NationalInsuranceStrategy
 
         public ISalaryItem CreateSalaryItem(ISalaryItemNode takeHomeSummery)
         {
-            throw new NotImplementedException();
+            var qualifyingIncome = _qualifyingSalaryCalculationService.CalculateQualifyingSalary(takeHomeSummery.GetTotal(), 
+                _freeAllowance);
 
-            //TODO: Calculate qualifying salary
+            var thresholdCalculationService = new ThresholdCalculationService();
+            var thresholdPercentageResults = thresholdCalculationService.CalculateThresholdPercentageResult(qualifyingIncome, _rules);
 
-            //TODO: Calculate NI contributions
+            var salaryItemNode = new SalaryItemNode(_name);
+            foreach (var result in thresholdPercentageResults)
+            {
+                if (result.Result == 0)
+                    continue;
 
-            //TODO: COnstruct salaryItemNode
+                var percentage = result.Rule.Percentage;     //TODO: refactor. (law of demeter violation)
 
-            //TODO: Return salaryItemNode
+                salaryItemNode.AddValue(new SalaryItem($"NI @ %{percentage * 100:G29}", result.Result * -1));
+            }
+
+            return salaryItemNode;
 
         }
     }

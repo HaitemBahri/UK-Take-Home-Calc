@@ -9,17 +9,11 @@ namespace UKTakeHomeCalc.Core.QualifyingSalaryServices.QualifyingSalaryCalculati
 {
     public class NationalInsuranceQualifyingSalaryCalculationService : IQualifyingSalaryCalculationService
     {
-        private readonly IFreeAllowance _freeAllowance;
-
-        public NationalInsuranceQualifyingSalaryCalculationService(IFreeAllowance freeAllowance)
+        public MonetaryValue CalculateQualifyingSalary(MonetaryValue salary, IFreeAllowance freeAllowance)
         {
-            _freeAllowance = freeAllowance;
-        }
-        public MonetaryValue CalculateQualifyingSalary(MonetaryValue salary)
-        {
-            var freeAllowance = _freeAllowance.GetFreeAllowance();
+            var freeAllowanceValue = freeAllowance.GetFreeAllowance();
 
-            var qualifyingSalary = salary - freeAllowance;
+            var qualifyingSalary = salary - freeAllowanceValue;
 
             if (qualifyingSalary < 0)
                 qualifyingSalary = 0;

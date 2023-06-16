@@ -17,6 +17,7 @@ namespace UKTakeHomeCalc.Core.Test.CalculationStrategyTests
         private Class1NationalInsuranceStrategy _sut;
         private Mock<ISalaryItemNode> _takeHomeSummeryMock;
         private Mock<IQualifyingSalaryCalculationService> _qualifyingSalaryCalculationServiceMock;
+        private Mock<IFreeAllowance> _freeAllowanceMock;
 
         public static IEnumerable<object[]> BelowThresholdSalary
         {
@@ -38,7 +39,10 @@ namespace UKTakeHomeCalc.Core.Test.CalculationStrategyTests
         {
             _qualifyingSalaryCalculationServiceMock = new Mock<IQualifyingSalaryCalculationService>();
             _takeHomeSummeryMock = new Mock<ISalaryItemNode>();
-            _sut = new Class1NationalInsuranceStrategy("National Insurance", _qualifyingSalaryCalculationServiceMock.Object);
+            _freeAllowanceMock = new Mock<IFreeAllowance>();    
+            _sut = new Class1NationalInsuranceStrategy("National Insurance", 
+                _qualifyingSalaryCalculationServiceMock.Object, 
+                new StandardNationalInsuranceFreeAllowance());
         }
 
         [Theory]
@@ -48,6 +52,8 @@ namespace UKTakeHomeCalc.Core.Test.CalculationStrategyTests
             ISalaryItemNode expectedResult)
         {
             _takeHomeSummeryMock.Setup(x => x.GetTotal()).Returns(salary);
+            _qualifyingSalaryCalculationServiceMock.Setup(x => x.CalculateQualifyingSalary(It.IsAny<MonetaryValue>(), It.IsAny<IFreeAllowance>()))
+                .Returns(0m.Annually());
 
             var actualResult = _sut.CreateSalaryItem(_takeHomeSummeryMock.Object);
 
