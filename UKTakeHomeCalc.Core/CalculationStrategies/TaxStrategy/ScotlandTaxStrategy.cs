@@ -14,7 +14,7 @@ namespace UKTakeHomeCalc.Core.CalculationStrategies.TaxStrategy
     public class ScotlandTaxStrategy : ICalculationStrategy
     {
         private readonly string _name;
-        private readonly CalculationRule _taxCalculationRule = new CalculationRule();
+        private readonly List<ThresholdPercentageRule> _rules;
         private readonly ITaxableSalaryCalculationService _taxableSalaryCalculationService;
 
         public ScotlandTaxStrategy(string name, ITaxableSalaryCalculationService taxableSalaryCalculationService)
@@ -22,26 +22,31 @@ namespace UKTakeHomeCalc.Core.CalculationStrategies.TaxStrategy
             _name = name;
             _taxableSalaryCalculationService = taxableSalaryCalculationService;
 
-            _taxCalculationRule.AddRule(0m.Annually(), 2162m.Annually(), 0.19m);
-            _taxCalculationRule.AddRule(2162m.Annually(), 13118m.Annually(), 0.2m);
-            _taxCalculationRule.AddRule(13118m.Annually(), 31092m.Annually(), 0.21m);
-            _taxCalculationRule.AddRule(31092m.Annually(), 125140m.Annually(), 0.42m);
-            _taxCalculationRule.AddRule(125140m.Annually(), 100000000m.Annually(), 0.47m);
+            _rules = new List<ThresholdPercentageRule>()
+            {
+                new ThresholdPercentageRule(0m.Annually(), 2162m.Annually(), 0.19m),
+                new ThresholdPercentageRule(2162m.Annually(), 13118m.Annually(), 0.2m),
+                new ThresholdPercentageRule(13118m.Annually(), 31092m.Annually(), 0.21m),
+                new ThresholdPercentageRule(31092m.Annually(), 125140m.Annually(), 0.42m),
+                new ThresholdPercentageRule(125140m.Annually(), 100000000m.Annually(), 0.47m),
+            };
         }
         public ISalaryItem CreateSalaryItem(ISalaryItemNode takeHomeSummery)
         {
             var taxableSalary = _taxableSalaryCalculationService.CalculateTaxableSalary(takeHomeSummery.GetTotal());
 
-            var taxResults = ThresholdCalculationService.CalcValuesUsingRules(taxableSalary, _taxCalculationRule);
+            var thresholdCalculationService = new ThresholdCalculationService();
+            var thresholdPercentageResults = thresholdCalculationService.CalculateThresholdPercentageResult(taxableSalary, _rules);
 
             var salaryItemNode = new SalaryItemNode(_name);
-            foreach (var taxResult in taxResults.Results)
+            foreach (var result in thresholdPercentageResults)
             {
-                if (taxResult.Value == 0)
+                if (result.Result == 0)
                     continue;
 
-                var taxPercentage = taxResult.Key;
-                salaryItemNode.AddValue(new SalaryItem($"Tax @ %{taxPercentage * 100:G29}", taxResult.Value * -1));
+                var percentage = result.Rule.Percentage;     //TODO: refactor. (law of demeter violation)
+
+                salaryItemNode.AddValue(new SalaryItem($"Tax @ %{percentage * 100:G29}", result.Result * -1));
             }
 
             return salaryItemNode;

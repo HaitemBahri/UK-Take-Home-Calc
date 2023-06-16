@@ -14,15 +14,17 @@ namespace UKTakeHomeCalc.Core.CalculationStrategies.NationalInsuranceStrategy
     public class Class1NationalInsuranceStrategy : ICalculationStrategy
     {
         private readonly string _name;
-        private readonly CalculationRule _nationalInsuranceCalculationRule = new CalculationRule();
+        private readonly List<ThresholdPercentageRule> _rules;
 
-        public Class1NationalInsuranceStrategy(string name, IQualifyingSalaryCalculationService qualifyingSalaryCalculationService)
+        public Class1NationalInsuranceStrategy(string name, 
+            IQualifyingSalaryCalculationService qualifyingSalaryCalculationService)
         {
             _name = name;
-            _nationalInsuranceCalculationRule = new CalculationRule();
-
-            _nationalInsuranceCalculationRule.AddRule(0m.Weekly(), (967m - 242m).Annually(), 0.12m);
-            _nationalInsuranceCalculationRule.AddRule((967m - 242m).Annually(), 10000000m.Annually(), 0.02m);
+            _rules = new List<ThresholdPercentageRule>()
+            {
+                new ThresholdPercentageRule(0m.Weekly(), (967m - 242m).Annually(), 0.12m),
+                new ThresholdPercentageRule((967m - 242m).Annually(), 10000000m.Annually(), 0.02m),
+            };
         }
 
         public ISalaryItem CreateSalaryItem(ISalaryItemNode takeHomeSummery)
