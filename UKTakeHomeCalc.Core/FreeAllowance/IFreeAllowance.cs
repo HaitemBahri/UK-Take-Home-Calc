@@ -1,6 +1,6 @@
 ﻿using UKTakeHomeCalc.Core.Models;
 
-namespace UKTakeHomeCalc.Core.QualifyingSalaryServices.QualifyingSalaryCalculationService
+namespace UKTakeHomeCalc.Core.FreeAllowance
 {
     public interface IFreeAllowance
     {

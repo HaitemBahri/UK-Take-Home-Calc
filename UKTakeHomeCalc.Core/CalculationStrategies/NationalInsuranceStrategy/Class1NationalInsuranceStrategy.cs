@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UKTakeHomeCalc.Core.CalculationStrategies;
+using UKTakeHomeCalc.Core.FreeAllowance;
 using UKTakeHomeCalc.Core.Helpers;
 using UKTakeHomeCalc.Core.Models;
 using UKTakeHomeCalc.Core.Models.CalculationRules;
-using UKTakeHomeCalc.Core.QualifyingSalaryServices.QualifyingSalaryCalculationService;
-using UKTakeHomeCalc.Core.QualifyingSalaryServices.TaxableSalaryCalculationService;
+using UKTakeHomeCalc.Core.QualifyingIncomeServices;
 
 namespace UKTakeHomeCalc.Core.CalculationStrategies.NationalInsuranceStrategy
 {
@@ -16,11 +16,11 @@ namespace UKTakeHomeCalc.Core.CalculationStrategies.NationalInsuranceStrategy
     {
         private readonly string _name;
         private readonly List<ThresholdPercentageRule> _rules;
-        private readonly IQualifyingSalaryCalculationService _qualifyingSalaryCalculationService;
+        private readonly IQualifyingIncomeCalculationService _qualifyingSalaryCalculationService;
         private readonly IFreeAllowance _freeAllowance;
 
         public Class1NationalInsuranceStrategy(string name, 
-            IQualifyingSalaryCalculationService qualifyingSalaryCalculationService, IFreeAllowance freeAllowance)
+            IQualifyingIncomeCalculationService qualifyingSalaryCalculationService, IFreeAllowance freeAllowance)
         {
             _name = name;
             _qualifyingSalaryCalculationService = qualifyingSalaryCalculationService;
@@ -35,8 +35,7 @@ namespace UKTakeHomeCalc.Core.CalculationStrategies.NationalInsuranceStrategy
 
         public ISalaryItem CreateSalaryItem(ISalaryItemNode takeHomeSummery)
         {
-            var qualifyingIncome = _qualifyingSalaryCalculationService.CalculateQualifyingSalary(takeHomeSummery.GetTotal(), 
-                _freeAllowance);
+            var qualifyingIncome = _qualifyingSalaryCalculationService.CalculateQualifyingIncome(takeHomeSummery.GetTotal());
 
             var thresholdCalculationService = new ThresholdCalculationService();
             var thresholdPercentageResults = thresholdCalculationService.CalculateThresholdPercentageResult(qualifyingIncome, _rules);

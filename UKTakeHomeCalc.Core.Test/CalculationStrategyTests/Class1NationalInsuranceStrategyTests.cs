@@ -5,9 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UKTakeHomeCalc.Core.CalculationStrategies.NationalInsuranceStrategy;
+using UKTakeHomeCalc.Core.FreeAllowance;
 using UKTakeHomeCalc.Core.Helpers;
 using UKTakeHomeCalc.Core.Models;
-using UKTakeHomeCalc.Core.QualifyingSalaryServices.QualifyingSalaryCalculationService;
+using UKTakeHomeCalc.Core.QualifyingIncomeServices;
 using Xunit;
 
 namespace UKTakeHomeCalc.Core.Test.CalculationStrategyTests
@@ -16,7 +17,7 @@ namespace UKTakeHomeCalc.Core.Test.CalculationStrategyTests
     {
         private Class1NationalInsuranceStrategy _sut;
         private Mock<ISalaryItemNode> _takeHomeSummeryMock;
-        private Mock<IQualifyingSalaryCalculationService> _qualifyingSalaryCalculationServiceMock;
+        private Mock<IQualifyingIncomeCalculationService> _qualifyingSalaryCalculationServiceMock;
         private Mock<IFreeAllowance> _freeAllowanceMock;
 
         public static IEnumerable<object[]> BelowThresholdSalary
@@ -37,9 +38,9 @@ namespace UKTakeHomeCalc.Core.Test.CalculationStrategyTests
 
         public Class1NationalInsuranceStrategyTests()
         {
-            _qualifyingSalaryCalculationServiceMock = new Mock<IQualifyingSalaryCalculationService>();
             _takeHomeSummeryMock = new Mock<ISalaryItemNode>();
             _freeAllowanceMock = new Mock<IFreeAllowance>();    
+            _qualifyingSalaryCalculationServiceMock = new Mock<IQualifyingIncomeCalculationService>();
             _sut = new Class1NationalInsuranceStrategy("National Insurance", 
                 _qualifyingSalaryCalculationServiceMock.Object, 
                 new StandardNationalInsuranceFreeAllowance());
@@ -52,7 +53,7 @@ namespace UKTakeHomeCalc.Core.Test.CalculationStrategyTests
             ISalaryItemNode expectedResult)
         {
             _takeHomeSummeryMock.Setup(x => x.GetTotal()).Returns(salary);
-            _qualifyingSalaryCalculationServiceMock.Setup(x => x.CalculateQualifyingSalary(It.IsAny<MonetaryValue>(), It.IsAny<IFreeAllowance>()))
+            _qualifyingSalaryCalculationServiceMock.Setup(x => x.CalculateQualifyingIncome(It.IsAny<MonetaryValue>()))
                 .Returns(0m.Annually());
 
             var actualResult = _sut.CreateSalaryItem(_takeHomeSummeryMock.Object);

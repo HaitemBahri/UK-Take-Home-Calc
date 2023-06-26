@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using UKTakeHomeCalc.Core.Helpers;
 using UKTakeHomeCalc.Core.Models;
 
-namespace UKTakeHomeCalc.Core.QualifyingSalaryServices.QualifyingSalaryCalculationService
+namespace UKTakeHomeCalc.Core.FreeAllowance
 {
     public class StandardNationalInsuranceFreeAllowance : IFreeAllowance
     {

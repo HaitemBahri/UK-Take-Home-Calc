@@ -7,7 +7,7 @@ using System.Xml.Linq;
 using UKTakeHomeCalc.Core.Helpers;
 using UKTakeHomeCalc.Core.Models;
 using UKTakeHomeCalc.Core.Models.CalculationRules;
-using UKTakeHomeCalc.Core.QualifyingSalaryServices.TaxableSalaryCalculationService;
+using UKTakeHomeCalc.Core.QualifyingIncomeServices;
 
 namespace UKTakeHomeCalc.Core.CalculationStrategies.TaxStrategy
 {
@@ -15,9 +15,10 @@ namespace UKTakeHomeCalc.Core.CalculationStrategies.TaxStrategy
     {
         private readonly string _name;
         private readonly List<ThresholdPercentageRule> _rules;
-        private readonly ITaxableSalaryCalculationService _taxableSalaryCalculationService;
+        private readonly IQualifyingIncomeCalculationService _taxableSalaryCalculationService;
 
-        public ScotlandTaxStrategy(string name, ITaxableSalaryCalculationService taxableSalaryCalculationService)
+        public ScotlandTaxStrategy(string name,
+            IQualifyingIncomeCalculationService taxableSalaryCalculationService)
         {
             _name = name;
             _taxableSalaryCalculationService = taxableSalaryCalculationService;
@@ -33,7 +34,7 @@ namespace UKTakeHomeCalc.Core.CalculationStrategies.TaxStrategy
         }
         public ISalaryItem CreateSalaryItem(ISalaryItemNode takeHomeSummery)
         {
-            var taxableSalary = _taxableSalaryCalculationService.CalculateTaxableSalary(takeHomeSummery.GetTotal());
+            var taxableSalary = _taxableSalaryCalculationService.CalculateQualifyingIncome(takeHomeSummery.GetTotal());
 
             var thresholdCalculationService = new ThresholdCalculationService();
             var thresholdPercentageResults = thresholdCalculationService.CalculateThresholdPercentageResult(taxableSalary, _rules);

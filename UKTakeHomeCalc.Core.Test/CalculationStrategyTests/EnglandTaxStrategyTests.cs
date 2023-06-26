@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using UKTakeHomeCalc.Core.CalculationStrategies.TaxStrategy;
 using UKTakeHomeCalc.Core.Helpers;
 using UKTakeHomeCalc.Core.Models;
-using UKTakeHomeCalc.Core.QualifyingSalaryServices.TaxableSalaryCalculationService;
+using UKTakeHomeCalc.Core.QualifyingIncomeServices;
 using Xunit;
 
 namespace UKTakeHomeCalc.Core.Test.CalculationStrategyTests
@@ -15,7 +15,7 @@ namespace UKTakeHomeCalc.Core.Test.CalculationStrategyTests
     public class EnglandTaxStrategyTests
     {
         private EnglandTaxStrategy _sut;
-        private Mock<ITaxableSalaryCalculationService> taxableSalaryCalculationServiceMock;
+        private Mock<IQualifyingIncomeCalculationService> taxableSalaryCalculationServiceMock;
         private Mock<ISalaryItemNode> _takeHomeSummerMock;
 
         public static IEnumerable<object[]> ZeroTaxableSalary
@@ -108,7 +108,7 @@ namespace UKTakeHomeCalc.Core.Test.CalculationStrategyTests
 
         public EnglandTaxStrategyTests()
         {
-            taxableSalaryCalculationServiceMock = new Mock<ITaxableSalaryCalculationService>();
+            taxableSalaryCalculationServiceMock = new Mock<IQualifyingIncomeCalculationService>();
             _sut = new EnglandTaxStrategy("Tax (England)", taxableSalaryCalculationServiceMock.Object);
             _takeHomeSummerMock = new Mock<ISalaryItemNode>();
         }
@@ -121,7 +121,7 @@ namespace UKTakeHomeCalc.Core.Test.CalculationStrategyTests
         [MemberData(nameof(AdditionalRateSalary))]
         public void CreateSalaryItem_ShouldReturnCorrectTax(MonetaryValue salary, ISalaryItemNode expectedResult)
         {
-            taxableSalaryCalculationServiceMock.Setup(x => x.CalculateTaxableSalary(It.IsAny<MonetaryValue>())).Returns(salary);
+            taxableSalaryCalculationServiceMock.Setup(x => x.CalculateQualifyingIncome(It.IsAny<MonetaryValue>())).Returns(salary);
             _takeHomeSummerMock.Setup(x => x.GetTotal()).Returns(It.IsAny<MonetaryValue>());
 
             var actualResult = _sut.CreateSalaryItem(_takeHomeSummerMock.Object);
