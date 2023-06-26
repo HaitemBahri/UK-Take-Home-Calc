@@ -6,6 +6,11 @@ public struct MonetaryValue
     public Frequency ValueFrequency { get; }
     private decimal BaseValue { get => Value / (int)ValueFrequency; }
 
+    public MonetaryValue()
+    {
+        Value = 0;
+        ValueFrequency = Frequency.Weekly;
+    }
     public MonetaryValue(decimal value, Frequency valueFrequency)
     {
         Value = Math.Round(value, 8);
