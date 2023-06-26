@@ -4,7 +4,14 @@ public struct MonetaryValue
 {
     public decimal Value { get; }
     public Frequency ValueFrequency { get; }
-    private decimal BaseValue { get => Value / (int)ValueFrequency; }
+    private decimal BaseValue { 
+        get 
+        { 
+            if(Value == 0) return 0;
+
+            return Value / (int)ValueFrequency; 
+        } 
+    }
 
     public MonetaryValue()
     {
