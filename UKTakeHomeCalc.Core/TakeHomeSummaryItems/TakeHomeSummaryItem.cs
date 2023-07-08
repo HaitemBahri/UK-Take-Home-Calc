@@ -1,10 +1,12 @@
-﻿namespace UKTakeHomeCalc.Core.Models
+﻿using UKTakeHomeCalc.Core.Models;
+
+namespace UKTakeHomeCalc.Core.TakeHomeSummaryItems
 {
-    public class SalaryItem : ISalaryItem
+    public class TakeHomeSummaryItem : ITakeHomeSummaryItem
     {
         public MonetaryValue Value { get; }
         public string Name { get; }
-        public SalaryItem(string name, MonetaryValue value)
+        public TakeHomeSummaryItem(string name, MonetaryValue value)
         {
             Name = name;
             Value = value;
@@ -13,7 +15,7 @@
         {
             return Value;
         }
-        public ISalaryItem? FindValue(string name)
+        public ITakeHomeSummaryItem? FindValue(string name)
         {
             if (name == Name)
                 return this;
@@ -23,10 +25,10 @@
 
         public override bool Equals(object? obj)
         {
-            if (obj == null) return false;
+            if (obj is null) return false;
 
-            var value = ((SalaryItem)obj).Value;
-            var name = ((SalaryItem)obj).Name;
+            var value = ((TakeHomeSummaryItem)obj).Value;
+            var name = ((TakeHomeSummaryItem)obj).Name;
 
             if (Value == value && Name == name)
                 return true;

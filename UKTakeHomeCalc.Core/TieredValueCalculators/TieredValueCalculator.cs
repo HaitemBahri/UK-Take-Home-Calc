@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UKTakeHomeCalc.Core.Models;
-using UKTakeHomeCalc.Core.Models.CalculationRules;
 
-namespace UKTakeHomeCalc.Core.Helpers
+namespace UKTakeHomeCalc.Core.TieredValueCalculators
 {
-    public class ThresholdCalculationService
+    public class TieredValueCalculator : ITieredValueCalculator
     {
-        public MonetaryValue CalculateValueBetweenThresholds(MonetaryValue value, 
+        public MonetaryValue CalculateValueBetweenThresholds(MonetaryValue value,
             MonetaryValue lowerThreshold, MonetaryValue upperThreshold)
         {
             if (value > upperThreshold)
@@ -22,10 +21,10 @@ namespace UKTakeHomeCalc.Core.Helpers
             return value - lowerThreshold;
         }
 
-        public List<ThresholdPercentageResult> CalculateThresholdPercentageResult(MonetaryValue value, 
-            List<ThresholdPercentageRule> rules)
+        public IEnumerable<TieredValueResult> CalculateTieredValueResults(MonetaryValue value,
+            IEnumerable<TieredValueRule> rules)
         {
-            var results = new List<ThresholdPercentageResult>();
+            var results = new List<TieredValueResult>();
 
             foreach (var rule in rules)
             {
@@ -33,7 +32,7 @@ namespace UKTakeHomeCalc.Core.Helpers
 
                 var thresholdPercentageResult = valueBetweenThresholds * rule.Percentage;
 
-                results.Add(new ThresholdPercentageResult(rule, thresholdPercentageResult));
+                results.Add(new TieredValueResult(rule, thresholdPercentageResult));
             }
 
             return results;

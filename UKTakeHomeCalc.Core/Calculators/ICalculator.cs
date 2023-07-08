@@ -1,9 +1,9 @@
-﻿using UKTakeHomeCalc.Core.Models;
+﻿using UKTakeHomeCalc.Core.TakeHomeSummaryItems;
 
 namespace UKTakeHomeCalc.Core.Calculators
 {
     public interface ICalculator
     {
-        public ISalaryItemNode CreateSalaryItemNode(ISalaryItemNode takeHomeSummery);
+        public ITakeHomeSummaryComposite CreateSalaryItemNode(ITakeHomeSummaryComposite takeHomeSummery);
     }
 }

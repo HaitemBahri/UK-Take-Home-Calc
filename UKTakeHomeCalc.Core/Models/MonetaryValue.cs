@@ -98,6 +98,6 @@ public struct MonetaryValue
     }
     public override string ToString()
     {
-        return $"{Math.Round(Value, 2)}/{ValueFrequency}";
+        return $"{Math.Round(Value, 2):n2}/{ValueFrequency}";
     }
 }

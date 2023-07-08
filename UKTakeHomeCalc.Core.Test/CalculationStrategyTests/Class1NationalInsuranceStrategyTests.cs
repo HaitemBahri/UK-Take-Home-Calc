@@ -9,6 +9,7 @@ using UKTakeHomeCalc.Core.FreeAllowance;
 using UKTakeHomeCalc.Core.Helpers;
 using UKTakeHomeCalc.Core.Models;
 using UKTakeHomeCalc.Core.QualifyingIncomeServices;
+using UKTakeHomeCalc.Core.TakeHomeSummaryItems;
 using Xunit;
 
 namespace UKTakeHomeCalc.Core.Test.CalculationStrategyTests
@@ -16,7 +17,7 @@ namespace UKTakeHomeCalc.Core.Test.CalculationStrategyTests
     public class Class1NationalInsuranceStrategyTests
     {
         private Class1NationalInsuranceStrategy _sut;
-        private Mock<ISalaryItemNode> _takeHomeSummeryMock;
+        private Mock<ITakeHomeSummaryComposite> _takeHomeSummeryMock;
         private Mock<IQualifyingIncomeCalculationService> _qualifyingSalaryCalculationServiceMock;
         private Mock<IFreeAllowance> _freeAllowanceMock;
 
@@ -25,7 +26,7 @@ namespace UKTakeHomeCalc.Core.Test.CalculationStrategyTests
             get
             {
                 var salaryTestSet1 = 120m.Weekly();
-                var expectedResultTestSet1 = new SalaryItemNode("National Insurance");
+                var expectedResultTestSet1 = new TakeHomeSummaryComposite("National Insurance");
 
                 var testSet1 = new object[] { salaryTestSet1, expectedResultTestSet1 };
 
@@ -38,7 +39,7 @@ namespace UKTakeHomeCalc.Core.Test.CalculationStrategyTests
 
         public Class1NationalInsuranceStrategyTests()
         {
-            _takeHomeSummeryMock = new Mock<ISalaryItemNode>();
+            _takeHomeSummeryMock = new Mock<ITakeHomeSummaryComposite>();
             _freeAllowanceMock = new Mock<IFreeAllowance>();    
             _qualifyingSalaryCalculationServiceMock = new Mock<IQualifyingIncomeCalculationService>();
             _sut = new Class1NationalInsuranceStrategy("National Insurance", 
@@ -50,7 +51,7 @@ namespace UKTakeHomeCalc.Core.Test.CalculationStrategyTests
         [MemberData(nameof(BelowThresholdSalary))]
         public void CreateNationalInsuranceSalaryItem_ShouldReturnCorrectValue_WhenGivenSalary(
             MonetaryValue salary,
-            ISalaryItemNode expectedResult)
+            ITakeHomeSummaryComposite expectedResult)
         {
             _takeHomeSummeryMock.Setup(x => x.GetTotal()).Returns(salary);
             _qualifyingSalaryCalculationServiceMock.Setup(x => x.CalculateQualifyingIncome(It.IsAny<MonetaryValue>()))

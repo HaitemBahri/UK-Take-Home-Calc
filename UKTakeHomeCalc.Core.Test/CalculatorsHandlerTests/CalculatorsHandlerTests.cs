@@ -8,6 +8,7 @@ using UKTakeHomeCalc.Core.Calculators;
 using UKTakeHomeCalc.Core.CalculatorsHandlers;
 using UKTakeHomeCalc.Core.Helpers;
 using UKTakeHomeCalc.Core.Models;
+using UKTakeHomeCalc.Core.TakeHomeSummaryItems;
 using Xunit;
 
 namespace UKTakeHomeCalc.Core.Test.ModelsTests.CalculatorsHandlerTests
@@ -22,7 +23,7 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.CalculatorsHandlerTests
         private Mock<ICalculator> _calculatorMock2;
         private Mock<ICalculator> _calculatorMock3;
 
-        private Mock<ISalaryItemNode> _takeHomeSummeryMock;
+        private Mock<ITakeHomeSummaryComposite> _takeHomeSummeryMock;
         private List<ICalculator> _calculatorsList;
 
         public CalculatorsHandlerTests()
@@ -33,12 +34,12 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.CalculatorsHandlerTests
             _calculatorMock2 = new Mock<ICalculator>();
             _calculatorMock3 = new Mock<ICalculator>();
 
-            _takeHomeSummeryMock = new Mock<ISalaryItemNode>();
+            _takeHomeSummeryMock = new Mock<ITakeHomeSummaryComposite>();
             _takeHomeSummeryMock.Setup(x => x.GetTotal()).Returns(50m.Weekly());
             
-            _calculatorMock1.Setup(x => x.CreateSalaryItemNode(null!)).Returns(new SalaryItemNode("some node 1"));
-            _calculatorMock2.Setup(x => x.CreateSalaryItemNode(null!)).Returns(new SalaryItemNode("some node 2"));
-            _calculatorMock3.Setup(x => x.CreateSalaryItemNode(null!)).Returns(new SalaryItemNode("some node 3"));
+            _calculatorMock1.Setup(x => x.CreateSalaryItemNode(null!)).Returns(new TakeHomeSummaryComposite("some node 1"));
+            _calculatorMock2.Setup(x => x.CreateSalaryItemNode(null!)).Returns(new TakeHomeSummaryComposite("some node 2"));
+            _calculatorMock3.Setup(x => x.CreateSalaryItemNode(null!)).Returns(new TakeHomeSummaryComposite("some node 3"));
 
             _calculatorsList = new List<ICalculator>() { 
                 _calculatorMock1.Object,
@@ -53,9 +54,9 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.CalculatorsHandlerTests
         {
             _sut.Handle(_takeHomeSummeryMock.Object);
 
-            _calculatorMock1.Verify(x => x.CreateSalaryItemNode(It.IsAny<ISalaryItemNode>()), Times.Once);
-            _calculatorMock2.Verify(x => x.CreateSalaryItemNode(It.IsAny<ISalaryItemNode>()), Times.Once);
-            _calculatorMock3.Verify(x => x.CreateSalaryItemNode(It.IsAny<ISalaryItemNode>()), Times.Once);
+            _calculatorMock1.Verify(x => x.CreateSalaryItemNode(It.IsAny<ITakeHomeSummaryComposite>()), Times.Once);
+            _calculatorMock2.Verify(x => x.CreateSalaryItemNode(It.IsAny<ITakeHomeSummaryComposite>()), Times.Once);
+            _calculatorMock3.Verify(x => x.CreateSalaryItemNode(It.IsAny<ITakeHomeSummaryComposite>()), Times.Once);
         }
 
         [Fact]
@@ -63,7 +64,7 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.CalculatorsHandlerTests
         {
             _sut.Handle(_takeHomeSummeryMock.Object);
 
-            _takeHomeSummeryMock.Verify(x => x.AddValue(It.IsAny<ISalaryItem>()), Times.Exactly(_calculatorsList.Count));
+            _takeHomeSummeryMock.Verify(x => x.AddValue(It.IsAny<ITakeHomeSummaryItem>()), Times.Exactly(_calculatorsList.Count));
         }
         [Fact]
         public void Handle_ShouldHandleWorkToNextHandler_WhenNextHandlerIsNotNull()
@@ -72,14 +73,14 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.CalculatorsHandlerTests
 
             _sut.Handle(_takeHomeSummeryMock.Object);
 
-            _calculatorsHandlerMock.Verify(x => x.Handle(It.IsAny<ISalaryItemNode>()), Times.Once());
+            _calculatorsHandlerMock.Verify(x => x.Handle(It.IsAny<ITakeHomeSummaryComposite>()), Times.Once());
         }
         [Fact]
         public void ShouldNotHandleWorkToNextHandler_WhenNextHandlerIsNull()
         {
             _sut.Handle(_takeHomeSummeryMock.Object);
 
-            _calculatorsHandlerMock.Verify(x => x.Handle(It.IsAny<ISalaryItemNode>()), Times.Never());
+            _calculatorsHandlerMock.Verify(x => x.Handle(It.IsAny<ITakeHomeSummaryComposite>()), Times.Never());
         }
 
     }

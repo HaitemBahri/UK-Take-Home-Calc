@@ -1,6 +1,6 @@
 using System.Collections.Concurrent;
 using UKTakeHomeCalc.Core.Calculators;
-using UKTakeHomeCalc.Core.Models;
+using UKTakeHomeCalc.Core.TakeHomeSummaryItems;
 
 namespace UKTakeHomeCalc.Core.CalculatorsHandlers
 {
@@ -16,9 +16,9 @@ namespace UKTakeHomeCalc.Core.CalculatorsHandlers
         {
             _nextCalculatorsHandler = nextCalculatorsHandler;
         }
-        public void Handle(ISalaryItemNode takeHomeSummery)
+        public void Handle(ITakeHomeSummaryComposite takeHomeSummery)
         {
-            var salaryItemsBag = new ConcurrentBag<ISalaryItem>();
+            var salaryItemsBag = new ConcurrentBag<ITakeHomeSummaryItem>();
 
             Parallel.ForEach(_calculators, (calculator) =>
             {

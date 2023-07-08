@@ -6,15 +6,16 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using UKTakeHomeCalc.Core.Helpers;
 using UKTakeHomeCalc.Core.Models;
-using UKTakeHomeCalc.Core.Models.CalculationRules;
 using UKTakeHomeCalc.Core.QualifyingIncomeServices;
+using UKTakeHomeCalc.Core.TakeHomeSummaryItems;
+using UKTakeHomeCalc.Core.TieredValueCalculators;
 
 namespace UKTakeHomeCalc.Core.CalculationStrategies.TaxStrategy
 {
     public class ScotlandTaxStrategy : ICalculationStrategy
     {
         private readonly string _name;
-        private readonly List<ThresholdPercentageRule> _rules;
+        private readonly List<TieredValueRule> _rules;
         private readonly IQualifyingIncomeCalculationService _taxableSalaryCalculationService;
 
         public ScotlandTaxStrategy(string name,
@@ -23,23 +24,23 @@ namespace UKTakeHomeCalc.Core.CalculationStrategies.TaxStrategy
             _name = name;
             _taxableSalaryCalculationService = taxableSalaryCalculationService;
 
-            _rules = new List<ThresholdPercentageRule>()
+            _rules = new List<TieredValueRule>()
             {
-                new ThresholdPercentageRule(0m.Annually(), 2162m.Annually(), 0.19m),
-                new ThresholdPercentageRule(2162m.Annually(), 13118m.Annually(), 0.2m),
-                new ThresholdPercentageRule(13118m.Annually(), 31092m.Annually(), 0.21m),
-                new ThresholdPercentageRule(31092m.Annually(), 125140m.Annually(), 0.42m),
-                new ThresholdPercentageRule(125140m.Annually(), 100000000m.Annually(), 0.47m),
+                new TieredValueRule(0m.Annually(), 2162m.Annually(), 0.19m),
+                new TieredValueRule(2162m.Annually(), 13118m.Annually(), 0.2m),
+                new TieredValueRule(13118m.Annually(), 31092m.Annually(), 0.21m),
+                new TieredValueRule(31092m.Annually(), 125140m.Annually(), 0.42m),
+                new TieredValueRule(125140m.Annually(), 100000000m.Annually(), 0.47m),
             };
         }
-        public ISalaryItem CreateSalaryItem(ISalaryItemNode takeHomeSummery)
+        public ITakeHomeSummaryItem CreateSalaryItem(ITakeHomeSummaryComposite takeHomeSummery)
         {
             var taxableSalary = _taxableSalaryCalculationService.CalculateQualifyingIncome(takeHomeSummery.GetTotal());
 
-            var thresholdCalculationService = new ThresholdCalculationService();
-            var thresholdPercentageResults = thresholdCalculationService.CalculateThresholdPercentageResult(taxableSalary, _rules);
+            var thresholdCalculationService = new TieredValueCalculator();
+            var thresholdPercentageResults = thresholdCalculationService.CalculateTieredValueResults(taxableSalary, _rules);
 
-            var salaryItemNode = new SalaryItemNode(_name);
+            var salaryItemNode = new TakeHomeSummaryComposite(_name);
             foreach (var result in thresholdPercentageResults)
             {
                 if (result.Result == 0)
@@ -47,7 +48,7 @@ namespace UKTakeHomeCalc.Core.CalculationStrategies.TaxStrategy
 
                 var percentage = result.Rule.Percentage;     //TODO: refactor. (law of demeter violation)
 
-                salaryItemNode.AddValue(new SalaryItem($"Tax @ %{percentage * 100:G29}", result.Result * -1));
+                salaryItemNode.AddValue(new TakeHomeSummaryItem($"Tax @ %{percentage * 100:G29}", result.Result * -1));
             }
 
             return salaryItemNode;

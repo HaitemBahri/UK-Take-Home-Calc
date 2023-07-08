@@ -8,6 +8,7 @@ using UKTakeHomeCalc.Core.CalculationStrategies;
 using UKTakeHomeCalc.Core.CalculationStrategies.IncomeItem;
 using UKTakeHomeCalc.Core.Calculators;
 using UKTakeHomeCalc.Core.Models;
+using UKTakeHomeCalc.Core.TakeHomeSummaryItems;
 using Xunit;
 
 namespace UKTakeHomeCalc.Core.Test.CalculationStrategyTests
@@ -20,11 +21,11 @@ namespace UKTakeHomeCalc.Core.Test.CalculationStrategyTests
 
         private BasicIncome _sut;
 
-        private Mock<ISalaryItemNode> _takeHomeSummeryMock;
+        private Mock<ITakeHomeSummaryComposite> _takeHomeSummeryMock;
 
         public BasicIncomeTests()
         {
-            _takeHomeSummeryMock = new Mock<ISalaryItemNode>();
+            _takeHomeSummeryMock = new Mock<ITakeHomeSummaryComposite>();
 
             _sut = new BasicIncome(name, value, freq);
         }
@@ -34,7 +35,7 @@ namespace UKTakeHomeCalc.Core.Test.CalculationStrategyTests
 
             var actualResult = _sut.CreateSalaryItem(_takeHomeSummeryMock.Object);
 
-            var expectedResult = new SalaryItem(name, new MonetaryValue(value, freq));
+            var expectedResult = new TakeHomeSummaryItem(name, new MonetaryValue(value, freq));
 
             Assert.Equal(expectedResult, actualResult);
         }

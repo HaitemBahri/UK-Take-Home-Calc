@@ -3,22 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UKTakeHomeCalc.Core.CalculationStrategies;
-using UKTakeHomeCalc.Core.Models;
+using UKTakeHomeCalc.Core.TakeHomeSummaryItems;
 
 namespace UKTakeHomeCalc.Core.Calculators
 {
     public class Calculator
     {
-        private ISalaryItemNode _calculatorNode;
+        private ITakeHomeSummaryComposite _calculatorNode;
         private readonly List<ICalculationStrategy> _calculationStrategies;
 
-        public Calculator(ISalaryItemNode calculatorNode, List<ICalculationStrategy> calculationStrategies)
+        public Calculator(ITakeHomeSummaryComposite calculatorNode, List<ICalculationStrategy> calculationStrategies)
         {
             _calculatorNode = calculatorNode;
             _calculationStrategies = calculationStrategies;
         }
 
-        public ISalaryItemNode CreateSalaryItemNode(ISalaryItemNode takeHomeSummery)
+        public ITakeHomeSummaryComposite CreateSalaryItemNode(ITakeHomeSummaryComposite takeHomeSummery)
         {
             foreach (var calculationStrategy in _calculationStrategies)
             {

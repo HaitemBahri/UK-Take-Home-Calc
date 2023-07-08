@@ -1,32 +1,34 @@
-﻿using System.Text;
+﻿using System.Data.Common;
+using System.Text;
+using UKTakeHomeCalc.Core.Models;
 
-namespace UKTakeHomeCalc.Core.Models
+namespace UKTakeHomeCalc.Core.TakeHomeSummaryItems
 {
-    public class SalaryItemNode : ISalaryItemNode
+    public class TakeHomeSummaryComposite : ITakeHomeSummaryComposite
     {
-        private List<ISalaryItem> _salaryItems;
-        public SalaryItemNode(string name)
+        private List<ITakeHomeSummaryItem> _salaryItems;
+        public TakeHomeSummaryComposite(string name)
         {
             Name = name;
-            _salaryItems = new List<ISalaryItem>();
+            _salaryItems = new List<ITakeHomeSummaryItem>();
         }
         public string Name { get; }
 
-        public void AddValue(ISalaryItem value)
+        public void AddValue(ITakeHomeSummaryItem value)
         {
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
 
             _salaryItems.Add(value);
         }
-        public ISalaryItem? FindValue(string name)
+        public ITakeHomeSummaryItem? FindValue(string name)
         {
             if (Name == name)
             {
                 return this;
             }
 
-            foreach (ISalaryItem value in _salaryItems)
+            foreach (ITakeHomeSummaryItem value in _salaryItems)
             {
                 var item = value.FindValue(name);
                 if (item != null)
@@ -46,20 +48,20 @@ namespace UKTakeHomeCalc.Core.Models
             return total;
         }
 
-        public IEnumerable<ISalaryItem> GetSalaryItems()
+        public IEnumerable<ITakeHomeSummaryItem> GetSalaryItems()
         {
             return _salaryItems.ToList();
         }
 
         public override bool Equals(object? obj)
         {
-            if (obj is null) 
+            if (obj is null)
                 return false;
 
-            if (obj.GetType() != typeof(SalaryItemNode)) 
+            if (obj.GetType() != typeof(TakeHomeSummaryComposite))
                 return false;
 
-            var other = (ISalaryItemNode)obj;
+            var other = (ITakeHomeSummaryComposite)obj;
 
             var result = true;
 
@@ -69,6 +71,16 @@ namespace UKTakeHomeCalc.Core.Models
             result = result && _salaryItems.SequenceEqual(other.GetSalaryItems());
 
             return result;
+        }
+
+        public static bool operator ==(TakeHomeSummaryComposite value1, TakeHomeSummaryComposite value2)
+        {
+            return (value1.Equals(value2));
+        }
+
+        public static bool operator !=(TakeHomeSummaryComposite value1, TakeHomeSummaryComposite value2)
+        {
+            return !(value1.Equals(value2));
         }
 
         public override int GetHashCode()
@@ -89,7 +101,7 @@ namespace UKTakeHomeCalc.Core.Models
 
             stringBuilder.AppendLine(Name);
 
-            foreach(var item in _salaryItems)
+            foreach (var item in _salaryItems)
             {
                 stringBuilder.Append('\t').AppendLine(item.ToString());
             }

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UKTakeHomeCalc.Core.CalculationStrategies;
 using UKTakeHomeCalc.Core.Models;
+using UKTakeHomeCalc.Core.TakeHomeSummaryItems;
 
 namespace UKTakeHomeCalc.Core.CalculationStrategies.PensionStrategy
 {
@@ -20,14 +21,14 @@ namespace UKTakeHomeCalc.Core.CalculationStrategies.PensionStrategy
             _name = name;
             _percentage = percentage;
         }
-        public ISalaryItem CreateSalaryItem(ISalaryItemNode takeHomeSummery)
+        public ITakeHomeSummaryItem CreateSalaryItem(ITakeHomeSummaryComposite takeHomeSummery)
         {
             var salaryValue = takeHomeSummery.GetTotal();
             var pensionableSalary = GetPensionableSalary(salaryValue);
 
             var pensionValue = pensionableSalary * (decimal)_percentage * -1;
 
-            return new SalaryItem(_name, pensionValue);
+            return new TakeHomeSummaryItem(_name, pensionValue);
         }
 
         private MonetaryValue GetPensionableSalary(MonetaryValue salaryValue)

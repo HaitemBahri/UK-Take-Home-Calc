@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using UKTakeHomeCalc.Core.CalculationStrategies.PensionStrategy;
 using UKTakeHomeCalc.Core.Helpers;
 using UKTakeHomeCalc.Core.Models;
+using UKTakeHomeCalc.Core.TakeHomeSummaryItems;
 using Xunit;
 
 namespace UKTakeHomeCalc.Core.Test.CalculationStrategyTests
@@ -15,7 +16,7 @@ namespace UKTakeHomeCalc.Core.Test.CalculationStrategyTests
     {
         private string _name = "autoEnrolmentRatePension";
         private float _percentage = 0.05f;
-        private Mock<ISalaryItemNode> _takeHomeSummeryMock;
+        private Mock<ITakeHomeSummaryComposite> _takeHomeSummeryMock;
         private AutoEnrolmentRatePensionStrategy _sut;
 
         public static IEnumerable<object[]> SalaryLessThanLowerThreshold
@@ -24,7 +25,7 @@ namespace UKTakeHomeCalc.Core.Test.CalculationStrategyTests
             {
 
                 var salary = 1650.00m.Annually();
-                var expectedResult = new SalaryItem("autoEnrolmentRatePension", 0m.Annually());
+                var expectedResult = new TakeHomeSummaryItem("autoEnrolmentRatePension", 0m.Annually());
 
                 var testDataSet1 = new object[] { salary, expectedResult };
 
@@ -41,7 +42,7 @@ namespace UKTakeHomeCalc.Core.Test.CalculationStrategyTests
             {
 
                 var salary = 45750.00m.Annually();
-                var expectedResult = new SalaryItem("autoEnrolmentRatePension", -1975.5m.Annually());
+                var expectedResult = new TakeHomeSummaryItem("autoEnrolmentRatePension", -1975.5m.Annually());
 
                 var testDataSet1 = new object[] { salary, expectedResult };
 
@@ -58,7 +59,7 @@ namespace UKTakeHomeCalc.Core.Test.CalculationStrategyTests
             {
 
                 var salary = 75050m.Annually();
-                var expectedResult = new SalaryItem("autoEnrolmentRatePension", -2201.5m.Annually());
+                var expectedResult = new TakeHomeSummaryItem("autoEnrolmentRatePension", -2201.5m.Annually());
 
                 var testDataSet1 = new object[] { salary, expectedResult };
 
@@ -72,7 +73,7 @@ namespace UKTakeHomeCalc.Core.Test.CalculationStrategyTests
         public AutoEnrolmentRatePensionStrategyTests()
         {
 
-            _takeHomeSummeryMock = new Mock<ISalaryItemNode>();
+            _takeHomeSummeryMock = new Mock<ITakeHomeSummaryComposite>();
 
             _sut = new AutoEnrolmentRatePensionStrategy(_name, _percentage);
 
@@ -83,7 +84,7 @@ namespace UKTakeHomeCalc.Core.Test.CalculationStrategyTests
         [MemberData(nameof(BetweenThresholds))]
         [MemberData(nameof(SalaryGreaterThanUpperThreshold))]
         public void CreatePensionItem_ShouldReturnZeroMonetaryValue_WhenSalaryLessThanLowerThreshold(
-            MonetaryValue salary, ISalaryItem expectedResult)
+            MonetaryValue salary, ITakeHomeSummaryItem expectedResult)
         {
             _takeHomeSummeryMock.Setup(x => x.GetTotal()).Returns(salary);
             var actualResult = _sut.CreateSalaryItem(_takeHomeSummeryMock.Object);

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UKTakeHomeCalc.Core.CalculationStrategies;
 using UKTakeHomeCalc.Core.Models;
+using UKTakeHomeCalc.Core.TakeHomeSummaryItems;
 
 namespace UKTakeHomeCalc.Core.CalculationStrategies.IncomeItem
 {
@@ -18,9 +19,9 @@ namespace UKTakeHomeCalc.Core.CalculationStrategies.IncomeItem
             _monetaryValue = new MonetaryValue(hourlyRate * hours, frequency);
             _name = name;
         }
-        public ISalaryItem CreateSalaryItem(ISalaryItemNode takeHomeSummery)
+        public ITakeHomeSummaryItem CreateSalaryItem(ITakeHomeSummaryComposite takeHomeSummery)
         {
-            return new SalaryItem(_name, _monetaryValue);
+            return new TakeHomeSummaryItem(_name, _monetaryValue);
         }
     }
 }
