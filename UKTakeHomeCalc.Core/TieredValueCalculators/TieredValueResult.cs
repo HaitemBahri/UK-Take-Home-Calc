@@ -2,7 +2,7 @@
 
 namespace UKTakeHomeCalc.Core.TieredValueCalculators
 {
-    public class TieredValueResult
+    public struct TieredValueResult
     {
         public TieredValueRule Rule { get; }
         public MonetaryValue Result { get; }
