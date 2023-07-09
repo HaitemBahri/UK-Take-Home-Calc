@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UKTakeHomeCalc.Core.FreeAllowance;
+using UKTakeHomeCalc.Core.FreeAllowances;
 using UKTakeHomeCalc.Core.FreeAllowances.TaxFreeAllowance;
 using UKTakeHomeCalc.Core.Models;
 

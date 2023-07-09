@@ -1,6 +1,6 @@
 ﻿using UKTakeHomeCalc.Core.Models;
 
-namespace UKTakeHomeCalc.Core.FreeAllowance
+namespace UKTakeHomeCalc.Core.FreeAllowances
 {
     public interface IFreeAllowance
     {
