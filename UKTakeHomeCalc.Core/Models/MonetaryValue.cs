@@ -4,13 +4,14 @@ public struct MonetaryValue
 {
     public decimal Value { get; }
     public Frequency ValueFrequency { get; }
-    private decimal BaseValue { 
-        get 
-        { 
-            if(Value == 0) return 0;
+    private decimal BaseValue
+    {
+        get
+        {
+            if (Value == 0) return 0;
 
-            return Value / (int)ValueFrequency; 
-        } 
+            return Value / (int)ValueFrequency;
+        }
     }
 
     public MonetaryValue()
@@ -90,11 +91,11 @@ public struct MonetaryValue
     }
     public static bool operator ==(MonetaryValue value1, MonetaryValue value2)
     {
-        return (value1.Equals(value2));
+        return value1.Equals(value2);
     }
     public static bool operator !=(MonetaryValue value1, MonetaryValue value2)
     {
-        return (!value1.Equals(value2));
+        return !value1.Equals(value2);
     }
     public override string ToString()
     {

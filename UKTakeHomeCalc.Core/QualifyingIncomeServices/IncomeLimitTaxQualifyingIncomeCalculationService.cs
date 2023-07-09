@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using UKTakeHomeCalc.Core.FreeAllowance;
 using UKTakeHomeCalc.Core.FreeAllowances.TaxFreeAllowance;
-using UKTakeHomeCalc.Core.Helpers;
 using UKTakeHomeCalc.Core.Models;
 
 namespace UKTakeHomeCalc.Core.QualifyingIncomeServices;

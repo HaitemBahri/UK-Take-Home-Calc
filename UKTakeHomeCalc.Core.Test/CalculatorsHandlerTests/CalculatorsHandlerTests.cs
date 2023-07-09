@@ -6,12 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using UKTakeHomeCalc.Core.Calculators;
 using UKTakeHomeCalc.Core.CalculatorsHandlers;
-using UKTakeHomeCalc.Core.Helpers;
 using UKTakeHomeCalc.Core.Models;
 using UKTakeHomeCalc.Core.TakeHomeSummaryItems;
 using Xunit;
 
-namespace UKTakeHomeCalc.Core.Test.ModelsTests.CalculatorsHandlerTests
+namespace UKTakeHomeCalc.Core.Test.CalculatorsHandlerTests
 {
     public class CalculatorsHandlerTests
     {
@@ -36,12 +35,12 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests.CalculatorsHandlerTests
 
             _takeHomeSummeryMock = new Mock<ITakeHomeSummaryComposite>();
             _takeHomeSummeryMock.Setup(x => x.GetTotal()).Returns(50m.Weekly());
-            
+
             _calculatorMock1.Setup(x => x.CreateSalaryItemNode(null!)).Returns(new TakeHomeSummaryComposite("some node 1"));
             _calculatorMock2.Setup(x => x.CreateSalaryItemNode(null!)).Returns(new TakeHomeSummaryComposite("some node 2"));
             _calculatorMock3.Setup(x => x.CreateSalaryItemNode(null!)).Returns(new TakeHomeSummaryComposite("some node 3"));
 
-            _calculatorsList = new List<ICalculator>() { 
+            _calculatorsList = new List<ICalculator>() {
                 _calculatorMock1.Object,
                 _calculatorMock2.Object,
                 _calculatorMock3.Object

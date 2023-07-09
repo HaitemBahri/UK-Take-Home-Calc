@@ -1,5 +1,4 @@
-﻿using UKTakeHomeCalc.Core.Helpers;
-using UKTakeHomeCalc.Core.Models;
+﻿using UKTakeHomeCalc.Core.Models;
 using UKTakeHomeCalc.Core.TieredValueCalculators;
 using Xunit;
 

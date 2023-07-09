@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UKTakeHomeCalc.Core.Models;
 
-namespace UKTakeHomeCalc.Core.Helpers
+namespace UKTakeHomeCalc.Core.Models
 {
     public static class MonetaryValueExtensions
     {

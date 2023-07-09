@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UKTakeHomeCalc.Core.Models;
-using UKTakeHomeCalc.Core.Helpers;
 using UKTakeHomeCalc.Core.CalculationStrategies;
 using UKTakeHomeCalc.Core.QualifyingIncomeServices;
 using UKTakeHomeCalc.Core.TieredValueCalculators;
 using UKTakeHomeCalc.Core.TakeHomeSummaryItems;
+using UKTakeHomeCalc.Core.Models;
 
 namespace UKTakeHomeCalc.Core.CalculationStrategies.TaxStrategy
 {
