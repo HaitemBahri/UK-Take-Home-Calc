@@ -49,19 +49,19 @@ public struct MonetaryValue
     }
     public static bool operator <(MonetaryValue value1, MonetaryValue value2)
     {
-        return value1.BaseValue < value2.BaseValue;
+        return Math.Round(value1.BaseValue, 2) < Math.Round(value2.BaseValue, 2);
     }
     public static bool operator >(MonetaryValue value1, MonetaryValue value2)
     {
-        return value1.BaseValue > value2.BaseValue;
+        return Math.Round(value1.BaseValue, 2) > Math.Round(value2.BaseValue, 2);
     }
     public static bool operator <=(MonetaryValue value1, MonetaryValue value2)
     {
-        return value1.BaseValue <= value2.BaseValue;
+        return Math.Round(value1.BaseValue, 2) <= Math.Round(value2.BaseValue, 2);
     }
     public static bool operator >=(MonetaryValue value1, MonetaryValue value2)
     {
-        return value1.BaseValue >= value2.BaseValue;
+        return Math.Round(value1.BaseValue, 2) >= Math.Round(value2.BaseValue, 2);
     }
     public static implicit operator MonetaryValue(decimal v)
     {
