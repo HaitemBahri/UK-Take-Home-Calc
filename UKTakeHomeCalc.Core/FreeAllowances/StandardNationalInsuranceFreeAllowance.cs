@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UKTakeHomeCalc.Core.Models;
 
-namespace UKTakeHomeCalc.Core.FreeAllowance
+namespace UKTakeHomeCalc.Core.FreeAllowances
 {
     public class StandardNationalInsuranceFreeAllowance : IFreeAllowance
     {
