@@ -125,7 +125,7 @@ namespace UKTakeHomeCalc.Core.Test.TakeHomeSummaryTests
             _sut.AddValue(_item4);
 
             var actualResult = _sut.GetTotal();
-            
+
             Assert.Equal(expectedResult, actualResult);
         }
         [Fact]
@@ -188,6 +188,57 @@ namespace UKTakeHomeCalc.Core.Test.TakeHomeSummaryTests
             _sut2.AddValue(_item6Copy);
 
             Assert.True(_sut != _sutCopy);
+        }
+
+        public static TheoryData<TakeHomeSummaryComposite, string, string> ShouldReturnCorrectStringTheoryData
+        {
+            get
+            {
+                var composite1 = new TakeHomeSummaryComposite("Sample SUT");
+                var result1 = "Sample SUT";
+
+                var composite2 = new TakeHomeSummaryComposite("Sample SUT 2");
+                composite2.AddValue(new TakeHomeSummaryItem("item - 1", 4500m.Monthly()));
+                composite2.AddValue(new TakeHomeSummaryItem("item - 2", 66.666m.Weekly()));
+                var result2 = "Sample SUT 2" +
+                              "\n\titem - 1 = 4,500.00/Monthly" +
+                              "\n\titem - 2 = 66.67/Weekly";
+
+                var composite3 = new TakeHomeSummaryComposite("Sample SUT 3");
+                var composite3Sub1 = new TakeHomeSummaryComposite("Sample SUT 3 Sub1");
+                composite3Sub1.AddValue(new TakeHomeSummaryItem("item - 1", 4500m.Monthly()));
+                composite3Sub1.AddValue(new TakeHomeSummaryItem("item - 2", 66.666m.Weekly()));
+                var composite3Sub2 = new TakeHomeSummaryComposite("Sample SUT 3 Sub2");
+                composite3Sub2.AddValue(new TakeHomeSummaryItem("item - 7", 66.666m.Weekly()));
+                composite3Sub2.AddValue(new TakeHomeSummaryItem("item - 8", 66.666m.Weekly()));
+                composite3Sub2.AddValue(new TakeHomeSummaryItem("item - 9", 66.666m.Weekly()));
+                composite3.AddValue(composite3Sub1);
+                composite3.AddValue(composite3Sub2);
+                var result3 = "Sample SUT 3" +
+                              "\n\tSample SUT 3 Sub1" +
+                              "\n\t\titem - 1 = 4,500.00/Monthly" +
+                              "\n\t\titem - 2 = 66.67/Weekly" +
+                              "\n\tSample SUT 3 Sub2" +
+                              "\n\t\titem - 7 = 66.67/Weekly" +
+                              "\n\t\titem - 8 = 66.67/Weekly" +
+                              "\n\t\titem - 9 = 66.67/Weekly";
+
+                return new()
+                {
+                    { composite1, result1, "Composite with no sub levels" },
+                    { composite2, result2, "Composite with 2 items" },
+                    { composite3, result3, "Composite with 2 composites + items" },
+                };
+            }
+        }
+
+        [Theory]
+        [MemberData(nameof(ShouldReturnCorrectStringTheoryData))]
+        public void ShouldReturnCorrectString(TakeHomeSummaryComposite value, string expectedResult, string testDataName)
+        {
+            var actualResult = value.ToString();
+
+            Assert.Equal(expectedResult, actualResult);
         }
     }
 }

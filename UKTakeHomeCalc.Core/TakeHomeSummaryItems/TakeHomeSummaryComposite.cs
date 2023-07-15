@@ -99,11 +99,17 @@ namespace UKTakeHomeCalc.Core.TakeHomeSummaryItems
         {
             var stringBuilder = new StringBuilder();
 
-            stringBuilder.AppendLine(Name);
+            stringBuilder.Append(Name);
 
             foreach (var item in _salaryItems)
             {
-                stringBuilder.Append('\t').AppendLine(item.ToString());
+                stringBuilder.Append('\n');
+
+                var itemString = item.ToString();
+
+                var updatedItemString = itemString?.Replace("\n", "\n\t");
+
+                stringBuilder.Append('\t').Append(updatedItemString);
             }
 
             return stringBuilder.ToString();
