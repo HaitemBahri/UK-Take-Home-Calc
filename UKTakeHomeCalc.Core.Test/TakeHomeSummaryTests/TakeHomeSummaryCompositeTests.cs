@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -61,6 +62,7 @@ namespace UKTakeHomeCalc.Core.Test.TakeHomeSummaryTests
             _item6 = new TakeHomeSummaryItem("TakeHomeSummaryItem No 6", 12.5m.Monthly());
             _item6Copy = new TakeHomeSummaryItem("TakeHomeSummaryItem No 6", 12.5m.Monthly());
         }
+
         [Fact]
         public void ShouldReturnItsName()
         {
@@ -92,6 +94,7 @@ namespace UKTakeHomeCalc.Core.Test.TakeHomeSummaryTests
 
             Assert.Equal(expectedResult, actualResult);
         }
+
         [Fact]
         public void ShouldReturnNull_WhenNameNoExists()
         {
@@ -190,20 +193,43 @@ namespace UKTakeHomeCalc.Core.Test.TakeHomeSummaryTests
             Assert.True(_sut != _sutCopy);
         }
 
-        public static TheoryData<TakeHomeSummaryComposite, string, string> ShouldReturnCorrectStringTheoryData
+        public static TheoryData<TakeHomeSummaryComposite, string, string> CompositeWithNoSubLevelsTheoryData
         {
             get
             {
                 var composite1 = new TakeHomeSummaryComposite("Sample SUT");
-                var result1 = "Sample SUT";
+                var expectedResult1 = "Sample SUT";
 
+
+                return new()
+                {
+                    { composite1, expectedResult1, "Composite with no sub levels" },
+                };
+            }
+        }
+
+        public static TheoryData<TakeHomeSummaryComposite, string, string> CompositeWith2ItemsTheoryData
+        {
+            get
+            {
                 var composite2 = new TakeHomeSummaryComposite("Sample SUT 2");
                 composite2.AddValue(new TakeHomeSummaryItem("item - 1", 4500m.Monthly()));
                 composite2.AddValue(new TakeHomeSummaryItem("item - 2", 66.666m.Weekly()));
-                var result2 = "Sample SUT 2" +
+                var ExpectedResult2 = "Sample SUT 2" +
                               "\n\titem - 1 = 4,500.00/Monthly" +
                               "\n\titem - 2 = 66.67/Weekly";
 
+                return new()
+                {
+                    { composite2, ExpectedResult2, "Composite with 2 items" },
+                };
+            }
+        }
+
+        public static TheoryData<TakeHomeSummaryComposite, string, string> CompositeWith2SubCompositesAndItemsTheoryData
+        {
+            get
+            {
                 var composite3 = new TakeHomeSummaryComposite("Sample SUT 3");
                 var composite3Sub1 = new TakeHomeSummaryComposite("Sample SUT 3 Sub1");
                 composite3Sub1.AddValue(new TakeHomeSummaryItem("item - 1", 4500m.Monthly()));
@@ -214,7 +240,7 @@ namespace UKTakeHomeCalc.Core.Test.TakeHomeSummaryTests
                 composite3Sub2.AddValue(new TakeHomeSummaryItem("item - 9", 66.666m.Weekly()));
                 composite3.AddValue(composite3Sub1);
                 composite3.AddValue(composite3Sub2);
-                var result3 = "Sample SUT 3" +
+                var expectedResult3 = "Sample SUT 3" +
                               "\n\tSample SUT 3 Sub1" +
                               "\n\t\titem - 1 = 4,500.00/Monthly" +
                               "\n\t\titem - 2 = 66.67/Weekly" +
@@ -225,15 +251,44 @@ namespace UKTakeHomeCalc.Core.Test.TakeHomeSummaryTests
 
                 return new()
                 {
-                    { composite1, result1, "Composite with no sub levels" },
-                    { composite2, result2, "Composite with 2 items" },
-                    { composite3, result3, "Composite with 2 composites + items" },
+                    { composite3, expectedResult3, "Composite with 2 composites + items" },
+                };
+            }
+        }
+
+        public static TheoryData<TakeHomeSummaryComposite, string, string> CompositeWith5SubLevelsTheoryData
+        {
+            get
+            {
+                var composite4 = new TakeHomeSummaryComposite("Sample SUT 4");
+                var composite41 = new TakeHomeSummaryComposite("Sample SUT 4.1");
+                composite4.AddValue(composite41);
+                var composite411 = new TakeHomeSummaryComposite("Sample SUT 4.1.1");
+                composite41.AddValue(composite411);
+                var composite4111 = new TakeHomeSummaryComposite("Sample SUT 4.1.1.1");
+                composite411.AddValue(composite4111);
+                var composite41111 = new TakeHomeSummaryComposite("Sample SUT 4.1.1.1.1");
+                composite4111.AddValue(composite41111);
+                composite41111.AddValue(new TakeHomeSummaryItem("item - 1", 4500m.Monthly()));
+                var expectedResult4 = "Sample SUT 4" +
+                              "\n\tSample SUT 4.1" +
+                              "\n\t\tSample SUT 4.1.1" +
+                              "\n\t\t\tSample SUT 4.1.1.1" +
+                              "\n\t\t\t\tSample SUT 4.1.1.1.1" +
+                              "\n\t\t\t\t\titem - 1 = 4,500.00/Monthly";
+
+                return new()
+                {
+                    { composite4, expectedResult4, "Composite with 5 sub levels" },
                 };
             }
         }
 
         [Theory]
-        [MemberData(nameof(ShouldReturnCorrectStringTheoryData))]
+        [MemberData(nameof(CompositeWithNoSubLevelsTheoryData))]
+        [MemberData(nameof(CompositeWith2ItemsTheoryData))]
+        [MemberData(nameof(CompositeWith2SubCompositesAndItemsTheoryData))]
+        [MemberData(nameof(CompositeWith5SubLevelsTheoryData))]
         public void ShouldReturnCorrectString(TakeHomeSummaryComposite value, string expectedResult, string testDataName)
         {
             var actualResult = value.ToString();
