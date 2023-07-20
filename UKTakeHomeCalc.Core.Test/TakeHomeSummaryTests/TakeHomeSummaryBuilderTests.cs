@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UKTakeHomeCalc.Core.Models;
 using UKTakeHomeCalc.Core.TakeHomeSummaryItems;
+using UKTakeHomeCalc.Core.TieredValueCalculators;
 using Xunit;
 
 namespace UKTakeHomeCalc.Core.Test.TakeHomeSummaryTests
@@ -17,7 +18,6 @@ namespace UKTakeHomeCalc.Core.Test.TakeHomeSummaryTests
         public TakeHomeSummaryBuilderTests()
         {
             _sut = new TakeHomeSummaryBuilder("TakeHomeSummaryBuilder SUT");
-            _sut.Build();
         }
 
         [Fact]
@@ -77,6 +77,28 @@ namespace UKTakeHomeCalc.Core.Test.TakeHomeSummaryTests
             expectedResult.AddValue(expectedSubComposite1);
             expectedResult.AddValue(expectedSubComposite2);
             expectedResult.AddValue(expectedSubComposite3);
+
+            var actualResult = _sut.Build();
+
+            Assert.Equal(expectedResult, actualResult);
+        }
+
+        [Fact]
+        public void ShouldBuildCompositeWithSubTieredValueResults()
+        {
+            var rule1 = new TieredValueRule(600m.Monthly(), 3000m.Monthly(), 0.25m);
+            var result1 = new TieredValueResult(rule1, 99m.Monthly());
+            var rule2 = new TieredValueRule(600m.Monthly(), 3000m.Monthly(), 0.425999m);
+            var result2 = new TieredValueResult(rule2, 51.055m.Monthly());
+            var rule3 = new TieredValueRule(600m.Monthly(), 3000m.Monthly(), 0.44m);
+            var result3 = new TieredValueResult(rule3, 23.88m.Monthly());
+
+            _sut.Add(result1, result2, result3);
+
+            var expectedResult = new TakeHomeSummaryComposite("TakeHomeSummaryBuilder SUT");
+            expectedResult.AddValue(new TakeHomeSummaryItem("@ [%25.00]", 99m.Monthly()));
+            expectedResult.AddValue(new TakeHomeSummaryItem("@ [%42.60]", 51.055m.Monthly()));
+            expectedResult.AddValue(new TakeHomeSummaryItem("@ [%44.00]", 23.88m.Monthly()));
 
             var actualResult = _sut.Build();
 

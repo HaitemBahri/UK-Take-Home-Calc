@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UKTakeHomeCalc.Core.Models;
+using UKTakeHomeCalc.Core.TieredValueCalculators;
 
 namespace UKTakeHomeCalc.Core.TakeHomeSummaryItems
 {
@@ -27,6 +28,16 @@ namespace UKTakeHomeCalc.Core.TakeHomeSummaryItems
             foreach (var composite in composites)
             {
                 _composite.AddValue(composite);
+            }
+
+            return this;
+        }
+
+        public ITakeHomeSummaryBuilder Add(params TieredValueResult[] results)
+        {
+            foreach (var result in results)
+            {
+                Add($"@ [%{result.RulePercentage*100:N2}]", result.Result);
             }
 
             return this;
