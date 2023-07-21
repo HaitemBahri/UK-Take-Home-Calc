@@ -22,5 +22,10 @@ namespace UKTakeHomeCalc.Core.Models
         {
             return new MonetaryValue(value, Frequency.Annually);
         }
+
+        public static MonetaryValue Every(this decimal value, Frequency frequency)
+        {
+            return new MonetaryValue(value, frequency);
+        }
     }
 }

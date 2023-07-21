@@ -11,6 +11,9 @@ namespace UKTakeHomeCalc.Core.Test.MonetaryValueTests
                 {new MonetaryValue(4500m, Frequency.Weekly), 4500m.Weekly(), "Weekly Value"},
                 {new MonetaryValue(4500m, Frequency.Monthly), 4500m.Monthly(), "Monthly Value"},
                 {new MonetaryValue(4500m, Frequency.Annually), 4500m.Annually(), "Annually Value" },
+                {new MonetaryValue(4500m, Frequency.Weekly), 4500m.Every(Frequency.Weekly), "Weekly Value using Every() Methed"},
+                {new MonetaryValue(4500m, Frequency.Monthly), 4500m.Every(Frequency.Monthly), "Monthly Value using Every() Methed"},
+                {new MonetaryValue(4500m, Frequency.Annually), 4500m.Every(Frequency.Annually), "Annually Value using Every() Methed" },
             };
 
         [Theory]
