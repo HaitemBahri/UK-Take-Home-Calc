@@ -12,7 +12,12 @@ namespace UKTakeHomeCalc.Core.TieredValueCalculators
         {
             FromValue = fromValue;
             ToValue = toValue;
-            Percentage = percentage;
+            Percentage = percentage; 
+        }
+
+        public override string ToString()
+        {
+            return $"[From {FromValue} - To {ToValue}] %{Percentage*100:N2}";
         }
     }
 }

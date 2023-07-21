@@ -13,5 +13,10 @@ namespace UKTakeHomeCalc.Core.TieredValueCalculators
             Rule = rule;
             Result = result;
         }
+
+        public override string ToString()
+        {
+            return $"Rule = {Rule}, Result = {Result}";
+        }
     }
 }
