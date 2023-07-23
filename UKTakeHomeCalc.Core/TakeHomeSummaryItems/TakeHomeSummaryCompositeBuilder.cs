@@ -8,22 +8,22 @@ using UKTakeHomeCalc.Core.TieredValueCalculators;
 
 namespace UKTakeHomeCalc.Core.TakeHomeSummaryItems
 {
-    public class TakeHomeSummaryBuilder : ITakeHomeSummaryBuilder
+    public class TakeHomeSummaryCompositeBuilder : ITakeHomeSummaryCompositeBuilder
     {
         private readonly ITakeHomeSummaryComposite _composite;
-        public TakeHomeSummaryBuilder(string name)
+        public TakeHomeSummaryCompositeBuilder(string name)
         {
             _composite = new TakeHomeSummaryComposite(name);
         }
 
-        public ITakeHomeSummaryBuilder Add(string itemName, MonetaryValue itemValue)
+        public ITakeHomeSummaryCompositeBuilder Add(string itemName, MonetaryValue itemValue)
         {
             _composite.AddValue(new TakeHomeSummaryItem(itemName, itemValue));
 
             return this;
         }
 
-        public ITakeHomeSummaryBuilder Add(params ITakeHomeSummaryComposite[] composites)
+        public ITakeHomeSummaryCompositeBuilder Add(params ITakeHomeSummaryItem[] composites)
         {
             foreach (var composite in composites)
             {
@@ -33,7 +33,7 @@ namespace UKTakeHomeCalc.Core.TakeHomeSummaryItems
             return this;
         }
 
-        public ITakeHomeSummaryBuilder Add(params TieredValueResult[] results)
+        public ITakeHomeSummaryCompositeBuilder Add(params TieredValueResult[] results)
         {
             foreach (var result in results)
             {

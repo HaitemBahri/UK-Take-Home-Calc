@@ -11,31 +11,46 @@ using Xunit;
 
 namespace UKTakeHomeCalc.Core.Test.TakeHomeSummaryTests
 {
-    public class TakeHomeSummaryBuilderTests
+    public class TakeHomeSummaryCompositeBuilderTests
     {
-        private TakeHomeSummaryBuilder _sut;
+        private TakeHomeSummaryCompositeBuilder _sut;
 
-        public TakeHomeSummaryBuilderTests()
+        public TakeHomeSummaryCompositeBuilderTests()
         {
-            _sut = new TakeHomeSummaryBuilder("TakeHomeSummaryBuilder SUT");
+            _sut = new TakeHomeSummaryCompositeBuilder("TakeHomeSummaryCompositeBuilder SUT");
         }
 
         [Fact]
         public void ShouldBuildCompositeWithNoSubItems()
         {
-            var expectedResult = new TakeHomeSummaryComposite("TakeHomeSummaryBuilder SUT");
+            var expectedResult = new TakeHomeSummaryComposite("TakeHomeSummaryCompositeBuilder SUT");
             var actualResult = _sut.Build();
 
             Assert.Equal(expectedResult, actualResult);
         }
 
         [Fact]
-        public void ShouldBuildCompositeWithSubItems()
+        public void ShouldBuildCompositeWithSubItemsUsingNameAndValueForItems()
         {
             _sut.Add("Sub Item 1", 900.33m.Weekly());
             _sut.Add("Sub Item 2", 12663.10m.Annually());
 
-            var expectedResult = new TakeHomeSummaryComposite("TakeHomeSummaryBuilder SUT");
+            var expectedResult = new TakeHomeSummaryComposite("TakeHomeSummaryCompositeBuilder SUT");
+            expectedResult.AddValue(new TakeHomeSummaryItem("Sub Item 1", 900.33m.Weekly()));
+            expectedResult.AddValue(new TakeHomeSummaryItem("Sub Item 2", 12663.10m.Annually()));
+
+            var actualResult = _sut.Build();
+
+            Assert.Equal(expectedResult, actualResult);
+        }
+
+        [Fact]
+        public void ShouldBuildCompositeWithSubItemsUsingTakeHomeSummaryItem()
+        {
+            _sut.Add(new TakeHomeSummaryItem("Sub Item 1", 900.33m.Weekly()));
+            _sut.Add(new TakeHomeSummaryItem("Sub Item 2", 12663.10m.Annually()));
+
+            var expectedResult = new TakeHomeSummaryComposite("TakeHomeSummaryCompositeBuilder SUT");
             expectedResult.AddValue(new TakeHomeSummaryItem("Sub Item 1", 900.33m.Weekly()));
             expectedResult.AddValue(new TakeHomeSummaryItem("Sub Item 2", 12663.10m.Annually()));
 
@@ -61,7 +76,7 @@ namespace UKTakeHomeCalc.Core.Test.TakeHomeSummaryTests
 
             _sut.Add(subComposite1, subComposite2, subComposite3);
 
-            var expectedResult = new TakeHomeSummaryComposite("TakeHomeSummaryBuilder SUT");
+            var expectedResult = new TakeHomeSummaryComposite("TakeHomeSummaryCompositeBuilder SUT");
             var expectedSubComposite1 = new TakeHomeSummaryComposite("Sub Composite 1");
             var expectedSubComposite2 = new TakeHomeSummaryComposite("Sub Composite 2");
             var expectedSubComposite3 = new TakeHomeSummaryComposite("Sub Composite 3");
@@ -95,7 +110,7 @@ namespace UKTakeHomeCalc.Core.Test.TakeHomeSummaryTests
 
             _sut.Add(result1, result2, result3);
 
-            var expectedResult = new TakeHomeSummaryComposite("TakeHomeSummaryBuilder SUT");
+            var expectedResult = new TakeHomeSummaryComposite("TakeHomeSummaryCompositeBuilder SUT");
             expectedResult.AddValue(new TakeHomeSummaryItem("@ [%25.00]", 99m.Monthly()));
             expectedResult.AddValue(new TakeHomeSummaryItem("@ [%42.60]", 51.055m.Monthly()));
             expectedResult.AddValue(new TakeHomeSummaryItem("@ [%44.00]", 23.88m.Monthly()));
