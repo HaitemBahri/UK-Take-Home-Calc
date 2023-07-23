@@ -10,24 +10,19 @@ namespace UKTakeHomeCalc.Core.QualifyingIncomeServices;
 
 public class StandardQualifyingIncomeCalculationService : IQualifyingIncomeCalculationService
 {
-    private readonly IFreeAllowance _freeAllowance;
-    public StandardQualifyingIncomeCalculationService(IFreeAllowance freeAllowance)
-    {
-        _freeAllowance = freeAllowance;
-    }
-    public MonetaryValue CalculateQualifyingIncome(MonetaryValue income)
+    public MonetaryValue CalculateQualifyingIncome(MonetaryValue income, MonetaryValue freeAllowance)
     {
         if (income < 0m.Annually())
             throw new ArgumentOutOfRangeException(nameof(income), "Income value cannot be less than zero.");
 
-        var freeAllowanceValue = _freeAllowance.GetFreeAllowance();
+        var freeAllowanceValue = freeAllowance;
 
-        var qualifyingIncome = CalculateQualifyingIncome(income, freeAllowanceValue);
+        var qualifyingIncome = CalculateFinalQualifyingIncome(income, freeAllowanceValue);
 
         return qualifyingIncome;
     }
 
-    private static MonetaryValue CalculateQualifyingIncome(MonetaryValue income, MonetaryValue freeAllowanceValue)
+    private static MonetaryValue CalculateFinalQualifyingIncome(MonetaryValue income, MonetaryValue freeAllowanceValue)
     {
         var qualifyingSalary = income - freeAllowanceValue;
 

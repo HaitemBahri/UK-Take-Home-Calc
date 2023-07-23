@@ -14,12 +14,10 @@ namespace UKTakeHomeCalc.Core.Test.QualifyingIncomeCalculationServiceTests
     public class IncomeLimitTaxQualifyingIncomeCalculationServiceTests
     {
         private IncomeLimitTaxQualifyingIncomeCalculationService _sut;
-        private Mock<IFreeAllowance> freeAllowanceMock;
 
         public IncomeLimitTaxQualifyingIncomeCalculationServiceTests()
         {
-            freeAllowanceMock = new Mock<IFreeAllowance>();
-            _sut = new IncomeLimitTaxQualifyingIncomeCalculationService(freeAllowanceMock.Object);
+            _sut = new IncomeLimitTaxQualifyingIncomeCalculationService();
         }
 
         public static TheoryData<MonetaryValue, MonetaryValue, MonetaryValue, string> AboveOrZeroIncomeTheoryData =>
@@ -39,9 +37,7 @@ namespace UKTakeHomeCalc.Core.Test.QualifyingIncomeCalculationServiceTests
         public void CalculateFreeAllowance_ShouldReturnCorrectValue_WhenIncomeAboveOrZero(MonetaryValue income,
             MonetaryValue freeAllowance, MonetaryValue expectedResult, string testDataName)
         {
-            freeAllowanceMock.Setup(x => x.GetFreeAllowance()).Returns(freeAllowance);
-
-            var actualResult = _sut.CalculateQualifyingIncome(income);
+            var actualResult = _sut.CalculateQualifyingIncome(income, freeAllowance);
 
             Assert.Equal(expectedResult, actualResult);
         }
@@ -57,7 +53,7 @@ namespace UKTakeHomeCalc.Core.Test.QualifyingIncomeCalculationServiceTests
         [MemberData(nameof(BelowZeroTheoryData))]
         public void CalculateFreeAllowance_ShouldThrowArgumentOutOfRangeException_WhenIncomeBelowZero(MonetaryValue income)
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => _ = _sut.CalculateQualifyingIncome(income));
+            Assert.Throws<ArgumentOutOfRangeException>(() => _ = _sut.CalculateQualifyingIncome(income, 0m));
         }
     }
 }

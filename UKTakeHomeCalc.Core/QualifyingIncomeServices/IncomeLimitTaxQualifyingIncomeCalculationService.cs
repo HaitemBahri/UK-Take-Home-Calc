@@ -11,29 +11,24 @@ namespace UKTakeHomeCalc.Core.QualifyingIncomeServices;
 public class IncomeLimitTaxQualifyingIncomeCalculationService : IQualifyingIncomeCalculationService
 {
     private readonly MonetaryValue INCOME_LIMIT = 100000m.Annually();
-    private readonly IFreeAllowance _freeAllowance;
-    public IncomeLimitTaxQualifyingIncomeCalculationService(IFreeAllowance freeAllowance)
-    {
-        _freeAllowance = freeAllowance;
-    }
 
-    public MonetaryValue CalculateQualifyingIncome(MonetaryValue income)
+    public MonetaryValue CalculateQualifyingIncome(MonetaryValue income, MonetaryValue freeAllowance)
     {
         if (income < 0m.Annually())
             throw new ArgumentOutOfRangeException(nameof(income), "Income value cannot be less than zero.");
 
-        var initialTaxFreeAllowance = _freeAllowance.GetFreeAllowance();
+        var initialTaxFreeAllowance = freeAllowance;
 
         var taxFreeAllowanceReduction = CalculateTaxFreeAllowanceReduction(income);
 
         var updatedTaxFreeAllowance = CalculateUpdatedTaxFreeAllowance(initialTaxFreeAllowance, taxFreeAllowanceReduction);
         
-        var qualifyingIncome = CalculateQualifyingIncome(income, updatedTaxFreeAllowance);
+        var qualifyingIncome = CalculateFinalQualifyingIncome(income, updatedTaxFreeAllowance);
 
         return qualifyingIncome;
     }
 
-    private MonetaryValue CalculateQualifyingIncome(MonetaryValue income, MonetaryValue updatedTaxFreeAllowance)
+    private MonetaryValue CalculateFinalQualifyingIncome(MonetaryValue income, MonetaryValue updatedTaxFreeAllowance)
     {
         var taxableSalary = income - updatedTaxFreeAllowance;
         if (taxableSalary < 0)
