@@ -1,7 +1,7 @@
 ﻿using UKTakeHomeCalc.Core.Models;
 using Xunit;
 
-namespace UKTakeHomeCalc.Core.Test.MonetaryValueTests
+namespace UKTakeHomeCalc.Core.Test.ModelsTests
 {
     public class MonetaryValueTests
     {
