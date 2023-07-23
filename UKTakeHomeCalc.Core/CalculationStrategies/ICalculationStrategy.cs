@@ -4,6 +4,6 @@ namespace UKTakeHomeCalc.Core.CalculationStrategies
 {
     public interface ICalculationStrategy
     {
-        public ITakeHomeSummaryItem CreateSalaryItem(ITakeHomeSummaryComposite takeHomeSummery);
+        public ITakeHomeSummaryItem CreateTakeHomeSummaryItem(ITakeHomeSummaryComposite takeHomeSummary);
     }
 }
