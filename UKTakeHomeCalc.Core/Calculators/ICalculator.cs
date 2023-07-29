@@ -4,6 +4,6 @@ namespace UKTakeHomeCalc.Core.Calculators
 {
     public interface ICalculator
     {
-        public ITakeHomeSummaryComposite CreateSalaryItemNode(ITakeHomeSummaryComposite takeHomeSummery);
+        public ITakeHomeSummaryComposite CreateTakeHomeSummaryComposite(ITakeHomeSummaryComposite takeHomeSummary);
     }
 }
