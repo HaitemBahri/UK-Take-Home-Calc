@@ -65,8 +65,7 @@ namespace UKTakeHomeCalc.Core.TakeHomeSummaryItems
 
             var result = true;
 
-            if (Name == other.Name)
-                result = result && true;
+            result = result && (Name == other.Name);
 
             result = result && _salaryItems.SequenceEqual(other.GetSalaryItems());
 

@@ -131,6 +131,7 @@ namespace UKTakeHomeCalc.Core.Test.TakeHomeSummaryTests
 
             Assert.Equal(expectedResult, actualResult);
         }
+
         [Fact]
         public void ShouldThrowNullException_WhenNullAdded()
         {
@@ -176,7 +177,7 @@ namespace UKTakeHomeCalc.Core.Test.TakeHomeSummaryTests
             _sut2.AddValue(_item2Copy);
             _sut2.AddValue(_item3Copy);
 
-            Assert.True(_sut != _sutCopy);
+            Assert.True(_sut != _sut2);
         }
 
         [Fact]
