@@ -6,33 +6,36 @@ namespace UKTakeHomeCalc.Core.CalculatorsHandlers
 {
     public class CalculatorsHandler : ICalculatorsHandler
     {
-        protected ICalculatorsHandler? _nextCalculatorsHandler = null;
-        private List<ICalculator> _calculators;
-        public CalculatorsHandler(List<ICalculator> calculators)
+        private ICalculatorsHandler? _nextCalculatorsHandler = null;
+        private ICalculator[] _calculators;
+
+        public CalculatorsHandler(params ICalculator[] calculators)
         {
             _calculators = calculators;
         }
+
         public void SetNext(ICalculatorsHandler nextCalculatorsHandler)
         {
             _nextCalculatorsHandler = nextCalculatorsHandler;
         }
-        public void Handle(ITakeHomeSummaryComposite takeHomeSummery)
+
+        public void Handle(ITakeHomeSummaryComposite takeHomeSummary)
         {
-            var salaryItemsBag = new ConcurrentBag<ITakeHomeSummaryItem>();
+            var takeHomeSummaryItems = new List<ITakeHomeSummaryItem>();
 
-            Parallel.ForEach(_calculators, (calculator) =>
+            foreach (var calculator in _calculators)
             {
-                var salaryItem = calculator.CreateSalaryItemNode(takeHomeSummery);
-                salaryItemsBag.Add(salaryItem);
-            });
+                var takeHomeSummaryComposite = calculator.CreateTakeHomeSummaryComposite(takeHomeSummary);
+                takeHomeSummaryItems.Add(takeHomeSummaryComposite);
+            }
 
-            foreach (var salaryItem in salaryItemsBag)
+            foreach (var takeHomeSummaryItem in takeHomeSummaryItems)
             {
-                takeHomeSummery.AddValue(salaryItem);
+                takeHomeSummary.AddValue(takeHomeSummaryItem);
             }
 
             if (_nextCalculatorsHandler != null)
-                _nextCalculatorsHandler.Handle(takeHomeSummery);
+                _nextCalculatorsHandler.Handle(takeHomeSummary);
         }
     }
 }
