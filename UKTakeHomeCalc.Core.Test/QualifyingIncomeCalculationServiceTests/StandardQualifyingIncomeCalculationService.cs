@@ -1,5 +1,4 @@
 ﻿using Moq;
-using UKTakeHomeCalc.Core.FreeAllowances;
 using UKTakeHomeCalc.Core.Models;
 using UKTakeHomeCalc.Core.QualifyingIncomeServices;
 using Xunit;

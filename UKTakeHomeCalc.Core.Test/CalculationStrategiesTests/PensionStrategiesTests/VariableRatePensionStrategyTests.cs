@@ -37,7 +37,7 @@ namespace UKTakeHomeCalc.Core.Test.CalculationStrategiesTests.PensionStrategiesT
         [MemberData(nameof(ShouldReturnCorrectTakeHomeSummaryItemTheoryData))]
         public void ShouldReturnCorrectTakeHomeSummaryItem(MonetaryValue value, decimal percentage, ITakeHomeSummaryItem expectedResult, string testDataName)
         {
-            _sut = new VariableRatePensionStrategy(_sutName, percentage);
+            _sut = new VariableRatePensionStrategy(_sutName, percentage, FreeAllowances.Pension.StandardPensionFreeAllowance);
             _takeHomeSummaryMock.Setup(x => x.GetTotal()).Returns(value);
 
             var actualResult = _sut.CreateTakeHomeSummaryItem(_takeHomeSummaryMock.Object);

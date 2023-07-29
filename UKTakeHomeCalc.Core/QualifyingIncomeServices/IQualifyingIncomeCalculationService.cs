@@ -1,5 +1,4 @@
-﻿using UKTakeHomeCalc.Core.FreeAllowances;
-using UKTakeHomeCalc.Core.Models;
+﻿using UKTakeHomeCalc.Core.Models;
 
 namespace UKTakeHomeCalc.Core.QualifyingIncomeServices
 {

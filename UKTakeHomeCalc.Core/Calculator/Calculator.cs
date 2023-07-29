@@ -22,7 +22,7 @@ namespace UKTakeHomeCalc.Core.Calculators
         {
             foreach (var calculationStrategy in _calculationStrategies)
             {
-                var salaryItem = calculationStrategy.CreateSalaryItem(takeHomeSummery);
+                var salaryItem = calculationStrategy.CreateTakeHomeSummaryItem(takeHomeSummery);
                 _calculatorNode.AddValue(salaryItem);
             }
 

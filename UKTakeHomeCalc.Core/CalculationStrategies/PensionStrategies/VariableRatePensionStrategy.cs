@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UKTakeHomeCalc.Core.CalculationStrategies;
-using UKTakeHomeCalc.Core.FreeAllowances;
-using UKTakeHomeCalc.Core.Models;
+﻿using UKTakeHomeCalc.Core.Models;
 using UKTakeHomeCalc.Core.QualifyingIncomeServices;
 using UKTakeHomeCalc.Core.TakeHomeSummaryItems;
 using UKTakeHomeCalc.Core.TieredValueCalculators;
@@ -17,17 +10,17 @@ namespace UKTakeHomeCalc.Core.CalculationStrategies.PensionStrategy
         protected override string Name { get; }
         protected override List<TieredValueRule> Rules { get; }
 
-        public VariableRatePensionStrategy(string name, decimal percentage) :
+        public VariableRatePensionStrategy(string name, decimal percentage, MonetaryValue freeAllowance) :
             base(new StandardQualifyingIncomeCalculationService(),
                  new TieredValueCalculator(),
                  new TakeHomeSummaryCompositeBuilder(name),
-                 0m)
+                 freeAllowance)
         {
             Name = name;
 
             Rules = new List<TieredValueRule>()
             {
-                new TieredValueRule(6240m.Annually(), 50270m.Annually(), -percentage),
+                new TieredValueRule(0m.Annually(), (50270m - 6240m).Annually(), -percentage),
             };
         }
         public override ITakeHomeSummaryItem CreateTakeHomeSummaryItem(ITakeHomeSummaryComposite takeHomeSummery)
