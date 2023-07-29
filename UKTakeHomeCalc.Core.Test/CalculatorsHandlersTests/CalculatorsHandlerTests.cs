@@ -1,5 +1,4 @@
 ﻿using Moq;
-using UKTakeHomeCalc.Core.CalculationStrategies;
 using UKTakeHomeCalc.Core.Calculators;
 using UKTakeHomeCalc.Core.CalculatorsHandlers;
 using UKTakeHomeCalc.Core.Models;
@@ -11,7 +10,7 @@ namespace UKTakeHomeCalc.Core.Test.CalculatorsHandlersTests
     public class CalculatorsHandlerTests
     {
         private CalculatorsHandler _sut;
-        private Mock<ITakeHomeSummaryComposite> _takeHomeSummaryMock = new Mock<ITakeHomeSummaryComposite>();
+        private readonly Mock<ITakeHomeSummaryComposite> _takeHomeSummaryMock = new();
 
         public CalculatorsHandlerTests()
         {

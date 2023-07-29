@@ -1,5 +1,4 @@
 ﻿using Moq;
-using System.Linq;
 using UKTakeHomeCalc.Core.CalculationStrategies;
 using UKTakeHomeCalc.Core.Calculators;
 using UKTakeHomeCalc.Core.Models;
@@ -11,7 +10,7 @@ namespace UKTakeHomeCalc.Core.Test.CalculatorTests
     public class CalculatorTests
     {
         private Calculator _sut;
-        private Mock<ITakeHomeSummaryComposite> _takeHomeSummaryMock = new Mock<ITakeHomeSummaryComposite>();
+        private readonly Mock<ITakeHomeSummaryComposite> _takeHomeSummaryMock = new();
         private readonly static string _sutName = "Some Calculator";
 
         public CalculatorTests()

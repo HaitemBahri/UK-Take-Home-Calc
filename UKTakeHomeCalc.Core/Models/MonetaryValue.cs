@@ -1,5 +1,4 @@
 namespace UKTakeHomeCalc.Core.Models;
-
 public struct MonetaryValue
 {
     public decimal Value { get; }
@@ -19,6 +18,7 @@ public struct MonetaryValue
         Value = 0;
         ValueFrequency = Frequency.Weekly;
     }
+
     public MonetaryValue(decimal value, Frequency valueFrequency)
     {
         Value = Math.Round(value, 8);
@@ -29,18 +29,22 @@ public struct MonetaryValue
     {
         return new MonetaryValue((value1.BaseValue + value2.BaseValue) * (int)value1.ValueFrequency, value1.ValueFrequency);
     }
+
     public static MonetaryValue operator *(MonetaryValue value1, decimal value2)
     {
         return new MonetaryValue(value1.Value * value2, value1.ValueFrequency);
     }
+
     public static MonetaryValue operator -(MonetaryValue value1, MonetaryValue value2)
     {
         return value1 + value2 * -1;
     }
+
     public static MonetaryValue operator -(MonetaryValue value1)
     {
         return value1 * -1;
     }
+
     public static MonetaryValue operator /(MonetaryValue value1, decimal value2)
     {
         if (value2 == 0)
@@ -48,26 +52,32 @@ public struct MonetaryValue
 
         return new MonetaryValue(value1.Value / value2, value1.ValueFrequency);
     }
+
     public static bool operator <(MonetaryValue value1, MonetaryValue value2)
     {
         return Math.Round(value1.BaseValue, 2) < Math.Round(value2.BaseValue, 2);
     }
+
     public static bool operator >(MonetaryValue value1, MonetaryValue value2)
     {
         return Math.Round(value1.BaseValue, 2) > Math.Round(value2.BaseValue, 2);
     }
+
     public static bool operator <=(MonetaryValue value1, MonetaryValue value2)
     {
         return Math.Round(value1.BaseValue, 2) <= Math.Round(value2.BaseValue, 2);
     }
+
     public static bool operator >=(MonetaryValue value1, MonetaryValue value2)
     {
         return Math.Round(value1.BaseValue, 2) >= Math.Round(value2.BaseValue, 2);
     }
+
     public static implicit operator MonetaryValue(decimal v)
     {
         return new MonetaryValue(v, Frequency.Weekly);
     }
+
     public override bool Equals(object? value)
     {
         if (value == null) return false;
@@ -77,6 +87,7 @@ public struct MonetaryValue
 
         return false;
     }
+
     public override int GetHashCode()
     {
         int initialHash = 23;
@@ -89,14 +100,17 @@ public struct MonetaryValue
 
         return initialHash;
     }
+
     public static bool operator ==(MonetaryValue value1, MonetaryValue value2)
     {
         return value1.Equals(value2);
     }
+
     public static bool operator !=(MonetaryValue value1, MonetaryValue value2)
     {
         return !value1.Equals(value2);
     }
+
     public override string ToString()
     {
         return $"{Math.Round(Value, 2):n2}/{ValueFrequency}";

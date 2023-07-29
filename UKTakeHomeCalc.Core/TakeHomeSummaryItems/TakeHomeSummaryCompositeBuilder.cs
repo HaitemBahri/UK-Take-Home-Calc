@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UKTakeHomeCalc.Core.Models;
+﻿using UKTakeHomeCalc.Core.Models;
 using UKTakeHomeCalc.Core.TieredValueCalculators;
 
 namespace UKTakeHomeCalc.Core.TakeHomeSummaryItems
@@ -11,6 +6,7 @@ namespace UKTakeHomeCalc.Core.TakeHomeSummaryItems
     public class TakeHomeSummaryCompositeBuilder : ITakeHomeSummaryCompositeBuilder
     {
         private readonly ITakeHomeSummaryComposite _composite;
+
         public TakeHomeSummaryCompositeBuilder(string name)
         {
             _composite = new TakeHomeSummaryComposite(name);

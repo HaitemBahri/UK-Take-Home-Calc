@@ -3,7 +3,7 @@ using UKTakeHomeCalc.Core.QualifyingIncomeServices;
 using UKTakeHomeCalc.Core.TakeHomeSummaryItems;
 using UKTakeHomeCalc.Core.TieredValueCalculators;
 
-namespace UKTakeHomeCalc.Core.CalculationStrategies.NationalInsuranceStrategy
+namespace UKTakeHomeCalc.Core.CalculationStrategies.NationalInsuranceStrategies
 {
     public class ClassOneNationalInsuranceStrategy : NationalInsuranceStrategy
     {
@@ -36,7 +36,6 @@ namespace UKTakeHomeCalc.Core.CalculationStrategies.NationalInsuranceStrategy
             var takeHomeSummaryComposite = TakeHomeSummaryCompositeBuilder.Build();
 
             return takeHomeSummaryComposite;
-
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System.Text.RegularExpressions;
-using UKTakeHomeCalc.Core.Models;
+﻿using UKTakeHomeCalc.Core.Models;
 
 namespace UKTakeHomeCalc.Core.TakeHomeSummaryItems
 {

@@ -1,4 +1,3 @@
-using System.Collections.Concurrent;
 using UKTakeHomeCalc.Core.Calculators;
 using UKTakeHomeCalc.Core.TakeHomeSummaryItems;
 

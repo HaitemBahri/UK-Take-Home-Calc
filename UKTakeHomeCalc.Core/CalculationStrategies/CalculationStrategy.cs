@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UKTakeHomeCalc.Core.TakeHomeSummaryItems;
+﻿using UKTakeHomeCalc.Core.TakeHomeSummaryItems;
 
 namespace UKTakeHomeCalc.Core.CalculationStrategies
 {
@@ -11,6 +6,7 @@ namespace UKTakeHomeCalc.Core.CalculationStrategies
     {
         protected abstract string Name { get; }
         protected ITakeHomeSummaryCompositeBuilder TakeHomeSummaryCompositeBuilder { get; }
+
         protected CalculationStrategy(ITakeHomeSummaryCompositeBuilder takeHomeSummaryCompositeBuilder)
         {
             TakeHomeSummaryCompositeBuilder = takeHomeSummaryCompositeBuilder;

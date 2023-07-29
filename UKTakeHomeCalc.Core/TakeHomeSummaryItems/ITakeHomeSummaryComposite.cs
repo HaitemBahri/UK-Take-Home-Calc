@@ -3,6 +3,6 @@
     public interface ITakeHomeSummaryComposite : ITakeHomeSummaryItem
     {
         public void AddValue(ITakeHomeSummaryItem value);
-        public IEnumerable<ITakeHomeSummaryItem> GetSalaryItems();
+        public IEnumerable<ITakeHomeSummaryItem> GetSubItems();
     }
 }

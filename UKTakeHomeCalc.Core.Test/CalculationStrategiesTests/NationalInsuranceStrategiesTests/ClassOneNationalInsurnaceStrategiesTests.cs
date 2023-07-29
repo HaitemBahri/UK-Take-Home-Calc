@@ -1,11 +1,5 @@
 ﻿using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UKTakeHomeCalc.Core.CalculationStrategies.NationalInsuranceStrategy;
-using UKTakeHomeCalc.Core.CalculationStrategies.PensionStrategy;
+using UKTakeHomeCalc.Core.CalculationStrategies.NationalInsuranceStrategies;
 using UKTakeHomeCalc.Core.Models;
 using UKTakeHomeCalc.Core.TakeHomeSummaryItems;
 using Xunit;
@@ -15,7 +9,7 @@ namespace UKTakeHomeCalc.Core.Test.CalculationStrategiesTests.NationalInsuranceS
     public class ClassOneNationalInsurnaceStrategiesTests
     {
         private ClassOneNationalInsuranceStrategy _sut;
-        private Mock<ITakeHomeSummaryComposite> _takeHomeSummaryMock = new Mock<ITakeHomeSummaryComposite>();
+        private readonly Mock<ITakeHomeSummaryComposite> _takeHomeSummaryMock = new();
         private readonly static string _sutName = "Pension";
 
         public static TheoryData<MonetaryValue, ITakeHomeSummaryItem, string> ShouldReturnCorrectTakeHomeSummaryItemTheoryData =>

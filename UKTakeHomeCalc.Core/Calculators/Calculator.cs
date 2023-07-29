@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UKTakeHomeCalc.Core.CalculationStrategies;
+﻿using UKTakeHomeCalc.Core.CalculationStrategies;
 using UKTakeHomeCalc.Core.TakeHomeSummaryItems;
 
 namespace UKTakeHomeCalc.Core.Calculators

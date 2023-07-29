@@ -6,15 +6,18 @@ namespace UKTakeHomeCalc.Core.TakeHomeSummaryItems
     {
         public MonetaryValue Value { get; }
         public string Name { get; }
+
         public TakeHomeSummaryItem(string name, MonetaryValue value)
         {
             Name = name;
             Value = value;
         }
+
         public MonetaryValue GetTotal()
         {
             return Value;
         }
+
         public ITakeHomeSummaryItem? FindValue(string name)
         {
             if (name == Name)

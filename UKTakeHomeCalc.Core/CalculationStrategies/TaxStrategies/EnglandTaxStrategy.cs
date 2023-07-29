@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UKTakeHomeCalc.Core.CalculationStrategies;
-using UKTakeHomeCalc.Core.QualifyingIncomeServices;
+﻿using UKTakeHomeCalc.Core.QualifyingIncomeServices;
 using UKTakeHomeCalc.Core.TieredValueCalculators;
 using UKTakeHomeCalc.Core.TakeHomeSummaryItems;
 using UKTakeHomeCalc.Core.Models;
 
-namespace UKTakeHomeCalc.Core.CalculationStrategies.TaxStrategy
+namespace UKTakeHomeCalc.Core.CalculationStrategies.TaxStrategies
 {
     public class EnglandTaxStrategy : TaxStrategy
     {
@@ -41,7 +35,5 @@ namespace UKTakeHomeCalc.Core.CalculationStrategies.TaxStrategy
 
             return takeHomeSummaryComposite;
         }
-
-
     }
 }

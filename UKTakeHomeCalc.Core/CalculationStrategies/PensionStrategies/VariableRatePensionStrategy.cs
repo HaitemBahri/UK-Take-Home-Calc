@@ -3,7 +3,7 @@ using UKTakeHomeCalc.Core.QualifyingIncomeServices;
 using UKTakeHomeCalc.Core.TakeHomeSummaryItems;
 using UKTakeHomeCalc.Core.TieredValueCalculators;
 
-namespace UKTakeHomeCalc.Core.CalculationStrategies.PensionStrategy
+namespace UKTakeHomeCalc.Core.CalculationStrategies.PensionStrategies
 {
     public class VariableRatePensionStrategy : PensionStrategy
     {
@@ -23,6 +23,7 @@ namespace UKTakeHomeCalc.Core.CalculationStrategies.PensionStrategy
                 new TieredValueRule(0m.Annually(), (50270m - 6240m).Annually(), -percentage),
             };
         }
+
         public override ITakeHomeSummaryItem CreateTakeHomeSummaryItem(ITakeHomeSummaryComposite takeHomeSummery)
         {
             var qualifyingIncome = QualifyingSalaryCalculationService.CalculateQualifyingIncome(takeHomeSummery.GetTotal(), FreeAllowance);

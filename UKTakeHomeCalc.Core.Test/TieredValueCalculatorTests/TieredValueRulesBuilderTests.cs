@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using UKTakeHomeCalc.Core.Models;
+﻿using UKTakeHomeCalc.Core.Models;
 using UKTakeHomeCalc.Core.TieredValueCalculators;
 using Xunit;
 
@@ -30,7 +29,6 @@ namespace UKTakeHomeCalc.Core.Test.TieredValueCalculatorTests
 
             var actualResult = _sut.Build();
 
-            actualResult.ForEach((x) => Debug.WriteLine(x));
             Assert.Equal(expectedResult, actualResult);
         }
     }

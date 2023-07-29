@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UKTakeHomeCalc.Core.Models;
+﻿using UKTakeHomeCalc.Core.Models;
 using UKTakeHomeCalc.Core.TakeHomeSummaryItems;
 
 namespace UKTakeHomeCalc.Core.CalculationStrategies.IncomeStrategies
@@ -19,6 +14,7 @@ namespace UKTakeHomeCalc.Core.CalculationStrategies.IncomeStrategies
             MonetaryValue = (hourlyRate * hours).Every(frequency);
             Name = name;
         }
+
         public override ITakeHomeSummaryItem CreateTakeHomeSummaryItem(ITakeHomeSummaryComposite takeHomeSummary)
         {
             return new TakeHomeSummaryItem(Name, MonetaryValue);

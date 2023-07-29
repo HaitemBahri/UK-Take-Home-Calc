@@ -1,26 +1,27 @@
-﻿using System.Data.Common;
-using System.Text;
+﻿using System.Text;
 using UKTakeHomeCalc.Core.Models;
 
 namespace UKTakeHomeCalc.Core.TakeHomeSummaryItems
 {
     public class TakeHomeSummaryComposite : ITakeHomeSummaryComposite
     {
-        private List<ITakeHomeSummaryItem> _salaryItems;
+        private readonly List<ITakeHomeSummaryItem> _items;
+        public string Name { get; }
+
         public TakeHomeSummaryComposite(string name)
         {
             Name = name;
-            _salaryItems = new List<ITakeHomeSummaryItem>();
+            _items = new List<ITakeHomeSummaryItem>();
         }
-        public string Name { get; }
 
         public void AddValue(ITakeHomeSummaryItem value)
         {
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
 
-            _salaryItems.Add(value);
+            _items.Add(value);
         }
+
         public ITakeHomeSummaryItem? FindValue(string name)
         {
             if (Name == name)
@@ -28,7 +29,7 @@ namespace UKTakeHomeCalc.Core.TakeHomeSummaryItems
                 return this;
             }
 
-            foreach (ITakeHomeSummaryItem value in _salaryItems)
+            foreach (ITakeHomeSummaryItem value in _items)
             {
                 var item = value.FindValue(name);
                 if (item != null)
@@ -36,11 +37,12 @@ namespace UKTakeHomeCalc.Core.TakeHomeSummaryItems
             }
             return null;
         }
+
         public MonetaryValue GetTotal()
         {
-            var total = new MonetaryValue(0, Frequency.Weekly);
+            var total = new MonetaryValue();
 
-            foreach (var item in _salaryItems)
+            foreach (var item in _items)
             {
                 total += item.GetTotal();
             }
@@ -48,9 +50,9 @@ namespace UKTakeHomeCalc.Core.TakeHomeSummaryItems
             return total;
         }
 
-        public IEnumerable<ITakeHomeSummaryItem> GetSalaryItems()
+        public IEnumerable<ITakeHomeSummaryItem> GetSubItems()
         {
-            return _salaryItems.ToList();
+            return _items.ToList();
         }
 
         public override bool Equals(object? obj)
@@ -67,7 +69,7 @@ namespace UKTakeHomeCalc.Core.TakeHomeSummaryItems
 
             result = result && (Name == other.Name);
 
-            result = result && _salaryItems.SequenceEqual(other.GetSalaryItems());
+            result = result && _items.SequenceEqual(other.GetSubItems());
 
             return result;
         }
@@ -100,7 +102,7 @@ namespace UKTakeHomeCalc.Core.TakeHomeSummaryItems
 
             stringBuilder.Append(Name);
 
-            foreach (var item in _salaryItems)
+            foreach (var item in _items)
             {
                 stringBuilder.Append('\n');
 

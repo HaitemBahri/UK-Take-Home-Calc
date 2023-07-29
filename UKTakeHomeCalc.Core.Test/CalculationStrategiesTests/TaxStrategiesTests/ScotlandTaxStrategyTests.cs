@@ -1,11 +1,5 @@
 ﻿using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UKTakeHomeCalc.Core.CalculationStrategies.IncomeStrategies;
-using UKTakeHomeCalc.Core.CalculationStrategies.TaxStrategy;
+using UKTakeHomeCalc.Core.CalculationStrategies.TaxStrategies;
 using UKTakeHomeCalc.Core.Models;
 using UKTakeHomeCalc.Core.TakeHomeSummaryItems;
 using Xunit;
