@@ -11,36 +11,38 @@ public class IncomeLimitTaxQualifyingIncomeCalculationService : IQualifyingIncom
         if (income < 0m.Annually())
             throw new ArgumentOutOfRangeException(nameof(income), "Income value cannot be less than zero.");
 
-        var initialTaxFreeAllowance = freeAllowance;
+        var initialFreeAllowance = freeAllowance;
 
-        var taxFreeAllowanceReduction = CalculateTaxFreeAllowanceReduction(income);
+        var freeAllowanceReduction = CalculateFreeAllowanceReduction(income);
 
-        var updatedTaxFreeAllowance = CalculateUpdatedTaxFreeAllowance(initialTaxFreeAllowance, taxFreeAllowanceReduction);
+        var updatedFreeAllowance = CalculateUpdatedFreeAllowance(initialFreeAllowance, freeAllowanceReduction);
         
-        var qualifyingIncome = CalculateFinalQualifyingIncome(income, updatedTaxFreeAllowance);
+        var qualifyingIncome = CalculateFinalQualifyingIncome(income, updatedFreeAllowance);
 
         return qualifyingIncome;
     }
 
-    private MonetaryValue CalculateFinalQualifyingIncome(MonetaryValue income, MonetaryValue updatedTaxFreeAllowance)
+    private MonetaryValue CalculateFinalQualifyingIncome(MonetaryValue income, MonetaryValue updatedFreeAllowance)
     {
-        var taxableSalary = income - updatedTaxFreeAllowance;
-        if (taxableSalary < 0)
-            taxableSalary = 0;
-        return taxableSalary;
+        var qualifyingIncome = income - updatedFreeAllowance;
+
+        if (qualifyingIncome < 0)
+            qualifyingIncome = 0;
+
+        return qualifyingIncome;
     }
 
-    private MonetaryValue CalculateUpdatedTaxFreeAllowance(MonetaryValue initialTaxFreeAllowance, MonetaryValue taxFreeAllowanceReduction)
+    private MonetaryValue CalculateUpdatedFreeAllowance(MonetaryValue initialFreeAllowance, MonetaryValue freeAllowanceReduction)
     {
-        var updatedTaxFreeAllowance = initialTaxFreeAllowance - taxFreeAllowanceReduction;
+        var updatedFreeAllowance = initialFreeAllowance - freeAllowanceReduction;
 
-        if (updatedTaxFreeAllowance < 0)
-            updatedTaxFreeAllowance = 0;
+        if (updatedFreeAllowance < 0)
+            updatedFreeAllowance = 0;
 
-        return updatedTaxFreeAllowance;
+        return updatedFreeAllowance;
     }
 
-    private MonetaryValue CalculateTaxFreeAllowanceReduction(MonetaryValue income)
+    private MonetaryValue CalculateFreeAllowanceReduction(MonetaryValue income)
     {
         if (income > INCOME_LIMIT)
         {

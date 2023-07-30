@@ -9,20 +9,20 @@ public class StandardQualifyingIncomeCalculationService : IQualifyingIncomeCalcu
         if (income < 0m.Annually())
             throw new ArgumentOutOfRangeException(nameof(income), "Income value cannot be less than zero.");
 
-        var freeAllowanceValue = freeAllowance;
+        var initialFreeAllowance = freeAllowance;
 
-        var qualifyingIncome = CalculateFinalQualifyingIncome(income, freeAllowanceValue);
+        var qualifyingIncome = CalculateFinalQualifyingIncome(income, initialFreeAllowance);
 
         return qualifyingIncome;
     }
 
-    private static MonetaryValue CalculateFinalQualifyingIncome(MonetaryValue income, MonetaryValue freeAllowanceValue)
+    private MonetaryValue CalculateFinalQualifyingIncome(MonetaryValue income, MonetaryValue initialFreeAllowance)
     {
-        var qualifyingSalary = income - freeAllowanceValue;
+        var qualifyingIncome = income - initialFreeAllowance;
 
-        if (qualifyingSalary < 0)
-            qualifyingSalary = 0;
+        if (qualifyingIncome < 0)
+            qualifyingIncome = 0;
 
-        return qualifyingSalary;
+        return qualifyingIncome;
     }
 }
