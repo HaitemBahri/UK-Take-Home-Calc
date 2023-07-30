@@ -3,7 +3,7 @@ using UKTakeHomeCalc.Core.QualifyingIncomeServices;
 using UKTakeHomeCalc.Core.TakeHomeSummaryItems;
 using UKTakeHomeCalc.Core.TieredValueCalculators;
 
-namespace UKTakeHomeCalc.Core.CalculationStrategies.NationalInsuranceStrategies
+namespace UKTakeHomeCalc.Core.CalculationStrategies.DeductableStrategies.NationalInsuranceStrategies
 {
     public class ClassOneNationalInsuranceStrategy : NationalInsuranceStrategy
     {
@@ -23,19 +23,6 @@ namespace UKTakeHomeCalc.Core.CalculationStrategies.NationalInsuranceStrategies
                 new TieredValueRule(0m.Weekly(), (967m - 242m).Weekly(), -0.12m),
                 new TieredValueRule((967m - 242m).Weekly(), 10000000m.Weekly(), -0.02m),
             };
-        }
-
-        public override ITakeHomeSummaryItem CreateTakeHomeSummaryItem(ITakeHomeSummaryComposite takeHomeSummery)
-        {
-            var qualifyingIncome = QualifyingSalaryCalculationService.CalculateQualifyingIncome(takeHomeSummery.GetTotal(), FreeAllowance);
-
-            var tieredValueResults = TieredValueCalculator.CalculateTieredValueResults(qualifyingIncome, Rules);
-
-            TakeHomeSummaryCompositeBuilder.Add(tieredValueResults.ToArray());
-
-            var takeHomeSummaryComposite = TakeHomeSummaryCompositeBuilder.Build();
-
-            return takeHomeSummaryComposite;
         }
     }
 }

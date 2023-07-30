@@ -1,5 +1,5 @@
 ﻿using Moq;
-using UKTakeHomeCalc.Core.CalculationStrategies.PensionStrategies;
+using UKTakeHomeCalc.Core.CalculationStrategies.DeductableStrategies.PensionStrategies;
 using UKTakeHomeCalc.Core.Models;
 using UKTakeHomeCalc.Core.TakeHomeSummaryItems;
 using Xunit;

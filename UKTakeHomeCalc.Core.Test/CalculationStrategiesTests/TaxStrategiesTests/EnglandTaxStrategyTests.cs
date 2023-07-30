@@ -1,5 +1,5 @@
 ﻿using Moq;
-using UKTakeHomeCalc.Core.CalculationStrategies.TaxStrategies;
+using UKTakeHomeCalc.Core.CalculationStrategies.DeductableStrategies.TaxStrategies;
 using UKTakeHomeCalc.Core.Models;
 using UKTakeHomeCalc.Core.TakeHomeSummaryItems;
 using Xunit;

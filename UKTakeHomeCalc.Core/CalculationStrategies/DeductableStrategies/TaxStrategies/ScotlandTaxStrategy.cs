@@ -3,7 +3,7 @@ using UKTakeHomeCalc.Core.QualifyingIncomeServices;
 using UKTakeHomeCalc.Core.TakeHomeSummaryItems;
 using UKTakeHomeCalc.Core.TieredValueCalculators;
 
-namespace UKTakeHomeCalc.Core.CalculationStrategies.TaxStrategies
+namespace UKTakeHomeCalc.Core.CalculationStrategies.DeductableStrategies.TaxStrategies
 {
     public class ScotlandTaxStrategy : TaxStrategy
     {
@@ -25,17 +25,6 @@ namespace UKTakeHomeCalc.Core.CalculationStrategies.TaxStrategies
                 new TieredValueRule(31092m.Annually(), 125140m.Annually(), -0.42m),
                 new TieredValueRule(125140m.Annually(), 100000000m.Annually(), -0.47m),
             };
-        }
-
-        public override ITakeHomeSummaryItem CreateTakeHomeSummaryItem(ITakeHomeSummaryComposite takeHomeSummery)
-        {
-            var qualifyingIncome = QualifyingSalaryCalculationService.CalculateQualifyingIncome(takeHomeSummery.GetTotal(), FreeAllowance);
-
-            var tieredValueResults = TieredValueCalculator.CalculateTieredValueResults(qualifyingIncome, Rules);
-
-            var takeHomeSummaryComposite = TakeHomeSummaryCompositeBuilder.Add(tieredValueResults.ToArray()).Build();
-
-            return takeHomeSummaryComposite;
         }
     }
 }

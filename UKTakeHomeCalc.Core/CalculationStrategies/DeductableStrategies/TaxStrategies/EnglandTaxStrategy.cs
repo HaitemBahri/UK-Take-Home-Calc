@@ -3,7 +3,7 @@ using UKTakeHomeCalc.Core.TieredValueCalculators;
 using UKTakeHomeCalc.Core.TakeHomeSummaryItems;
 using UKTakeHomeCalc.Core.Models;
 
-namespace UKTakeHomeCalc.Core.CalculationStrategies.TaxStrategies
+namespace UKTakeHomeCalc.Core.CalculationStrategies.DeductableStrategies.TaxStrategies
 {
     public class EnglandTaxStrategy : TaxStrategy
     {
@@ -23,17 +23,6 @@ namespace UKTakeHomeCalc.Core.CalculationStrategies.TaxStrategies
                 new TieredValueRule(37700m.Annually(), 125140m.Annually(), -0.4m),
                 new TieredValueRule(125140m.Annually(), 1000000m.Annually(), -0.45m),
             };
-        }
-
-        public override ITakeHomeSummaryItem CreateTakeHomeSummaryItem(ITakeHomeSummaryComposite takeHomeSummery)
-        {
-            var qualifyingIncome = QualifyingSalaryCalculationService.CalculateQualifyingIncome(takeHomeSummery.GetTotal(), FreeAllowance);
-
-            var tieredValueResults = TieredValueCalculator.CalculateTieredValueResults(qualifyingIncome, Rules);
-
-            var takeHomeSummaryComposite = TakeHomeSummaryCompositeBuilder.Add(tieredValueResults.ToArray()).Build();
-
-            return takeHomeSummaryComposite;
         }
     }
 }
