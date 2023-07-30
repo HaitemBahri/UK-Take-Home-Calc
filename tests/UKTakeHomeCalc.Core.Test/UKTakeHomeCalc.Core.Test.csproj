@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\UKTakeHomeCalc.Core\UKTakeHomeCalc.Core.csproj" />
+    <ProjectReference Include="..\..\source\UKTakeHomeCalc.Core\UKTakeHomeCalc.Core.csproj" />
   </ItemGroup>
 
 </Project>
