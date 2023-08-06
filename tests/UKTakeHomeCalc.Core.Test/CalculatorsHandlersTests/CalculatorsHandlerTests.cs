@@ -1,4 +1,5 @@
 ﻿using Moq;
+using UKTakeHomeCalc.Core.CalculationStrategies.DeductableStrategies.TaxStrategies;
 using UKTakeHomeCalc.Core.Calculators;
 using UKTakeHomeCalc.Core.CalculatorsHandlers;
 using UKTakeHomeCalc.Core.Models;
@@ -11,6 +12,7 @@ namespace UKTakeHomeCalc.Core.Test.CalculatorsHandlersTests
     {
         private CalculatorsHandler _sut;
         private readonly Mock<ITakeHomeSummaryComposite> _takeHomeSummaryMock = new();
+        private readonly Mock<ICalculator> _calculatorMock = new();
 
         public CalculatorsHandlerTests()
         {
@@ -123,6 +125,18 @@ namespace UKTakeHomeCalc.Core.Test.CalculatorsHandlersTests
             _sut.Handle(actualResult);
 
             Assert.Equal(expectedResult, actualResult);
+        }
+
+        [Fact]
+        public void ShouldThrowArgumentNullException_WhenCalculatorsIsNull()
+        {
+            Assert.Throws<ArgumentNullException>(() => _sut = new  CalculatorsHandler(null!));
+        }
+
+        [Fact]
+        public void ShouldThrowArgumentNullException_WhenCalculatorsContainsNull()
+        {
+            Assert.Throws<ArgumentNullException>(() => _sut = new CalculatorsHandler(_calculatorMock.Object, null!));
         }
     }
 }

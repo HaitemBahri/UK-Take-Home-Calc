@@ -1,5 +1,7 @@
 ﻿using UKTakeHomeCalc.Core.CalculationStrategies;
+using UKTakeHomeCalc.Core.QualifyingIncomeServices;
 using UKTakeHomeCalc.Core.TakeHomeSummaryItems;
+using UKTakeHomeCalc.Core.TieredValueCalculators;
 
 namespace UKTakeHomeCalc.Core.Calculators
 {
@@ -11,6 +13,9 @@ namespace UKTakeHomeCalc.Core.Calculators
 
         public Calculator(string name, params ICalculationStrategy[] calculationStrategies)
         {
+            if (calculationStrategies is null || calculationStrategies.Contains(null))
+                throw new ArgumentNullException(nameof(calculationStrategies), "The variable is either null or contains a null value.");
+
             _name = name;
             _calculationStrategies = calculationStrategies;
             _takeHomeSummaryBuilder = new TakeHomeSummaryCompositeBuilder(name);

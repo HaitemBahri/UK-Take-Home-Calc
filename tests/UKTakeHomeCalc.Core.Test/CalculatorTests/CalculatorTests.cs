@@ -1,5 +1,6 @@
 ﻿using Moq;
 using UKTakeHomeCalc.Core.CalculationStrategies;
+using UKTakeHomeCalc.Core.CalculationStrategies.DeductableStrategies.TaxStrategies;
 using UKTakeHomeCalc.Core.Calculators;
 using UKTakeHomeCalc.Core.Models;
 using UKTakeHomeCalc.Core.TakeHomeSummaryItems;
@@ -79,6 +80,21 @@ namespace UKTakeHomeCalc.Core.Test.CalculatorTests
             var actualResult = _sut.CreateTakeHomeSummaryComposite(_takeHomeSummaryMock.Object);
 
             Assert.Equal(expectedResult, actualResult);
+        }
+
+        [Fact]
+        public void ShouldThrowArgumentNullException_WhenCalculationStrategiesIsNull()
+        {
+            Assert.Throws<ArgumentNullException>(() => _sut = new Calculator(_sutName, null!));
+        }
+
+        [Fact]
+        public void ShouldThrowArgumentNullException_WhenCalculationStrategiesContainsNull()
+        {
+            Assert.Throws<ArgumentNullException>(() => _sut = new Calculator(_sutName,
+                new ScotlandTaxStrategy("Sco Tax Strategy", FreeAllowances.Tax.StandardTaxFreeAllowance),
+                null!,
+                new EnglandTaxStrategy("Eng Tax Strategy", FreeAllowances.Tax.StandardTaxFreeAllowance)));
         }
     }
 }

@@ -11,6 +11,9 @@ namespace UKTakeHomeCalc.Core.CalculationStrategies.IncomeStrategies
         public BasicIncomeStrategy(string name, decimal value, Frequency frequency) : 
             base(new TakeHomeSummaryCompositeBuilder(name))
         {
+            if(value < 0)
+                throw new ArgumentOutOfRangeException(nameof(value));
+
             MonetaryValue = value.Every(frequency);
             Name = name;
         }

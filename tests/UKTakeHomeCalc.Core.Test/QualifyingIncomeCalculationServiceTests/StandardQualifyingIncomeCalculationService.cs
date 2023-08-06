@@ -33,17 +33,15 @@ public class StandardQualifyingIncomeCalculationServiceTests
         Assert.Equal(expectedResult, actualResult);
     }
 
-    public static TheoryData<MonetaryValue> BelowZeroTheoryData =>
-            new()
-            {
-                { -10m.Weekly() },
-                { -145000m.Annually() }
-            };
-
-    [Theory]
-    [MemberData(nameof(BelowZeroTheoryData))]
-    public void CalculateFreeAllowance_ShouldThrowArgumentOutOfRangeException_WhenIncomeBelowZero(MonetaryValue income)
+    [Fact]
+    public void ShouldThrowArgumentOutOfRangeException_WhenIncomeIsNegative()
     {
-        Assert.Throws<ArgumentOutOfRangeException>(() => _ = _sut.CalculateQualifyingIncome(income, 0m));
+        Assert.Throws<ArgumentOutOfRangeException>(() => _ = _sut.CalculateQualifyingIncome(-10m.Weekly(), 0m));
+    }
+
+    [Fact]
+    public void ShouldThrowArgumentOutOfRangeException_WhenFreeAllowanceIsNegative()
+    {
+        Assert.Throws<ArgumentOutOfRangeException>(() => _ = _sut.CalculateQualifyingIncome(1000m.Monthly(), -1500m.Annually()));
     }
 }

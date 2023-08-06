@@ -1,4 +1,6 @@
-﻿using UKTakeHomeCalc.Core.TakeHomeSummaryItems;
+﻿using UKTakeHomeCalc.Core.QualifyingIncomeServices;
+using UKTakeHomeCalc.Core.TakeHomeSummaryItems;
+using UKTakeHomeCalc.Core.TieredValueCalculators;
 
 namespace UKTakeHomeCalc.Core.CalculationStrategies
 {
@@ -9,6 +11,9 @@ namespace UKTakeHomeCalc.Core.CalculationStrategies
 
         protected CalculationStrategy(ITakeHomeSummaryCompositeBuilder takeHomeSummaryCompositeBuilder)
         {
+            if (takeHomeSummaryCompositeBuilder is null)
+                throw new ArgumentNullException(nameof(takeHomeSummaryCompositeBuilder));
+
             TakeHomeSummaryCompositeBuilder = takeHomeSummaryCompositeBuilder;
         }
 

@@ -11,6 +11,9 @@ namespace UKTakeHomeCalc.Core.CalculationStrategies.IncomeStrategies
         public HourlyRateIncomeStrategy(string name, decimal hourlyRate, decimal hours, Frequency frequency) :
             base(new TakeHomeSummaryCompositeBuilder(name))
         {
+            if (hourlyRate < 0 || hours < 0)
+                throw new ArgumentOutOfRangeException(nameof(hourlyRate));
+
             MonetaryValue = (hourlyRate * hours).Every(frequency);
             Name = name;
         }

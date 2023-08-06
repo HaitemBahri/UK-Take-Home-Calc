@@ -18,6 +18,12 @@ namespace UKTakeHomeCalc.Core.CalculationStrategies.DeductableStrategies
             MonetaryValue freeAllowance) :
             base(takeHomeSummaryCompositeBuilder)
         {
+            if (qualifyingIncomeCalculationService is null || tieredValueCalculator is null)
+                throw new ArgumentNullException();
+
+            if(freeAllowance < 0m.Weekly())
+                throw new ArgumentOutOfRangeException();
+
             QualifyingIncomeCalculationService = qualifyingIncomeCalculationService;
             TieredValueCalculator = tieredValueCalculator;
             FreeAllowance = freeAllowance;

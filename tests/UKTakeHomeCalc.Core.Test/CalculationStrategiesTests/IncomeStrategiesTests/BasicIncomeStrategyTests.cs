@@ -28,5 +28,20 @@ namespace UKTakeHomeCalc.Core.Test.CalculationStrategiesTests.IncomeStrategiesTe
 
             Assert.Equal(expectedResult, actualResult);
         }
+
+        public static TheoryData<decimal, Frequency, TakeHomeSummaryItem, string> ShouldThrowArgumentOutOfRangeException_WhenValueIsNegativeTheoryData =>
+            new()
+            {
+                {-425.666m, Frequency.Weekly, new TakeHomeSummaryItem(_sutName, 425.666m.Weekly()), "Negative Weekly Income" },
+                {-425.666m, Frequency.Monthly, new TakeHomeSummaryItem(_sutName, 425.666m.Monthly()), "Negative Monthly Income" },
+                {-425.666m, Frequency.Annually, new TakeHomeSummaryItem(_sutName, 425.666m.Annually()), "Negative Annually Income" }
+            };
+
+        [Theory]
+        [MemberData(nameof(ShouldThrowArgumentOutOfRangeException_WhenValueIsNegativeTheoryData))]
+        public void ShouldThrowArgumentOutOfRangeException_WhenValueIsNegative(decimal value, Frequency frequency, TakeHomeSummaryItem expectedResult, string testDataName)
+        {
+            Assert.Throws<ArgumentOutOfRangeException>(() => _sut = new BasicIncomeStrategy(_sutName, value, frequency));
+        }
     }
 }

@@ -10,6 +10,9 @@ namespace UKTakeHomeCalc.Core.CalculatorsHandlers
 
         public CalculatorsHandler(params ICalculator[] calculators)
         {
+            if (calculators is null || calculators.Contains(null))
+                throw new ArgumentNullException(nameof(calculators), "The variable is either null or contains a null value.");
+
             _calculators = calculators;
         }
 

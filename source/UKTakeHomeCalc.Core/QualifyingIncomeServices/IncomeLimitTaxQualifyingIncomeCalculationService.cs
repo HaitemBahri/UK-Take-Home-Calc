@@ -11,6 +11,9 @@ public class IncomeLimitTaxQualifyingIncomeCalculationService : IQualifyingIncom
         if (income < 0m.Annually())
             throw new ArgumentOutOfRangeException(nameof(income), "Income value cannot be less than zero.");
 
+        if (freeAllowance < 0m.Annually())
+            throw new ArgumentOutOfRangeException(nameof(freeAllowance), "Free Allowance value cannot be less than zero.");
+
         var initialFreeAllowance = freeAllowance;
 
         var freeAllowanceReduction = CalculateFreeAllowanceReduction(income);
