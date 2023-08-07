@@ -56,5 +56,11 @@ namespace UKTakeHomeCalc.Core.TakeHomeSummaryItems
         {
             return $"{Name} = {Value}";
         }
+
+        public string ToStringExtended()
+        {
+            return $"{Name} = {Value.ConvertTo(Frequency.Weekly)} \t {Value.ConvertTo(Frequency.Monthly)} \t {Value.ConvertTo(Frequency.Annually)}";
+
+        }
     }
 }

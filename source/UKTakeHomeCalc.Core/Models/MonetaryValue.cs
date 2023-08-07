@@ -25,6 +25,11 @@ public struct MonetaryValue
         ValueFrequency = valueFrequency;
     }
 
+    public MonetaryValue ConvertTo(Frequency newFrequency)
+    {
+        return new MonetaryValue(Value * (int)newFrequency / (int)ValueFrequency, newFrequency);
+    }
+
     public static MonetaryValue operator +(MonetaryValue value1, MonetaryValue value2)
     {
         return new MonetaryValue((value1.BaseValue + value2.BaseValue) * (int)value1.ValueFrequency, value1.ValueFrequency);

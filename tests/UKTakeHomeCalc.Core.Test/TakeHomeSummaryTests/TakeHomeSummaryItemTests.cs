@@ -98,5 +98,15 @@ namespace UKTakeHomeCalc.Core.Test.TakeHomeSummaryTests
             Assert.Equal(expectedResult, actualResult);
         }
 
+        [Fact]
+        public void ShouldReturnCorrectStringExtendedValue()
+        {
+            var expectedResult = "TakeHomeSummaryItem SUT Object = 1,071.00/Weekly \t 4,590.00/Monthly \t 55,845.00/Annually";
+
+            var actualResult = _sut.ToStringExtended();
+
+            Assert.Equal(expectedResult, actualResult);
+        }
+
     }
 }

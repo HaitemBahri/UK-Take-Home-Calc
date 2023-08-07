@@ -217,6 +217,34 @@ namespace UKTakeHomeCalc.Core.Test.ModelsTests
             Assert.True(value1 <= value2);
         }
 
+        public static TheoryData<MonetaryValue, Frequency, MonetaryValue, string> ShouldConvertToDifferentFrequencyTheoryData =>
+            new()
+            {
+                {61.887m.Weekly(), Frequency.Monthly,  265.23m.Monthly(), "Weekly to Monthly"},
+                {61.887m.Weekly(), Frequency.Annually,  3226.965m.Annually(), "Weekly to Annually"},
 
+                {2395.6666m.Monthly(), Frequency.Weekly,  558.99m.Weekly(), "Monthly to Weekly"},
+                {2395.6666m.Monthly(), Frequency.Annually,  29147.27697m.Annually(), "Monthly to Annually"},
+
+                {12299.51m.Annually(), Frequency.Weekly,  235.881m.Weekly(), "Annually to Weekly"},
+                {12299.51m.Annually(), Frequency.Monthly,  1010.9186m.Monthly(), "Annually to Monthly"},
+
+                {-61.887m.Weekly(), Frequency.Monthly,  -265.23m.Monthly(), "Weekly to Monthly (Negative)"},
+                {-61.887m.Weekly(), Frequency.Annually,  -3226.965m.Annually(), "Weekly to Annually (Negative)"},
+
+                {-2395.6666m.Monthly(), Frequency.Weekly,  -558.9887m.Weekly(), "Monthly to Weekly (Negative)"},
+                {-2395.6666m.Monthly(), Frequency.Annually,  -29147.27697m.Annually(), "Monthly to Annually (Negative)"},
+
+                {-12299.51m.Annually(), Frequency.Weekly,  -235.881m.Weekly(), "Annually to Weekly (Negative)"},
+                {-12299.51m.Annually(), Frequency.Monthly,  -1010.9186m.Monthly(), "Annually to Monthly (Negative)"},
+            };
+
+        [Theory, MemberData(nameof(ShouldConvertToDifferentFrequencyTheoryData))]
+        public void ShouldConvertToDifferentFrequency(MonetaryValue value, Frequency frequency, MonetaryValue expectedResult, string testDataName)
+        {
+            var actualResult = value.ConvertTo(frequency);
+
+            Assert.Equal(expectedResult, actualResult);
+        }
     }
 }
