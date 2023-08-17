@@ -91,7 +91,7 @@ namespace UKTakeHomeCalc.Core.Test.TakeHomeSummaryTests
         [Fact]
         public void ShouldReturnCorrectStringValue()
         {
-            var expectedResult = "TakeHomeSummaryItem SUT Object = 4,590.00/Monthly";
+            var expectedResult = "TakeHomeSummaryItem SUT Object = 1,071.00/Weekly \t 4,590.00/Monthly \t 55,845.00/Annually";
 
             var actualResult = _sut.ToString();
 
