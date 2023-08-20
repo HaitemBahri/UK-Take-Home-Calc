@@ -18,5 +18,10 @@
         {
             public static readonly MonetaryValue StandardPensionFreeAllowance = 6240m.Annually();
         }
+
+        public static class StudentLoan
+        {
+            public static readonly MonetaryValue Plan1StudentLoanFreeAllownace = 22015m.Annually();
+        }
     }
 }
