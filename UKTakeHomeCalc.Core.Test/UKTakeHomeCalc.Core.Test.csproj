@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\source\UKTakeHomeCalc.Core\UKTakeHomeCalc.Core.csproj" />
+    <ProjectReference Include="..\UKTakeHomeCalc.Core\UKTakeHomeCalc.Core.csproj" />
   </ItemGroup>
 
 </Project>

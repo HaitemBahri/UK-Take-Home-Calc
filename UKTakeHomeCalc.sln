@@ -5,9 +5,11 @@ VisualStudioVersion = 17.3.32811.315
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B4877F29-CCAB-45B9-94A3-615F55E1A12D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UKTakeHomeCalc.Core", "source\UKTakeHomeCalc.Core\UKTakeHomeCalc.Core.csproj", "{B81769C3-5DA1-49FC-BE76-6DE0929363B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UKTakeHomeCalc.Demo", "UKTakeHomeCalc.Demo\UKTakeHomeCalc.Demo.csproj", "{B967B8B5-0F4E-47D8-958E-9A5BCBCD2903}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UKTakeHomeCalc.Core.Test", "tests\UKTakeHomeCalc.Core.Test\UKTakeHomeCalc.Core.Test.csproj", "{313CF624-6EEA-4FA2-B7B9-BD4DEBF304BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UKTakeHomeCalc.Core", "UKTakeHomeCalc.Core\UKTakeHomeCalc.Core.csproj", "{C901DA78-FCBF-413C-8A09-AD7AC2165E26}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UKTakeHomeCalc.Core.Test", "UKTakeHomeCalc.Core.Test\UKTakeHomeCalc.Core.Test.csproj", "{7403D10C-7A70-4D2E-BF48-A5FBD85200C0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,14 +17,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B81769C3-5DA1-49FC-BE76-6DE0929363B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B81769C3-5DA1-49FC-BE76-6DE0929363B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B81769C3-5DA1-49FC-BE76-6DE0929363B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B81769C3-5DA1-49FC-BE76-6DE0929363B4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{313CF624-6EEA-4FA2-B7B9-BD4DEBF304BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{313CF624-6EEA-4FA2-B7B9-BD4DEBF304BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{313CF624-6EEA-4FA2-B7B9-BD4DEBF304BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{313CF624-6EEA-4FA2-B7B9-BD4DEBF304BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B967B8B5-0F4E-47D8-958E-9A5BCBCD2903}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B967B8B5-0F4E-47D8-958E-9A5BCBCD2903}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B967B8B5-0F4E-47D8-958E-9A5BCBCD2903}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B967B8B5-0F4E-47D8-958E-9A5BCBCD2903}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C901DA78-FCBF-413C-8A09-AD7AC2165E26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C901DA78-FCBF-413C-8A09-AD7AC2165E26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C901DA78-FCBF-413C-8A09-AD7AC2165E26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C901DA78-FCBF-413C-8A09-AD7AC2165E26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7403D10C-7A70-4D2E-BF48-A5FBD85200C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7403D10C-7A70-4D2E-BF48-A5FBD85200C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7403D10C-7A70-4D2E-BF48-A5FBD85200C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7403D10C-7A70-4D2E-BF48-A5FBD85200C0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
