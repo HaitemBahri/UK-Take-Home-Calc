@@ -211,8 +211,8 @@ namespace UKTakeHomeCalc.Core.Test.TakeHomeSummaryTests
                 composite2.AddValue(new TakeHomeSummaryItem("item - 1", 4500m.Monthly()));
                 composite2.AddValue(new TakeHomeSummaryItem("item - 2", 66.666m.Weekly()));
                 var ExpectedResult2 = "Sample SUT 2" +
-                              "\n\titem - 1 = 1,050.00/Weekly \t 4,500.00/Monthly \t 54,750.00/Annually" +
-                              "\n\titem - 2 = 66.67/Weekly \t 285.71/Monthly \t 3,476.16/Annually";
+                              "\n\titem - 1 = \t1,050.00/Weekly \t 4,500.00/Monthly \t 54,750.00/Annually" +
+                              "\n\titem - 2 = \t66.67/Weekly \t 285.71/Monthly \t 3,476.16/Annually";
 
                 return new()
                 {
@@ -237,12 +237,12 @@ namespace UKTakeHomeCalc.Core.Test.TakeHomeSummaryTests
                 composite3.AddValue(composite3Sub2);
                 var expectedResult3 = "Sample SUT 3" +
                               "\n\tSample SUT 3 Sub1" +
-                              "\n\t\titem - 1 = 1,050.00/Weekly \t 4,500.00/Monthly \t 54,750.00/Annually" +
-                              "\n\t\titem - 2 = 66.67/Weekly \t 285.71/Monthly \t 3,476.16/Annually" +
+                              "\n\t\titem - 1 = \t1,050.00/Weekly \t 4,500.00/Monthly \t 54,750.00/Annually" +
+                              "\n\t\titem - 2 = \t66.67/Weekly \t 285.71/Monthly \t 3,476.16/Annually" +
                               "\n\tSample SUT 3 Sub2" +
-                              "\n\t\titem - 7 = 66.67/Weekly \t 285.71/Monthly \t 3,476.16/Annually" +
-                              "\n\t\titem - 8 = 66.67/Weekly \t 285.71/Monthly \t 3,476.16/Annually" +
-                              "\n\t\titem - 9 = 66.67/Weekly \t 285.71/Monthly \t 3,476.16/Annually";
+                              "\n\t\titem - 7 = \t66.67/Weekly \t 285.71/Monthly \t 3,476.16/Annually" +
+                              "\n\t\titem - 8 = \t66.67/Weekly \t 285.71/Monthly \t 3,476.16/Annually" +
+                              "\n\t\titem - 9 = \t66.67/Weekly \t 285.71/Monthly \t 3,476.16/Annually";
 
                 return new()
                 {
@@ -270,7 +270,7 @@ namespace UKTakeHomeCalc.Core.Test.TakeHomeSummaryTests
                               "\n\t\tSample SUT 4.1.1" +
                               "\n\t\t\tSample SUT 4.1.1.1" +
                               "\n\t\t\t\tSample SUT 4.1.1.1.1" +
-                              "\n\t\t\t\t\titem - 1 = 1,050.00/Weekly \t 4,500.00/Monthly \t 54,750.00/Annually";
+                              "\n\t\t\t\t\titem - 1 = \t1,050.00/Weekly \t 4,500.00/Monthly \t 54,750.00/Annually";
 
                 return new()
                 {

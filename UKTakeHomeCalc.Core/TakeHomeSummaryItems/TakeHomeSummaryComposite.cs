@@ -110,7 +110,7 @@ namespace UKTakeHomeCalc.Core.TakeHomeSummaryItems
 
                 var updatedItemString = itemString?.Replace("\n", "\n\t");
 
-                stringBuilder.Append('\t').Append(updatedItemString);
+                stringBuilder.Append("\t").Append(updatedItemString);
             }
 
             return stringBuilder.ToString();

@@ -54,12 +54,12 @@ namespace UKTakeHomeCalc.Core.TakeHomeSummaryItems
 
         public override string ToString()
         {
-            return $"{Name} = {Value.ConvertTo(Frequency.Weekly)} \t {Value.ConvertTo(Frequency.Monthly)} \t {Value.ConvertTo(Frequency.Annually)}";
+            return $"{Name} = \t{Value.ConvertTo(Frequency.Weekly)} \t {Value.ConvertTo(Frequency.Monthly)} \t {Value.ConvertTo(Frequency.Annually)}";
         }
 
         public string ToStringExtended()
         {
-            return $"{Name} = {Value.ConvertTo(Frequency.Weekly)} \t {Value.ConvertTo(Frequency.Monthly)} \t {Value.ConvertTo(Frequency.Annually)}";
+            return $"{Name} = \t{Value.ConvertTo(Frequency.Weekly)} \t {Value.ConvertTo(Frequency.Monthly)} \t {Value.ConvertTo(Frequency.Annually)}";
 
         }
     }
