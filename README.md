@@ -34,29 +34,174 @@ This follows the *Strategy pattern* and It holds that rules of how a calculation
 4. **TakeHomeSummaryItem / TakeHomeSummaryComposite**: 
 These classes represent the summary output that lists all income and deductables. They follow the *Composite Pattern* where `ITakeHomeSummaryItem` represent a leaf and `ITakeHomeSummaryComposite` represents a node. 
 
-    When executing `takeHomeSummaryComposite.ToString( )` the output looks similar to this:
+    When executing `takeHomeSummaryComposite.ToString( )` the **output** looks similar to this:
 
 ```
 Take-Home Summary
-	Pension
-		Auto-Enrol Pension 
-			@ [%-5.00] = 3.28/Weekly 	 14.05/Monthly 	 170.94/Annually
-		Additional Pension
-			@ [%-2.50] = 1.64/Weekly 	 7.02/Monthly 	 85.47/Annually
-	Tax
-		England Tax
-			@ [%-20.00] = 22.30/Weekly 	 95.55/Monthly 	 1,162.52/Annually
-			@ [%-40.00] = 0.94/Weekly 	 4.05/Monthly 	 49.28/Annually
-	National Insurance
-		Class 1 NI
-			@ [%-12.00] = 3.24/Weekly 	 13.88/Monthly 	 168.87/Annually
-			@ [%-2.00] = 1.22/Weekly 	 5.23/Monthly 	 63.63/Annually
+	    Income
+                Fixed Income =  1,054.79/Weekly          4,520.55/Monthly        55,000.00/Annually
+                Overtime Income =       17.84/Weekly     76.44/Monthly   930.00/Annually
+        Pension
+                Variable Rate Pension
+                        @ [%-5.00] =    -42.22/Weekly    -180.95/Monthly         -2,201.50/Annually
+        Tax
+                Tax (Scotland)
+                        @ [%-19.00] =   -7.88/Weekly     -33.76/Monthly          -410.78/Annually
+                        @ [%-20.00] =   -42.02/Weekly    -180.10/Monthly         -2,191.20/Annually
+                        @ [%-21.00] =   -72.39/Weekly    -310.24/Monthly         -3,774.54/Annually
+                        @ [%-42.00] =   -81.08/Weekly    -347.50/Monthly         -4,227.93/Annually
+                        @ [%-47.00] =   0.00/Weekly      0.00/Monthly    0.00/Annually
+        National Insurance
+                Class 1
+                        @ [%-12.00] =   -87.00/Weekly    -372.86/Monthly         -4,536.43/Annually
+                        @ [%-2.00] =    -1.27/Weekly     -5.44/Monthly   -66.13/Annually
+
 ```
+
 
 ## **Examples:**
 
-        //TODO
+### Example 1:
+- **Income**:
+  - Fixed Income: 55,000/Annually
+  - Overtime: 15.5 an hour for 20 hours/monthly for 3 months/Annually
+- **Pension**:
+  - Auto-enrolment (5%)
+- **Tax**:
+  - Scotland Tax Rates - Standard free allowance
+- **National Insurance**:
+  - Class 1 National Insurance contributions
 
+The code will be as follows:
+```csharp
+//Fixed Income: 55,000/Annually
+var fixedIncomeStrategy = new BasicIncomeStrategy("Fixed Income", 55000m, Frequency.Annually);
+
+//Overtime: 15.5 an hour for 20 hours/monthly for 3 months/Annually
+var overtimeIncomeStrategy = new HourlyRateIncomeStrategy("Overtime Income", 15.5m, 20 * 3, Frequency.Annually);
+
+//Creating a Calculator object to calculate total income
+var incomeCalculator = new Calculator("Income", fixedIncomeStrategy, overtimeIncomeStrategy);
+
+//Auto-enrolment (5%) pension
+var pensionStrategy = new VariableRatePensionStrategy("Variable Rate Pension", 0.05m, FreeAllowances.Pension.StandardPensionFreeAllowance);
+
+//Creating a Calculator object to calculate pension
+var pensionCalculator = new Calculator("Pension", pensionStrategy);
+
+//Scotland Tax Rates - Standard free allowance
+var taxStrategy = new ScotlandTaxStrategy("Tax (Scotland)", FreeAllowances.Tax.StandardTaxFreeAllowance);
+
+//Creating a Calculator object to calculate tax
+var taxCalculator = new Calculator("Tax", taxStrategy);
+
+//Class 1 National Insurance contributions
+var nationalInsuranceStrategy = new ClassOneNationalInsuranceStrategy("Class 1", FreeAllowances.NationalInsurance.StandardNationalInsuranceFreeAllowance);
+
+//Creating a Calculator object to calculate national insurance contributions
+var nationalInsuranceCalculator = new Calculator("National Insurance", nationalInsuranceStrategy);
+
+//CalculatorsHandler for 1st stage for calculations. Handles Income Calculator
+var handler1 = new CalculatorsHandler(incomeCalculator);
+
+//CalculatorsHandler for 2nd stage for calculations, Handles Pension Calculator
+var handler2 = new CalculatorsHandler(pensionCalculator);
+
+//CalculatorsHandler for 3rd stage for calculations, Handles both Tax and National Insurance Calculators
+var handler3 = new CalculatorsHandler(taxCalculator, nationalInsuranceCalculator);
+
+///Setting the order of the execution.
+///handler1 (1st stage) -> handler2 (2nd stage) -> handler3 (3rd stage)
+handler1.SetNext(handler2);
+handler2.SetNext(handler3);
+
+///Preparing a TakeHomeSummary object that will be passed through the execution stages.
+///In each stage, the result from the calculation will be added to it.
+var takeHomeSummary = new TakeHomeSummaryComposite("Example 1 Take-Home Summary");
+
+//Starting the Take-Home calculation process.
+handler1.Handle(takeHomeSummary);
+
+//Printing detailed result of the Take-Home Summary
+Console.WriteLine(takeHomeSummary.ToString());
+
+//Printing the final Value
+var takeHomeValue = takeHomeSummary.GetTotal();
+Console.WriteLine($"\nTake-Home Value: {takeHomeValue.ConvertTo(Frequency.Weekly)} {takeHomeValue.ConvertTo(Frequency.Monthly)} {takeHomeValue.ConvertTo(Frequency.Annually)}");
+Console.WriteLine();
+```
+
+### Example 2:
+
+- **Income**:
+  - Hourly Rate Income:  40 hours/Weekly @ (15.5 an hour)
+  - Overtime: 4 hours/Weekly @ (17.5 an hour)
+  - Bonus: 150/Monthly
+- **Tax**:
+  - England Tax Rates - Blind person free allownace
+- **National Insurance**:
+  - Class 1 National Insurance contributions
+- **Student Loans**:
+  - Plan 1
+
+The code will be as follows:
+```csharp
+//Hourly Rate Income: (15.5 an hour)/Weekly
+var hourlyRateIncomeStrategy = new HourlyRateIncomeStrategy("Hourly Rate Income", 15.5m, 40m, Frequency.Weekly);
+
+//Overtime: 4 hours/Weekly @ (17.5 an hour)
+var overtimeIncomeStrategy = new HourlyRateIncomeStrategy("Overtime Income", 17.5m, 4m, Frequency.Weekly);
+
+//Bonus: 150/Monthly
+var bonusIncomeStrategy = new BasicIncomeStrategy("Bonus Income", 150m, Frequency.Monthly);
+
+//Creating a Calculator object to calculate total income
+var incomeCalculator = new Calculator("Income", hourlyRateIncomeStrategy, overtimeIncomeStrategy, bonusIncomeStrategy);
+
+//Plan 1 Student Loan
+var plan1StudentLoanStrategy = new Plan1StudentLoanStrategy("Plan 1 Student Loan");
+
+//Creating a Calculator object to calculate Student loan
+var studentLoanCalculator = new Calculator("Student Loan", plan1StudentLoanStrategy);
+
+//England Tax Rates - Blind person free allownace
+var taxStrategy = new EnglandTaxStrategy("Tax (England)", FreeAllowances.Tax.BlindTaxFreeAllowance);
+
+//Creating a Calculator object to calculate tax
+var taxCalculator = new Calculator("Tax", taxStrategy);
+
+//Class 1 National Insurance contributions
+var nationalInsuranceStrategy = new ClassOneNationalInsuranceStrategy("Class 1", FreeAllowances.NationalInsurance.StandardNationalInsuranceFreeAllowance);
+
+//Creating a Calculator object to calculate national insurance contributions
+var nationalInsuranceCalculator = new Calculator("National Insurance", nationalInsuranceStrategy);
+
+//CalculatorsHandler for 1st stage for calculations. Handles Income Calculator
+var handler1 = new CalculatorsHandler(incomeCalculator);
+
+//CalculatorsHandler for 2nd stage for calculations, Handles Student Loan, Tax and National Insurance Calculators simultaneously
+var handler2 = new CalculatorsHandler(studentLoanCalculator, taxCalculator, nationalInsuranceCalculator);
+
+///Setting the order of the execution.
+///handler1 (1st stage) -> handler2 (2nd stage)
+handler1.SetNext(handler2);
+
+///Preparing a TakeHomeSummary object that will be passed through the execution stages.
+///In each stage, the result from the calculation will be added to it.
+var takeHomeSummary = new TakeHomeSummaryComposite("Example 2 Take-Home Summary");
+
+//Starting the Take-Home calculation process.
+handler1.Handle(takeHomeSummary);
+
+//Printing detailed result of the Take-Home Summary
+Console.WriteLine(takeHomeSummary.ToString());
+
+//Printing the final Value
+var takeHomeValue = takeHomeSummary.GetTotal();
+Console.WriteLine($"\nTake-Home Value: {takeHomeValue.ConvertTo(Frequency.Weekly)} {takeHomeValue.ConvertTo(Frequency.Monthly)} {takeHomeValue.ConvertTo(Frequency.Annually)}");
+
+
+```
 
 ## **Support:**
 
