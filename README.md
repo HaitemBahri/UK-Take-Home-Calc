@@ -1,5 +1,5 @@
 # UKTakeHomeCalculator
-        //TODO, badges for nuget, release version
+
 
 UKTakeHomeCalc is a C# library designed to simplify the task of calculating take home salary amounts for employees in the UK. This library is built with the latest rules in mind, ensuring accurate calculations every time. With just a few lines of code, this library can calculate gross pay, various types of deductions, and take-home pay. Designed to be easy to integrate, customize and extend, this library can help with take-home pay calculations.
 
@@ -12,11 +12,19 @@ This library can be installed as a NuGet package or manually downloaded from the
 
 - #### Using NuGet package manager:
 
-        //TODO
+  You can install the package from nuget by searching '**HaitemBahri.UKTakeHomeCalc**' on the NuGet Package Manager or by running the following command on the CLI:
+  ```
+  dotnet add package HaitemBahri.UKTakeHomeCalc --version 0.1.0
+  ```
+
+  Or using the Package Manager Console:
+  ```
+  NuGet\Install-Package HaitemBahri.UKTakeHomeCalc -Version 0.1.0
+  ```
 
 - #### Installing manually:
 
-        //TODO
+  Download the built dll file from [Releases](https://github.com/HaitemBahri//UK-Take-Home-Calc/releases) and manually add it to your project.
 
 ## **Overview:**
 
