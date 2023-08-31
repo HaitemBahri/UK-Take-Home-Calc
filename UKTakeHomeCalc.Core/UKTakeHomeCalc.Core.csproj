@@ -1,9 +1,23 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageId>HaitemBahri.UKTakeHomeCalc</PackageId>
+    <Authors>HaitemBahri</Authors>
+    <Title>UKTakeHomeCalc</Title>
+    <Description>A .NET library written in C# that simplifies the take-home income calculation process in the UK.</Description>
+    <Copyright>Copyright (c) 2023 Haitem Bahri</Copyright>
+    <PackageProjectUrl>https://github.com/HaitemBahri/UK-Take-Home-Calc</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/HaitemBahri/UK-Take-Home-Calc</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>open-source; calculator; library; dotnet; take-home; salary; uk;</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+	<VersionPrefix>0.1.0</VersionPrefix>
+	<Product>$(Title)</Product>
+	<PackageReleaseNotes>Initial release</PackageReleaseNotes>
   </PropertyGroup>
 
 </Project>
